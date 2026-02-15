@@ -2,8 +2,8 @@
   <main
     class="mt-10 md:mt-1 flex flex-col-reverse gap-8 items-center md:flex-row md:gap-16 md:justify-center min-h-[65vh] md:min-h-[80vh]">
     <div class="space-y-2 text-center md:text-left px-10">
-      <p class="text-amber-200">Hello World, I'm</p>
-      <h1 class="text-4xl font-bold md:text-5xl text-white fadein-up">Bagas Rakha</h1>
+      <p class="text-amber-200 fadein-bot">Hello World, I'm</p>
+      <h1 class="text-4xl font-bold md:text-5xl text-white fadein-up">Hani Hashmi</h1>
       <div class="py-2">
         <h1
           class="typewrite text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-yellow-500 md:text-2xl fadein-up"
@@ -11,21 +11,30 @@
           <span class="wrap">{{ txt }}</span>
         </h1>
       </div>
-      <p class="text-white pr-4 fade-in-from-left">Welcome to My personal website. <span class="wave">👋🏼</span></p>
+      <p class="text-gray-300 pr-4 fade-in-from-left leading-relaxed text-sm md:text-base max-w-lg">
+        Software Engineer with 2 years of experience in Full Stack Development. Skilled in React.js, React Native, Python (Flask/Django), and the MERN stack.
+      </p>
+      <p class="text-gray-400 text-sm fade-in-from-left flex items-center justify-center md:justify-start gap-1 pt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+        Riyadh, Saudi Arabia
+      </p>
       <br>
-      <!-- <button
-        class="fadein-bot fade-500 flex items-center py-2 px-4 mx-auto text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 md:mx-0 text-amber-200 border-amber-200 hover:bg-amber-200 hover:bg-opacity-10 bg-transparent focus:outline-none w-fit"><svg
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-2 w-4 h-4">
-          <path fill-rule="evenodd"
-            d="M5.625 1.5H9a3.75 3.75 0 013.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 013.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 01-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875zm5.845 17.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V12a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z"
-            clip-rule="evenodd"></path>
-          <path
-            d="M14.25 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0016.5 7.5h-1.875a.375.375 0 01-.375-.375V5.25z">
-          </path>
-        </svg>Download Resume</button> -->
+      <div class="fadein-bot fade-500 flex items-center gap-3 justify-center md:justify-start">
+        <a href="mailto:hanimhashmi121@gmail.com"
+          class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 text-amber-200 border-amber-200 hover:bg-amber-200 hover:bg-opacity-10 bg-transparent focus:outline-none w-fit">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          Get In Touch
+        </a>
+        <router-link to="/portfolio"
+          class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 text-white border-white/30 hover:bg-white hover:bg-opacity-10 bg-transparent focus:outline-none w-fit">
+          View My Work
+        </router-link>
+      </div>
     </div>
-    <div class="flex justify-center md:justify-start fadein-right"><img alt="avatar" fetchpriority="high" width="300" height="300" decoding="async" data-nimg="1"
-        class="w-10/12 md:h-auto rounded-full border-4 border-amber-200 pict" src="https://i1.sndcdn.com/avatars-000214125831-5q6tdw-t500x500.jpg">
+    <div class="flex justify-center md:justify-start fadein-right">
+      <div class="w-56 h-56 md:w-72 md:h-72 rounded-full border-4 border-amber-200 pict overflow-hidden flex items-center justify-center bg-[#1e1e1f]">
+        <span class="text-7xl md:text-8xl font-bold text-amber-200">HH</span>
+      </div>
     </div>
   </main>
 </template>
@@ -35,7 +44,7 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      toRotate: ["Web Developer", "Full-stack Engineer", "Informatics Student", "Tech Enthusiast"],
+      toRotate: ["Full Stack Developer", "Software Engineer", "React Native Dev", "Python Developer"],
       period: 2000,
       txt: '',
       loopNum: 0,
@@ -95,52 +104,10 @@ body {
   border-right: 0.08em solid #fff;
 }
 
-.wave {
-  animation-name: wave-animation;
-  animation-duration: 2.5s;
-  animation-iteration-count: infinite;
-  transform-origin: 70% 70%;
-  display: inline-block
-}
-
-@keyframes wave-animation {
-  0% {
-    transform: rotate(0deg)
-  }
-
-  10% {
-    transform: rotate(14deg)
-  }
-
-  20% {
-    transform: rotate(-8deg)
-  }
-
-  30% {
-    transform: rotate(14deg)
-  }
-
-  40% {
-    transform: rotate(-4deg)
-  }
-
-  50% {
-    transform: rotate(10deg)
-  }
-
-  60% {
-    transform: rotate(0deg)
-  }
-
-  to {
-    transform: rotate(0deg)
-  }
-}
-
 .pict {
   box-shadow: 0px 0px 73px -9px rgba(255,219,112,0.44);
--webkit-box-shadow: 0px 0px 73px -9px rgba(255,219,112,0.44);
--moz-box-shadow: 0px 0px 73px -9px rgba(255,219,112,0.44);
+  -webkit-box-shadow: 0px 0px 73px -9px rgba(255,219,112,0.44);
+  -moz-box-shadow: 0px 0px 73px -9px rgba(255,219,112,0.44);
 }
 
 .fadein-up {
@@ -156,7 +123,6 @@ body {
     opacity: 0;
     transform: translate3d(0, 100%, 0);
   }
-
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -207,7 +173,6 @@ body {
     opacity: 0;
     transform: translate3d(0, -100%, 0);
   }
-
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
