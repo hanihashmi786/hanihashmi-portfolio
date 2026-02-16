@@ -21,7 +21,7 @@
           <a href="https://github.com/hanihashmi786" target="_blank" rel="noopener">
             <img class="w-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" :style="{ filter: isDark ? 'invert(1)' : 'none' }">
           </a>
-          <a href="https://linkedin.com/in/hanihashmi333" target="_blank" rel="noopener">
+          <a href="https://linkedin.com/in/hanihashmi" target="_blank" rel="noopener">
             <img class="w-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn">
           </a>
         </div>
