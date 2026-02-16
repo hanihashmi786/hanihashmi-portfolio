@@ -99,7 +99,7 @@ export default {
 
     <!-- Work Experience Section -->
     <div class="mb-16">
-      <div class="text-2xl font-bold mb-10 flex items-center" style="color: var(--text);">
+      <div class="text-2xl font-bold mb-10 flex items-center fadein-bot" style="color: var(--text);">
         <div class="h-[1px] w-10 md:w-20" style="background-color: var(--accent);"></div>
         &nbsp; Work Experience
       </div>
@@ -109,7 +109,7 @@ export default {
         <!-- Center vertical line -->
         <div class="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2" style="background-color: var(--accent);"></div>
 
-        <div v-for="(exp, index) in experiences" :key="index" class="relative mb-12">
+        <div v-for="(exp, index) in experiences" :key="index" class="relative mb-12" :class="['fadein-left', index === 0 ? 'fadeins-1' : index === 1 ? 'fadeins-2' : index === 2 ? 'fadeins-3' : 'fadeins-4']">
           <!-- Timeline dot -->
           <div class="absolute left-1/2 top-6 w-3 h-3 rounded-full -translate-x-1/2 z-10"
             style="background-color: var(--accent);"
@@ -215,7 +215,7 @@ export default {
       <!-- Mobile Timeline (stacked) -->
       <div class="md:hidden relative">
         <div class="absolute left-4 top-0 bottom-0 w-[2px]" style="background-color: rgba(var(--accent-rgb), 0.3);"></div>
-        <div v-for="(exp, index) in experiences" :key="'m'+index" class="relative mb-6 ml-10">
+        <div v-for="(exp, index) in experiences" :key="'m'+index" class="relative mb-6 ml-10" :class="['fadein-left', index === 0 ? 'fadeins-1' : index === 1 ? 'fadeins-2' : index === 2 ? 'fadeins-3' : 'fadeins-4']">
           <div class="absolute -left-[1.75rem] top-4 w-3 h-3 rounded-full" style="background-color: var(--accent);"
             :style="exp.current ? { boxShadow: '0 0 0 4px rgba(var(--accent-rgb), 0.2)' } : {}"></div>
           <div class="rounded-xl p-4 cursor-pointer"
