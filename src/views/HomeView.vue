@@ -37,7 +37,15 @@
     <div class="flex justify-center md:justify-start fadein-right">
       <div class="w-56 h-56 md:w-72 md:h-72 rounded-full border-4 pict overflow-hidden flex items-center justify-center"
         style="border-color: var(--accent);">
-        <img src="/images/profile.png" alt="Hani Hashmi" class="w-full h-full object-cover" />
+        <video
+          src="/videos/welcome.mov"
+          autoplay
+          loop
+          muted
+          playsinline
+          class="w-full h-full object-cover"
+          aria-label="Hani Hashmi welcome animation"
+        ></video>
       </div>
     </div>
   </main>
