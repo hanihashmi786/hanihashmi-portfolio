@@ -254,12 +254,12 @@ export default {
 
     <!-- Education Section -->
     <div class="mb-32">
-      <div class="text-2xl font-bold mb-10 flex items-center" style="color: var(--text);">
+      <div class="text-2xl font-bold mb-10 flex items-center fadein-bot" style="color: var(--text);">
         Education &nbsp;
         <div class="h-[1px] w-32 md:w-96" style="background-color: var(--accent);"></div>
       </div>
 
-      <div class="rounded-xl p-6 md:p-8" style="background-color: var(--bg-card); border: 1px solid var(--border);">
+      <div class="rounded-xl p-6 md:p-8 fadein-left fadeins-1" style="background-color: var(--bg-card); border: 1px solid var(--border);">
         <div class="flex flex-col md:flex-row md:items-start gap-5">
           <!-- Education icon -->
           <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background-color: rgba(var(--accent-rgb), 0.1);">
@@ -283,7 +283,7 @@ export default {
             </div>
             <!-- Key Highlights heading -->
             <div class="pt-6 mt-4" style="border-top: 1px solid var(--border);">
-              <div class="flex items-center justify-center gap-2 mb-6">
+              <div class="flex items-center justify-center gap-2 mb-6 fadein-left fadeins-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: var(--accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                 </svg>
@@ -292,7 +292,7 @@ export default {
               <!-- Highlight cards grid -->
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div v-for="(h, hi) in education.highlights" :key="hi"
-                  class="rounded-xl p-5 text-center transition-all duration-300 hover:-translate-y-1"
+                  :class="['rounded-xl p-5 text-center transition-all duration-300 hover:-translate-y-1 fadein-left', hi === 0 ? 'fadeins-3' : hi === 1 ? 'fadeins-4' : 'fadeins-5']"
                   style="background-color: var(--bg); border: 1px solid rgba(var(--accent-rgb), 0.2);">
                   <!-- Medal/ribbon icon -->
                   <div class="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style="background-color: rgba(var(--accent-rgb), 0.1);">
@@ -311,3 +311,57 @@ export default {
     </div>
   </div>
 </template>
+
+<style>
+.fadein-left {
+  opacity: 0;
+  animation: fadeInLeftAbout 0.5s ease-out forwards;
+}
+
+@keyframes fadeInLeftAbout {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fadein-bot {
+  opacity: 0;
+  animation: fadeInBot 0.5s forwards;
+}
+
+@keyframes fadeInBot {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeins-1 {
+  animation-delay: 300ms;
+}
+
+.fadeins-2 {
+  animation-delay: 600ms;
+}
+
+.fadeins-3 {
+  animation-delay: 900ms;
+}
+
+.fadeins-4 {
+  animation-delay: 1200ms;
+}
+
+.fadeins-5 {
+  animation-delay: 1500ms;
+}
+</style>
