@@ -21,12 +21,12 @@
       </p>
       <br>
       <div class="fadein-bot fade-500 flex items-center gap-3 justify-center md:justify-start">
-        <a href="mailto:hanimhashmi121@gmail.com"
+        <router-link to="/contact"
           class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
           style="color: var(--accent); border-color: var(--accent);">
           <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
           Get In Touch
-        </a>
+        </router-link>
         <router-link to="/portfolio"
           class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
           style="color: var(--text); border-color: var(--border);">
