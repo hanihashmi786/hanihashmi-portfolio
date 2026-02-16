@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isMobile" class="custom-cursor">
+  <div v-if="!isMobile" class="custom-cursor" :class="{ 'cursor-visible': isVisible }">
     <div 
       ref="cursorDot" 
       class="cursor-dot"
@@ -21,13 +21,14 @@ export default {
       isMobile: false,
       isHovering: false,
       isClicking: false,
-      mouseX: 0,
-      mouseY: 0,
-      dotX: 0,
-      dotY: 0,
-      ringX: 0,
-      ringY: 0,
-      animationFrame: null
+      mouseX: window.innerWidth / 2,
+      mouseY: window.innerHeight / 2,
+      dotX: window.innerWidth / 2,
+      dotY: window.innerHeight / 2,
+      ringX: window.innerWidth / 2,
+      ringY: window.innerHeight / 2,
+      animationFrame: null,
+      isVisible: false
     }
   },
   mounted() {
@@ -35,6 +36,14 @@ export default {
     this.isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     if (!this.isMobile) {
+      // Initialize cursor to center of viewport
+      this.mouseX = window.innerWidth / 2;
+      this.mouseY = window.innerHeight / 2;
+      this.dotX = this.mouseX;
+      this.dotY = this.mouseY;
+      this.ringX = this.mouseX;
+      this.ringY = this.mouseY;
+      
       this.initCursor();
     }
   },
@@ -66,6 +75,11 @@ export default {
     },
     
     handleMouseMove(e) {
+      // Show cursor on first mouse move
+      if (!this.isVisible) {
+        this.isVisible = true;
+      }
+      
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
       
@@ -185,6 +199,12 @@ export default {
   height: 100%;
   pointer-events: none;
   z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-cursor.cursor-visible {
+  opacity: 1;
 }
 
 .cursor-dot {
