@@ -1,4 +1,5 @@
 <template>
+  <CustomCursor />
   <div class="max-w-7xl mx-auto flex flex-col relative">
 
     <nav class="max-w-7xl px-5 md:fixed top-0 z-[98] w-screen backdrop-blur-md bg-opacity-80" style="background-color: var(--nav-bg);">
@@ -69,7 +70,12 @@
 </template>
 
 <script>
+import CustomCursor from './components/CustomCursor.vue'
+
 export default {
+  components: {
+    CustomCursor
+  },
   data() {
     return {
       isDark: true
@@ -135,6 +141,13 @@ body {
   color: var(--text-muted);
   height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  body * {
+    cursor: none !important;
+  }
 }
 
 nav {
