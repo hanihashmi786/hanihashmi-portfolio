@@ -281,14 +281,29 @@ export default {
                 </p>
               </div>
             </div>
-            <div class="pt-4" style="border-top: 1px solid var(--border);">
-              <h4 class="text-xs font-bold uppercase tracking-wider mb-3" style="color: var(--accent);">Key Highlights</h4>
-              <ul class="flex flex-col gap-2">
-                <li v-for="(h, hi) in education.highlights" :key="hi" class="text-sm leading-relaxed flex items-start gap-2" style="color: var(--text-muted);">
-                  <span class="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style="background-color: var(--accent);"></span>
-                  {{ h }}
-                </li>
-              </ul>
+            <!-- Key Highlights heading -->
+            <div class="pt-6 mt-4" style="border-top: 1px solid var(--border);">
+              <div class="flex items-center justify-center gap-2 mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: var(--accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                </svg>
+                <h4 class="text-base font-bold" style="color: var(--text);">Key Highlights</h4>
+              </div>
+              <!-- Highlight cards grid -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div v-for="(h, hi) in education.highlights" :key="hi"
+                  class="rounded-xl p-5 text-center transition-all duration-300 hover:-translate-y-1"
+                  style="background-color: var(--bg); border: 1px solid rgba(var(--accent-rgb), 0.2);">
+                  <!-- Medal/ribbon icon -->
+                  <div class="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style="background-color: rgba(var(--accent-rgb), 0.1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: var(--accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="12" cy="8" r="6" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.5 14l-1.5 8 5-3 5 3-1.5-8" />
+                    </svg>
+                  </div>
+                  <p class="text-sm leading-relaxed" style="color: var(--text-muted);">{{ h }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

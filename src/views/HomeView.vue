@@ -36,7 +36,7 @@
     </div>
     <div class="flex justify-center md:justify-start fadein-right">
       <div class="w-56 h-56 md:w-72 md:h-72 rounded-full border-4 pict overflow-hidden flex items-center justify-center"
-        style="border-color: var(--accent); background-color: var(--bg-card);">
+        style="border-color: #000000; background-color: #000000;">
         <video
           src="/videos/welcome.mov"
           autoplay
