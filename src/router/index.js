@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { track } from '@vercel/analytics'
 import HomeView from '../views/HomeView.vue'
 
 const routes = [
@@ -48,6 +49,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title + ' - Hani Hashmi';
   next();
+});
+
+// Track page views with Vercel Analytics
+router.afterEach((to) => {
+  track('pageview', {
+    page: to.path,
+    title: to.meta.title || 'Unknown'
+  });
 });
 
 export default router
