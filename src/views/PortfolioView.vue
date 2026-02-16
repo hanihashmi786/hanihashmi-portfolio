@@ -7,6 +7,7 @@ export default {
         {
           id: 1,
           name: 'Gogo Sports',
+          image: '/images/projects/gogo-sports.jpg',
           status: 'A premium sports store in KSA for match balls, training gear, tracksuits, uniforms, and goalkeeper gloves. Built with Next.js and deployed as a production e-commerce experience.',
           tech: 'Next.js',
           techIcons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg'],
@@ -19,6 +20,7 @@ export default {
         {
           id: 2,
           name: 'Motorek',
+          image: '/images/projects/motorek.jpg',
           status: 'A comprehensive car oil change service platform providing both mobile application and website. Built with React Native for mobile, Next.js for web, Django for backend, and PostgreSQL for database.',
           tech: 'React Native, Next.js, Django, PostgreSQL',
           techIcons: [
@@ -36,6 +38,7 @@ export default {
         {
           id: 3,
           name: 'Break Portal',
+          image: '/images/projects/break-portal.jpg',
           status: 'A web-based platform developed to manage employee break times and enhance workplace efficiency. Built and deployed on the server.',
           tech: 'React.js, Python (Flask/Django), PostgreSQL',
           techIcons: [
@@ -53,6 +56,7 @@ export default {
         {
           id: 4,
           name: 'Call Loom',
+          image: '/images/projects/call-loom.jpg',
           status: 'A mobile application built to track AI-powered call interactions. Complete mobile app with API integration.',
           tech: 'React Native, Tailwind CSS, API, AWS',
           techIcons: [
@@ -69,6 +73,7 @@ export default {
         {
           id: 5,
           name: 'Data Scrubber',
+          image: '/images/projects/data-scrubber.jpg',
           status: 'A data cleaning and preprocessing tool for separating clean and bad numbers through Blacklist Alliance, saving API requests for already scrubbed numbers.',
           tech: 'HTML, CSS, JavaScript, Flask',
           techIcons: [
@@ -86,6 +91,7 @@ export default {
         {
           id: 6,
           name: 'Dial Loom',
+          image: '/images/projects/dial-loom.jpg',
           status: 'A mobile application designed to help businesses monitor and track dialer performance and call center metrics. Designed the complete frontend.',
           tech: 'React Native, Tailwind CSS',
           techIcons: [
@@ -101,6 +107,7 @@ export default {
         {
           id: 7,
           name: 'Taskio',
+          image: '/images/projects/taskio.jpg',
           status: 'A task management app aimed at improving personal and team productivity. Built the entire website and deployed on server.',
           tech: 'React + Vite, Django, PostgreSQL',
           techIcons: [
@@ -118,6 +125,7 @@ export default {
         {
           id: 8,
           name: 'Rujo-illalah',
+          image: '/images/projects/rujo-illalah.jpg',
           status: 'An Islamic mobile application providing spiritual guidance and resources, built with React Native.',
           tech: 'React Native, Firebase, TypeScript',
           techIcons: [
@@ -153,6 +161,10 @@ export default {
             @mouseleave="hoveredProject = null">
             <div class="item-card flex flex-col gap-3 rounded-xl px-5 py-5 h-full transition-all duration-300"
               style="background-color: var(--bg-card); border: 1px solid var(--border);">
+              <!-- Project image -->
+              <div class="w-full h-36 rounded-lg overflow-hidden -mt-1 mb-1">
+                <img :src="item.image" :alt="item.name" class="w-full h-full object-cover" />
+              </div>
               <!-- Color accent bar -->
               <div class="w-full h-1 rounded-full" :style="{ backgroundColor: item.color }"></div>
               

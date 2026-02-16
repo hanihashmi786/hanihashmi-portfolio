@@ -37,12 +37,16 @@
                 class="fadein-bot fadein-1 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">About</router-link>
             </li>
             <li>
+              <router-link to="/experience"
+                class="fadein-bot fadein-2 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Experience</router-link>
+            </li>
+            <li>
               <router-link to="/portfolio"
-                class="fadein-bot fadein-2 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Portfolio</router-link>
+                class="fadein-bot fadein-3 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Portfolio</router-link>
             </li>
             <li>
               <router-link to="/contact"
-                class="fadein-bot fadein-3 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Contact</router-link>
+                class="fadein-bot nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Contact</router-link>
             </li>
           </ul>
         </div>
@@ -57,6 +61,7 @@
     <nav class="flex justify-around py-4 text-xs">
       <router-link to="/" class="nav-link-mobile">Home</router-link>
       <router-link to="/about" class="nav-link-mobile">About</router-link>
+      <router-link to="/experience" class="nav-link-mobile">Experience</router-link>
       <router-link to="/portfolio" class="nav-link-mobile">Portfolio</router-link>
       <router-link to="/contact" class="nav-link-mobile">Contact</router-link>
     </nav>

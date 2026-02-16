@@ -36,14 +36,15 @@
     </div>
     <div class="flex justify-center md:justify-start fadein-right">
       <div class="w-56 h-56 md:w-72 md:h-72 rounded-full border-4 pict overflow-hidden flex items-center justify-center"
-        style="border-color: var(--accent);">
+        style="border-color: var(--accent); background-color: var(--bg-card);">
         <video
           src="/videos/welcome.mov"
           autoplay
           loop
           muted
           playsinline
-          class="w-full h-full object-cover"
+          class="w-[140%] h-[140%] object-contain"
+          style="transform: scale(0.7);"
           aria-label="Hani Hashmi welcome animation"
         ></video>
       </div>

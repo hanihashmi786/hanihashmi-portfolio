@@ -33,70 +33,7 @@ export default {
         { id: 7, name: 'Selenium', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg', status: 'Automation' },
         { id: 8, name: 'TensorFlow', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', status: 'AI/ML' },
       ],
-      experiences: [
-        {
-          role: 'Full Stack Developer',
-          company: 'Freelancing',
-          period: 'Oct 2025 - Present',
-          location: 'Riyadh, Saudi Arabia',
-          current: true,
-          points: [
-            'Developed the mobile app "Rujo-illalah" using React Native',
-            'Currently working on "Motorek" web using Next.js and mobile app using React Native, with Django backend',
-            'Developed the frontend of "Gogo Sports" using Next.js'
-          ]
-        },
-        {
-          role: 'Full Stack Developer',
-          company: 'Mars BPO Pvt. Ltd.',
-          period: 'Jul 2024 - Aug 2025',
-          location: 'Rawalpindi, Pakistan',
-          current: false,
-          points: [
-            'Developed & maintained 5+ web apps using React and mobile apps using React Native & Python (Flask/Django), improving deployment time by 30%',
-            'Collaborated with cross-functional teams to build scalable solutions, resulting in a 25% increase in system reliability',
-            'Optimized backend codebase & debugging processes, reducing issue resolution time by 40%'
-          ]
-        },
-        {
-          role: 'Full Stack Developer',
-          company: 'Freelancing',
-          period: 'Sep 2023 - Jul 2024',
-          location: 'Islamabad, Pakistan',
-          current: false,
-          points: [
-            'Developed a UI/UX dashboard using React.js',
-            'Built a mobile app for online clothing sales using React Native',
-            'Created an e-commerce store for an international student project with MERN stack',
-            'Built a voice changer website using Python as a final year project'
-          ]
-        },
-        {
-          role: 'JavaScript Developer - Internship',
-          company: 'SOFTOO Pvt. Ltd.',
-          period: 'Jul 2023 - Sep 2023',
-          location: 'Islamabad, Pakistan',
-          current: false,
-          points: [
-            'Completed intensive Node.js training during the internship',
-            'Enhanced logical thinking & problem-solving by independently tackling coding challenges',
-            'Contributed to a collaborative team culture by sharing solutions and improving peer review quality'
-          ]
-        }
-      ],
-      education: [
-        {
-          degree: 'BS Software Engineering',
-          institution: 'Capital University of Science & Technology',
-          period: '2020 - 2024',
-          location: 'Islamabad, Pakistan',
-          highlights: [
-            'Final Year Project: Detection of Brain Tumor using MR Images (Python, TensorFlow/Keras, OpenCV)',
-            'Focused on Full Stack Development, AI/ML, and Mobile App Development',
-            'Strong foundation in Data Structures, Algorithms, and System Design'
-          ]
-        }
-      ],
+
       certifications: [
         { name: 'Google IT Support', issuer: 'Google', category: 'IT Support', url: 'https://www.coursera.org/professional-certificates/google-it-support' },
         { name: 'Crash Course on Python', issuer: 'Google', category: 'Programming', url: 'https://www.coursera.org/learn/python-crash-course' },
@@ -124,7 +61,7 @@ export default {
       <section class="text-sm md:text-base text-justify flex flex-col md:flex-row gap-6">
         <div class="flex-shrink-0 flex justify-center md:justify-start">
           <div class="w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border-2" style="border-color: var(--accent);">
-            <img src="/images/profile-3d.png" alt="Hani Hashmi" class="w-full h-full object-cover" />
+            <img src="/images/profile-about.jpeg" alt="Hani Hashmi" class="w-full h-full object-cover" />
           </div>
         </div>
         <div class="flex flex-col gap-4">
@@ -139,75 +76,7 @@ export default {
     </article>
   </div>
 
-  <!-- Work Experience Section -->
-  <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3 mb-5">
-    <article>
-      <header>
-        <div class="text-2xl font-bold mb-8 fadein-bot title-section flex items-center" style="color: var(--text);">
-          <div class="h-[1px] w-10 md:w-20" style="background-color: var(--accent);"></div>
-          &nbsp; Work Experience
-        </div>
-      </header>
-      <section>
-        <div class="relative">
-          <!-- Timeline line -->
-          <div class="absolute left-4 top-0 bottom-0 w-[2px] hidden md:block" style="background-color: rgba(var(--accent-rgb), 0.2);"></div>
-          <div v-for="(exp, index) in experiences" :key="index" class="mb-8 md:ml-12 relative">
-            <!-- Timeline dot -->
-            <div class="absolute -left-[3.25rem] top-1 w-3 h-3 rounded-full hidden md:block" style="background-color: var(--accent);" :style="exp.current ? { boxShadow: '0 0 0 4px rgba(var(--accent-rgb), 0.2)' } : {}"></div>
-            <div class="rounded-xl p-5 md:p-6 transition-colors duration-300" style="background-color: var(--bg-card); border: 1px solid var(--border);">
-              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                <div>
-                  <h3 class="text-lg font-semibold" style="color: var(--text);">{{ exp.role }}</h3>
-                  <p class="text-sm" style="color: var(--accent);">{{ exp.company }}</p>
-                </div>
-                <div class="text-right mt-2 md:mt-0">
-                  <span v-if="exp.current" class="inline-block px-2 py-1 text-xs rounded-full mb-1" style="background-color: rgba(var(--accent-rgb), 0.1); color: var(--accent);">Current</span>
-                  <p class="text-xs" style="color: var(--text-muted);">{{ exp.period }}</p>
-                  <p class="text-xs" style="color: var(--text-muted); opacity: 0.7;">{{ exp.location }}</p>
-                </div>
-              </div>
-              <ul class="list-disc list-inside text-sm leading-relaxed flex flex-col gap-2" style="color: var(--text-muted);">
-                <li v-for="(point, pIndex) in exp.points" :key="pIndex">{{ point }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
-  </div>
 
-  <!-- Education Section -->
-  <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3 mb-5">
-    <article>
-      <header>
-        <div class="text-2xl font-bold mb-8 fadein-bot title-section flex items-center" style="color: var(--text);">
-          Education &nbsp;
-          <div class="h-[1px] w-32 md:w-96" style="background-color: var(--accent);"></div>
-        </div>
-      </header>
-      <section>
-        <div v-for="(edu, index) in education" :key="index" class="rounded-xl p-5 md:p-6 mb-4" style="background-color: var(--bg-card); border: 1px solid var(--border);">
-          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-            <div>
-              <h3 class="text-lg font-semibold" style="color: var(--text);">{{ edu.degree }}</h3>
-              <p class="text-sm" style="color: var(--accent);">{{ edu.institution }}</p>
-            </div>
-            <div class="text-right mt-2 md:mt-0">
-              <p class="text-xs" style="color: var(--text-muted);">{{ edu.period }}</p>
-              <p class="text-xs" style="color: var(--text-muted); opacity: 0.7;">{{ edu.location }}</p>
-            </div>
-          </div>
-          <div class="mt-3">
-            <h4 class="text-sm font-medium mb-2" style="color: var(--accent); opacity: 0.8;">Key Highlights</h4>
-            <ul class="list-disc list-inside text-sm leading-relaxed flex flex-col gap-2" style="color: var(--text-muted);">
-              <li v-for="(highlight, hIndex) in edu.highlights" :key="hIndex">{{ highlight }}</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </article>
-  </div>
 
   <!-- Skills Section -->
   <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3 mb-5">

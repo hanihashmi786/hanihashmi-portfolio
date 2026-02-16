@@ -15,6 +15,12 @@ const routes = [
     meta: { title: 'About' }
   },
   {
+    path: '/experience',
+    name: 'experience',
+    component: () => import('../views/ExperienceView.vue'),
+    meta: { title: 'Experience' }
+  },
+  {
     path: '/portfolio',
     name: 'portfolio',
     component: () => import('../views/PortfolioView.vue'),
