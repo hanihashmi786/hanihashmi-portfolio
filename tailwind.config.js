@@ -4,14 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        'mono-bg': '#E9ECEF',
-        'mono-fg': '#212529',
-        'mono-muted': '#6c757d',
-        'mono-border': '#CED4DA',
-        'mono-card': '#F8F9FA',
-        'mono-card-hover': '#DEE2E6',
-        'mono-accent': '#495057',
-        'mono-subtle': '#ADB5BD',
+        'th-bg': 'var(--bg)',
+        'th-fg': 'var(--fg)',
+        'th-muted': 'var(--muted)',
+        'th-border': 'var(--border)',
+        'th-card': 'var(--card)',
+        'th-card-hover': 'var(--card-hover)',
+        'th-accent': 'var(--accent)',
+        'th-subtle': 'var(--subtle)',
+        'th-highlight': 'var(--highlight)',
       }
     },
   },
