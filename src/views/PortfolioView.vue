@@ -125,7 +125,7 @@ export default {
         {
           id: 8,
           name: 'Rujo-illalah',
-          image: '/images/projects/rujo-illalah.jpg',
+          image: '/images/projects/rujo-illalah.png',
           status: 'An Islamic mobile application providing spiritual guidance and resources, built with React Native.',
           tech: 'React Native, Firebase, TypeScript',
           techIcons: [
