@@ -64,7 +64,7 @@
               </svg>
               <span class="text-sm font-medium">GitHub</span>
             </a>
-            <a href="https://linkedin.com/in/hanihashmi333" target="_blank" rel="noopener"
+            <a href="https://linkedin.com/in/hanihashmi" target="_blank" rel="noopener"
               class="flex items-center gap-2 px-5 py-3 rounded-xl transition-all duration-300 hover:opacity-80"
               style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
