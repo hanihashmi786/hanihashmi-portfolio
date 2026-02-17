@@ -1,4 +1,5 @@
 <template>
+  <Analytics />
   <CustomCursor />
   <div class="max-w-7xl mx-auto flex flex-col relative">
 
@@ -70,10 +71,12 @@
 </template>
 
 <script>
+import { Analytics } from '@vercel/analytics/vue'
 import CustomCursor from './components/CustomCursor.vue'
 
 export default {
   components: {
+    Analytics,
     CustomCursor
   },
   data() {
