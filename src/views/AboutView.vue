@@ -66,7 +66,7 @@ export default {
         </div>
         <div class="flex flex-col gap-4">
           <p class="leading-relaxed fadein-left fadeins-1" style="color: var(--text-muted);">
-            I am a Software Engineer with 2 years of experience in Full Stack Development, IT Support, Software Support, and Networking. Skilled in React.js, React Native, Python (Flask/Django), and the MERN stack, with a solid foundation in AI, Machine Learning, and NLP.
+            I am a Software Engineer with around 3 years of experience in Full Stack Development, IT Support, Software Support, and Networking. Skilled in React.js, React Native, Python (Flask/Django), and the MERN stack, with a solid foundation in AI, Machine Learning, and NLP.
           </p>
           <p class="leading-relaxed fadein-left fadeins-2" style="color: var(--text-muted);">
             I have contributed to multiple successful projects including Break Portal, Call Loom, Data Scrubber, Dial Loom, Taskio, Rujo-illalah and am currently working on Motorek (Web & Mobile App). My work has improved deployment time by 30%, increased system reliability by 25%, and reduced issue resolution time by 40%.
