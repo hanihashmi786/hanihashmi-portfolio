@@ -154,7 +154,11 @@ body {
 
 /* ---------- Currently building strip ---------- */
 .now-building {
-  margin-top: 1.75rem;
+  /* The hero column uses space-y-2, whose sibling selector outranks this
+     class, so the breathing room above the strip has to be forced. */
+  margin-top: 2.5rem !important;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
 }
 
 .nb-label {
