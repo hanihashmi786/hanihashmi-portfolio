@@ -1,8 +1,15 @@
 <script>
-import { projects, ORG_FILTERS, STATUS } from '../data/projects.js'
+import CurrentlyWorkingOn from '../components/CurrentlyWorkingOn.vue'
+import { projects, currentWork, ORG_FILTERS, STATUS } from '../data/projects.js'
+
+// The two in-flight builds get the featured block above the grid, so the
+// grid lists everything else rather than repeating them.
+const featuredIds = new Set(currentWork.map((p) => p.id))
+const gridProjects = projects.filter((p) => !featuredIds.has(p.id))
 
 export default {
   name: 'PortfolioView',
+  components: { CurrentlyWorkingOn },
   data() {
     return {
       hoveredProject: null,
@@ -13,13 +20,13 @@ export default {
   },
   computed: {
     items() {
-      if (this.activeFilter === 'all') return projects;
-      return projects.filter((p) => p.orgKey === this.activeFilter);
+      if (this.activeFilter === 'all') return gridProjects;
+      return gridProjects.filter((p) => p.orgKey === this.activeFilter);
     }
   },
   methods: {
     countFor(key) {
-      return key === 'all' ? projects.length : projects.filter((p) => p.orgKey === key).length;
+      return key === 'all' ? gridProjects.length : gridProjects.filter((p) => p.orgKey === key).length;
     },
     statusOf(item) {
       return STATUS[item.status] || STATUS.shipped;
@@ -37,14 +44,24 @@ export default {
   <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3">
     <article>
       <header>
-        <div class="text-2xl font-bold mb-6 fadein-bot title-section flex items-center justify-center flex-col">
+        <div class="text-2xl font-bold mb-12 fadein-bot title-section flex items-center justify-center flex-col">
           <h4 style="color: var(--text);">Projects</h4>
           <h4 class="text-base font-normal text-transparent bg-clip-text" style="background-image: linear-gradient(to right, var(--gradient-from), var(--gradient-to));">
             Production platforms, mobile apps and tools I have shipped</h4>
         </div>
+      </header>
+
+      <!-- Featured: the two builds currently in flight -->
+      <CurrentlyWorkingOn class="mb-16" />
+
+      <section>
+        <div class="text-xl font-bold mb-5 flex items-center" style="color: var(--text);">
+          <div class="h-[1px] w-10 md:w-20 mr-3" style="background-color: var(--accent);"></div>
+          More Projects
+        </div>
 
         <!-- Filter chips -->
-        <div class="flex flex-wrap justify-center gap-2 mb-8 fadein-bot" role="group" aria-label="Filter projects by organisation">
+        <div class="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter projects by organisation">
           <button v-for="f in filters" :key="f.key" type="button"
             class="filter-chip" :class="{ active: activeFilter === f.key }"
             :aria-pressed="activeFilter === f.key"
@@ -53,8 +70,7 @@ export default {
             <span class="filter-count">{{ countFor(f.key) }}</span>
           </button>
         </div>
-      </header>
-      <section>
+
         <div :key="activeFilter" class="grid grid-cols-1 gap-4 pb-16 md:grid-cols-2 lg:grid-cols-3 md:gap-5 fade-zoom-in">
           <div v-for="item in items" :key="item.id" class="relative"
             @mouseenter="canPreview(item) ? hoveredProject = item.id : null"

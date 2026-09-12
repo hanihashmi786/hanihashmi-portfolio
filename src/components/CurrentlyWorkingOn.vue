@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-  <section class="cwo px-5 md:px-12 mx-3 pb-32 md:pb-20" :class="{ 'is-visible': visible }" aria-labelledby="cwo-title">
+  <section class="cwo" :class="{ 'is-visible': visible }" aria-labelledby="cwo-title">
     <header class="cwo-head rise">
       <div class="cwo-head-main">
         <span class="cwo-kicker">
@@ -140,11 +140,7 @@ export default {
 </template>
 
 <style scoped>
-.cwo {
-  max-width: 72rem;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* Spacing around the block is the parent's job so it can sit inside any page. */
 
 /* ---------- reveal ---------- */
 .rise {
@@ -213,8 +209,8 @@ export default {
 }
 
 .cwo-title {
-  margin-top: 0.9rem;
-  font-size: 1.55rem;
+  margin-top: 0.8rem;
+  font-size: 1.35rem;
   font-weight: 700;
   line-height: 1.2;
   color: var(--text);
@@ -222,7 +218,7 @@ export default {
 
 @media (min-width: 768px) {
   .cwo-title {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
   }
 }
 
