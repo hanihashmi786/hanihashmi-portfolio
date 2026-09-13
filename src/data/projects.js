@@ -1,6 +1,6 @@
 // Single source of truth for project data.
-// `currentWork` feeds the "Currently Working On" block on the home page,
-// `projects` feeds the portfolio grid. Keep both in sync with the CV.
+// `currentWork` feeds the "Currently building" strip on the home page,
+// `projects` feeds the portfolio mosaic. Keep both in sync with the CV.
 
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/'
 
@@ -92,7 +92,7 @@ export const currentWork = [
     tagline: 'Vehicle & Adventure Rental Marketplace',
     short: 'Adventure rental marketplace',
     org: ORGS.otaishan,
-    image: '/images/projects/bahhr.png',
+    image: '/images/projects/bahhr-cover.svg',
     icon: '/images/projects/bahhr-icon.svg',
     color: '#023047',
     status: 'prelaunch',
@@ -112,6 +112,20 @@ export const currentWork = [
   }
 ]
 
+const work = Object.fromEntries(currentWork.map((p) => [p.id, p]))
+
+// The in-flight builds carry their progress and highlights into the mosaic's
+// hero tiles and the detail sheet.
+const featured = (id) => ({
+  featured: true,
+  icon: work[id].icon,
+  statusNote: work[id].statusNote,
+  phases: work[id].phases,
+  phase: work[id].phase,
+  highlights: work[id].highlights
+})
+
+// `size` drives the mosaic: xl = hero tile, lg = tall tile, md = standard.
 export const projects = [
   {
     id: 'mrafqk',
@@ -120,7 +134,10 @@ export const projects = [
     orgKey: 'otaishan',
     org: ORGS.otaishan,
     status: 'testing',
+    size: 'xl',
     image: '/images/projects/mrafqk.jpg',
+    // Keep the wordmark on the left in frame when the cover is cropped.
+    imagePosition: '10% center',
     description:
       'Book licensed, verified nurses as non-clinical companions for hospital visits, dialysis and elderly care across Saudi Arabia. Real-time bidding and chat, booking-to-payout workflows, MFA and role-based access, all built end-to-end.',
     tech: 'TypeScript, React Native (Expo), Next.js, Node.js/Express, tRPC, PostgreSQL, Redis, WebSockets',
@@ -128,7 +145,8 @@ export const projects = [
     demo: 'https://mrafqk.com',
     playstore: null,
     note: 'Play Store release pending',
-    color: '#14b8a6'
+    color: '#14b8a6',
+    ...featured('mrafqk')
   },
   {
     id: 'bahhr',
@@ -137,7 +155,8 @@ export const projects = [
     orgKey: 'otaishan',
     org: ORGS.otaishan,
     status: 'prelaunch',
-    image: '/images/projects/bahhr.png',
+    size: 'xl',
+    image: '/images/projects/bahhr-cover.svg',
     description:
       'Multi-category rental marketplace for boats, jet skis, ATVs, buggies and motorcycles. Booking engine with overlap validation, real-time chat via Socket.IO, JWT/OTP auth with RBAC, and full English/Arabic RTL support.',
     tech: 'React Native (Expo), NestJS, PostgreSQL, Prisma, Next.js, Socket.IO, TypeScript, Tailwind CSS',
@@ -145,7 +164,8 @@ export const projects = [
     demo: 'https://www.bahhr.net',
     playstore: null,
     note: 'Pre-launch review',
-    color: '#00b4d8'
+    color: '#00b4d8',
+    ...featured('bahhr')
   },
   {
     id: 'motorekcs',
@@ -154,13 +174,18 @@ export const projects = [
     orgKey: 'otaishan',
     org: ORGS.otaishan,
     status: 'live',
+    size: 'lg',
     image: '/images/projects/motorek.jpg',
     description:
       'Dispatches service vehicles to customer locations for engine oil changes ordered from Saudi automotive and oil brands. Django REST backend with JWT auth, Next.js customer platform and a React Native app with payments and push notifications.',
+    highlights: [
+      'Service vehicles are dispatched to the customer’s location to perform engine oil changes ordered from Saudi automotive and oil brands.',
+      'Django REST Framework backend with JWT authentication and PostgreSQL, powering order management and separate customer, driver and service workflows.',
+      'Next.js customer platform and React Native mobile app, integrating payment architecture and push notifications.'
+    ],
     tech: 'Next.js, React, TypeScript, Django REST Framework, PostgreSQL, React Native, Tailwind CSS',
     icons: [ICONS.nextjs, ICONS.react, ICONS.typescript, ICONS.django, ICONS.postgresql, ICONS.tailwind],
     demo: 'https://motorekcs.com',
-    preview: false,
     playstore: null,
     note: 'Mobile release in progress',
     color: '#f97316'
@@ -172,9 +197,15 @@ export const projects = [
     orgKey: 'otaishan',
     org: ORGS.otaishan,
     status: 'live',
+    size: 'lg',
     image: '/images/projects/the-perfect-house.webp',
     description:
       'Interactive digital product for an architecture, interiors, landscape and construction firm, including 3D architectural experiences in Three.js/WebGL. Shipped as a React Native (Expo) app and web platform with Arabic/English RTL, technical SEO and serverless deployment.',
+    highlights: [
+      'Interactive digital product for the firm’s architecture, interiors, landscape and construction divisions.',
+      '3D architectural experiences built with Three.js/WebGL.',
+      'React Native (Expo) app released alongside the web platform, with Arabic/English RTL, technical SEO, security headers and serverless deployment on Vercel.'
+    ],
     tech: 'React Native (Expo), Next.js, Three.js/WebGL, TypeScript, Node.js serverless, Vercel',
     icons: [ICONS.reactNative, ICONS.nextjs, ICONS.threejs, ICONS.typescript, ICONS.nodejs, ICONS.vercel],
     demo: 'https://theperfecthouse.co',
@@ -189,9 +220,14 @@ export const projects = [
     orgKey: 'freelance',
     org: ORGS.freelance,
     status: 'live',
+    size: 'md',
     image: '/images/projects/gogo-sports.jpg',
     description:
       'Customer-facing store for match balls, training gear, uniforms and goalkeeper gloves. Built in Next.js with a backend-free architecture: the order flow is routed directly through WhatsApp.',
+    highlights: [
+      'Backend-free architecture: the order flow is routed directly through WhatsApp.',
+      'Premium football gear catalogue priced in SAR with delivery across Saudi Arabia.'
+    ],
     tech: 'Next.js, React, Tailwind CSS',
     icons: [ICONS.nextjs, ICONS.react, ICONS.tailwind],
     demo: 'https://gogosports.online/',
@@ -206,9 +242,15 @@ export const projects = [
     orgKey: 'personal',
     org: ORGS.personal,
     status: 'soon',
+    size: 'md',
     image: '/images/projects/mutmainnah.png',
     description:
       "Designed, built and shipped independently. Runs on React Native's New Architecture (Fabric, TurboModules) with Hermes, React Context across salah, tasbeeh, theme and settings, AsyncStorage as the sole persistence layer, and English/Urdu via a custom i18n layer.",
+    highlights: [
+      'Designed, built and shipped to Google Play independently, covering product definition, engineering and release.',
+      'React Native New Architecture (Fabric and TurboModules) on the Hermes engine, with React Context across the salah, tasbeeh, theme and settings modules.',
+      'Fully offline-first with AsyncStorage as the sole persistence layer, and bilingual English/Urdu via a custom lightweight i18n layer.'
+    ],
     tech: 'React Native, React, JavaScript, Hermes, React Navigation, AsyncStorage',
     icons: [ICONS.reactNative, ICONS.react, ICONS.javascript],
     demo: null,
@@ -223,9 +265,14 @@ export const projects = [
     orgKey: 'marsbpo',
     org: ORGS.marsbpo,
     status: 'live',
+    size: 'lg',
     image: '/images/projects/call-loom.jpg',
     description:
       "React Native mobile app for the company's flagship commercial AI call-tracking and IVR platform. Integrated the product APIs and shipped the app to the Google Play Store.",
+    highlights: [
+      'React Native app for Mars BPO’s flagship commercial AI call-tracking and IVR platform.',
+      'Integrated the product APIs and shipped the app to the Google Play Store.'
+    ],
     tech: 'React Native, Tailwind CSS, REST APIs, AWS',
     icons: [ICONS.reactNative, ICONS.tailwind, ICONS.aws],
     demo: 'https://callloom.com/',
@@ -240,6 +287,7 @@ export const projects = [
     orgKey: 'marsbpo',
     org: ORGS.marsbpo,
     status: 'shipped',
+    size: 'md',
     image: '/images/projects/break-portal.jpg',
     description:
       'Web platform for managing employee break times and improving floor efficiency. Built and deployed on the company server.',
@@ -257,6 +305,7 @@ export const projects = [
     orgKey: 'marsbpo',
     org: ORGS.marsbpo,
     status: 'shipped',
+    size: 'md',
     image: '/images/projects/data-scrubber.jpg',
     description:
       'Separates clean and bad numbers through the Blacklist Alliance API, caching already-scrubbed numbers to save API requests.',
@@ -274,6 +323,7 @@ export const projects = [
     orgKey: 'marsbpo',
     org: ORGS.marsbpo,
     status: 'shipped',
+    size: 'md',
     image: '/images/projects/dial-loom.jpg',
     description:
       'Mobile app that helps businesses monitor dialer performance and call-center metrics. Designed and built the complete frontend.',
@@ -291,6 +341,7 @@ export const projects = [
     orgKey: 'marsbpo',
     org: ORGS.marsbpo,
     status: 'shipped',
+    size: 'md',
     image: '/images/projects/taskio.jpg',
     description:
       'Task management app for personal and team productivity. Built the entire web application and deployed it on the company server.',
