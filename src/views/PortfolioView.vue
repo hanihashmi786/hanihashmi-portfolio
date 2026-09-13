@@ -1,8 +1,15 @@
 <script>
-import { projects, ORG_FILTERS, STATUS } from '../data/projects.js'
+import CurrentlyWorkingOn from '../components/CurrentlyWorkingOn.vue'
+import { projects, currentWork, ORG_FILTERS, STATUS } from '../data/projects.js'
+
+// The two in-flight builds get the Currently Working On block above the
+// mosaic, so the mosaic lists everything else rather than repeating them.
+const featuredIds = new Set(currentWork.map((p) => p.id))
+const gridProjects = projects.filter((p) => !featuredIds.has(p.id))
 
 export default {
   name: 'PortfolioView',
+  components: { CurrentlyWorkingOn },
   data() {
     return {
       activeFilter: 'all',
@@ -13,11 +20,11 @@ export default {
   },
   computed: {
     items() {
-      if (this.activeFilter === 'all') return projects;
-      return projects.filter((p) => p.orgKey === this.activeFilter);
+      if (this.activeFilter === 'all') return gridProjects;
+      return gridProjects.filter((p) => p.orgKey === this.activeFilter);
     },
     openItem() {
-      return projects.find((p) => p.id === this.openId) || null;
+      return gridProjects.find((p) => p.id === this.openId) || null;
     },
     openIndex() {
       return this.items.findIndex((p) => p.id === this.openId);
@@ -38,7 +45,7 @@ export default {
   },
   methods: {
     countFor(key) {
-      return key === 'all' ? projects.length : projects.filter((p) => p.orgKey === key).length;
+      return key === 'all' ? gridProjects.length : gridProjects.filter((p) => p.orgKey === key).length;
     },
     statusOf(item) {
       return STATUS[item.status] || STATUS.shipped;
@@ -79,14 +86,24 @@ export default {
 <template>
   <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3">
     <article>
-      <header class="text-center mb-8 fadein-bot">
+      <header class="text-center mb-12 fadein-bot">
         <h2 class="text-3xl font-bold" style="color: var(--text);">Projects</h2>
         <p class="text-base mt-1 text-transparent bg-clip-text" style="background-image: linear-gradient(to right, var(--gradient-from), var(--gradient-to));">
           Production platforms, mobile apps and tools I have shipped
         </p>
+      </header>
+
+      <!-- Featured: the two builds currently in flight -->
+      <CurrentlyWorkingOn class="mb-16" />
+
+      <section>
+        <div class="text-xl font-bold mb-5 flex items-center" style="color: var(--text);">
+          <div class="h-[1px] w-10 md:w-20 mr-3" style="background-color: var(--accent);"></div>
+          More Projects
+        </div>
 
         <!-- Filter chips -->
-        <div class="flex flex-wrap justify-center gap-2 mt-6" role="group" aria-label="Filter projects by organisation">
+        <div class="flex flex-wrap gap-2 mb-6" role="group" aria-label="Filter projects by organisation">
           <button v-for="f in filters" :key="f.key" type="button"
             class="filter-chip" :class="{ active: activeFilter === f.key }"
             :aria-pressed="activeFilter === f.key"
@@ -95,9 +112,7 @@ export default {
             <span class="filter-count">{{ countFor(f.key) }}</span>
           </button>
         </div>
-      </header>
 
-      <section>
         <!-- Mosaic -->
         <div :key="activeFilter" class="mosaic">
           <button v-for="(item, i) in items" :key="item.id" type="button"
