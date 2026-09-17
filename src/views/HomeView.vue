@@ -1,9 +1,9 @@
 <template>
   <main
     class="mt-10 md:mt-1 pb-24 md:pb-0 flex flex-col-reverse gap-8 items-center md:flex-row md:gap-16 md:justify-center min-h-[65vh] md:min-h-[80vh]">
-    <div class="space-y-2 text-center md:text-left px-10 w-full md:w-auto min-w-0">
-      <p class="fadein-bot" style="color: var(--accent);">Hello World, I'm</p>
-      <h1 class="text-4xl font-bold md:text-5xl fadein-up" style="color: var(--text);">Hani Hashmi</h1>
+    <div class="space-y-2 text-center md:text-start px-10 w-full md:w-auto min-w-0">
+      <p class="fadein-bot" style="color: var(--accent);">{{ $t('home.greeting') }}</p>
+      <h1 class="text-4xl font-bold md:text-5xl fadein-up" style="color: var(--text);">{{ $t('home.name') }}</h1>
       <div class="py-2">
         <h1
           class="typewrite text-xl font-semibold text-transparent bg-clip-text md:text-2xl fadein-up"
@@ -12,25 +12,25 @@
           <span class="wrap">{{ txt }}</span>
         </h1>
       </div>
-      <p class="pr-4 fade-in-from-left leading-relaxed text-sm md:text-base max-w-lg" style="color: var(--text-muted);">
-        Product Engineer with 3 years of experience building and shipping full-stack products across mobile, web and backend. Strong in TypeScript, React Native, Next.js, Node.js and Django, with bilingual Arabic/English (RTL) product experience.
+      <p class="pe-4 fade-in-from-left leading-relaxed text-sm md:text-base max-w-lg" style="color: var(--text-muted);">
+        {{ $t('home.bio') }}
       </p>
       <p class="text-sm fade-in-from-left flex items-center justify-center md:justify-start gap-1 pt-2" style="color: var(--text-muted);">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="color: var(--accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-        Riyadh, Saudi Arabia
+        {{ $t('common.location') }}
       </p>
       <br>
       <div class="fadein-bot fade-500 flex items-center gap-3 justify-center md:justify-start">
         <router-link to="/contact"
           class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
           style="color: var(--accent); border-color: var(--accent);">
-          <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-          Get In Touch
+          <svg xmlns="http://www.w3.org/2000/svg" class="me-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          {{ $t('home.getInTouch') }}
         </router-link>
         <router-link to="/portfolio"
           class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
           style="color: var(--text); border-color: var(--border);">
-          View My Work
+          {{ $t('home.viewWork') }}
         </router-link>
       </div>
 
@@ -39,7 +39,7 @@
       <div class="now-building fadein-bot fade-700">
         <p class="nb-label">
           <span class="nb-pulse" aria-hidden="true"></span>
-          Currently building
+          {{ $t('common.currentlyBuilding') }}
         </p>
         <div class="nb-row">
           <a v-for="p in nowBuilding" :key="p.id" :href="p.website" target="_blank" rel="noopener"
@@ -76,29 +76,45 @@
 </template>
 
 <script>
-import { currentWork, STATUS } from '../data/projects.js'
+import { localizedCurrentWork, statusOf } from '../data/projects.js'
 
 export default {
   name: 'HomeView',
   data() {
     return {
-      toRotate: ["Product Engineer", "Full-Stack Developer", "React Native Dev", "Next.js & Node.js Dev"],
       period: 2000,
       txt: '',
       loopNum: 0,
-      isDeleting: false,
-      nowBuilding: currentWork
+      isDeleting: false
     };
+  },
+  computed: {
+    toRotate() {
+      return this.$t('home.roles');
+    },
+    nowBuilding() {
+      return localizedCurrentWork();
+    }
+  },
+  watch: {
+    // Restart the typewriter from the first role in the new language rather
+    // than finishing a word that no longer exists in the list.
+    '$i18n.locale'() {
+      this.txt = '';
+      this.loopNum = 0;
+      this.isDeleting = false;
+    }
   },
   mounted() {
     this.$nextTick(() => {
       this.tick();
     });
   },
+  beforeUnmount() {
+    clearTimeout(this.timer);
+  },
   methods: {
-    statusOf(p) {
-      return STATUS[p.status] || STATUS.live;
-    },
+    statusOf,
     tick() {
       let typewriter = this.$refs.typewriter;
 
@@ -128,7 +144,7 @@ export default {
         delta = 500;
       }
 
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         that.tick();
       }, delta);
     },
@@ -143,7 +159,7 @@ body {
 }
 
 .typewrite>.wrap {
-  border-right: 0.08em solid var(--text);
+  border-inline-end: 0.08em solid var(--text);
 }
 
 .pict {
@@ -201,9 +217,10 @@ body {
   min-width: 0;
   max-width: 100%;
   gap: 0.65rem;
-  padding: 0.5rem 0.75rem 0.5rem 0.55rem;
+  padding: 0.5rem;
+  padding-inline: 0.55rem 0.75rem;
   border-radius: 14px;
-  text-align: left;
+  text-align: start;
   background-color: var(--bg-card);
   border: 1px solid var(--border);
   transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
@@ -246,7 +263,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  margin-left: 0.35rem;
+  margin-inline-start: 0.35rem;
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
   font-size: 0.58rem;
@@ -291,7 +308,7 @@ body {
   }
 
   .nb-status {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 }
 
@@ -352,6 +369,16 @@ body {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Mirrored entrances under RTL: the copy slides in from its own edge and the
+   portrait from the other, same as the LTR layout. */
+[dir="rtl"] .fade-in-from-left {
+  animation-name: fadeInRight;
+}
+
+[dir="rtl"] .fadein-right {
+  animation-name: fadeInLeftHome;
 }
 
 .fadein-bot {

@@ -6,11 +6,12 @@
     <nav class="max-w-7xl px-5 md:fixed top-0 z-[98] w-screen backdrop-blur-md bg-opacity-80" style="background-color: var(--nav-bg);">
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <button @click="redirectToHome" class="flex">
-          <span class="self-center text-lg font-semibold whitespace-nowrap fadein-bot hover:opacity-80 transition-opacity" style="color: var(--accent);">haniHashmi();</span>
+          <span class="self-center text-lg font-semibold whitespace-nowrap fadein-bot hover:opacity-80 transition-opacity" style="color: var(--accent);" dir="ltr" lang="en">haniHashmi();</span>
         </button>
         <div class="flex md:order-2 fadein-bot items-center gap-3">
+          <LanguageSwitcher />
           <!-- Theme Toggle -->
-          <button @click="toggleTheme" class="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:opacity-80" style="color: var(--accent);" :title="isDark ? 'Switch to Mono theme' : 'Switch to Dark theme'">
+          <button @click="toggleTheme" class="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:opacity-80" style="color: var(--accent);" :title="isDark ? $t('nav.themeMono') : $t('nav.themeDark')" :aria-label="isDark ? $t('nav.themeMono') : $t('nav.themeDark')">
             <!-- Sun icon (shown in dark mode) -->
             <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -31,24 +32,24 @@
           <ul class="flex-col md:flex-row flex md:gap-8 mt-4 md:mt-0 md:text-sm md:font-medium">
             <li>
               <router-link to="/"
-                class="fadein-bot nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300"
-                aria-current="page">Home</router-link>
+                class="fadein-bot nav-link block ps-3 pe-4 py-2 md:p-0 transition-colors duration-300"
+                aria-current="page">{{ $t('nav.home') }}</router-link>
             </li>
             <li>
               <router-link to="/about"
-                class="fadein-bot fadein-1 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">About</router-link>
+                class="fadein-bot fadein-1 nav-link block ps-3 pe-4 py-2 md:p-0 transition-colors duration-300">{{ $t('nav.about') }}</router-link>
             </li>
             <li>
               <router-link to="/experience"
-                class="fadein-bot fadein-2 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Experience</router-link>
+                class="fadein-bot fadein-2 nav-link block ps-3 pe-4 py-2 md:p-0 transition-colors duration-300">{{ $t('nav.experience') }}</router-link>
             </li>
             <li>
               <router-link to="/portfolio"
-                class="fadein-bot fadein-3 nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Portfolio</router-link>
+                class="fadein-bot fadein-3 nav-link block ps-3 pe-4 py-2 md:p-0 transition-colors duration-300">{{ $t('nav.portfolio') }}</router-link>
             </li>
             <li>
               <router-link to="/contact"
-                class="fadein-bot nav-link block pl-3 pr-4 py-2 md:p-0 transition-colors duration-300">Contact</router-link>
+                class="fadein-bot nav-link block ps-3 pe-4 py-2 md:p-0 transition-colors duration-300">{{ $t('nav.contact') }}</router-link>
             </li>
           </ul>
         </div>
@@ -61,11 +62,11 @@
   </div>
   <footer class="block md:hidden fixed bottom-0 left-0 right-0 rounded-t-3xl border bg-opacity-80 backdrop-blur-md backdrop-opacity-90 z-[99]" style="border-color: var(--border); background-color: var(--nav-bg);">
     <nav class="flex justify-around py-4 text-xs">
-      <router-link to="/" class="nav-link-mobile">Home</router-link>
-      <router-link to="/about" class="nav-link-mobile">About</router-link>
-      <router-link to="/experience" class="nav-link-mobile">Experience</router-link>
-      <router-link to="/portfolio" class="nav-link-mobile">Portfolio</router-link>
-      <router-link to="/contact" class="nav-link-mobile">Contact</router-link>
+      <router-link to="/" class="nav-link-mobile">{{ $t('nav.home') }}</router-link>
+      <router-link to="/about" class="nav-link-mobile">{{ $t('nav.about') }}</router-link>
+      <router-link to="/experience" class="nav-link-mobile">{{ $t('nav.experience') }}</router-link>
+      <router-link to="/portfolio" class="nav-link-mobile">{{ $t('nav.portfolio') }}</router-link>
+      <router-link to="/contact" class="nav-link-mobile">{{ $t('nav.contact') }}</router-link>
     </nav>
   </footer>
 </template>
@@ -73,11 +74,13 @@
 <script>
 import { Analytics } from '@vercel/analytics/vue'
 import CustomCursor from './components/CustomCursor.vue'
+import LanguageSwitcher from './components/LanguageSwitcher.vue'
 
 export default {
   components: {
     Analytics,
-    CustomCursor
+    CustomCursor,
+    LanguageSwitcher
   },
   data() {
     return {

@@ -1,11 +1,11 @@
 <script>
 import CurrentlyWorkingOn from '../components/CurrentlyWorkingOn.vue'
-import { projects, currentWork, ORG_FILTERS, STATUS } from '../data/projects.js'
+import { localizedProjects, currentWork, FILTER_KEYS, statusOf } from '../data/projects.js'
+import { isRtl } from '../i18n/index.js'
 
 // The two in-flight builds get the Currently Working On block above the
 // mosaic, so the mosaic lists everything else rather than repeating them.
 const featuredIds = new Set(currentWork.map((p) => p.id))
-const gridProjects = projects.filter((p) => !featuredIds.has(p.id))
 
 export default {
   name: 'PortfolioView',
@@ -13,18 +13,21 @@ export default {
   data() {
     return {
       activeFilter: 'all',
-      filters: ORG_FILTERS,
+      filters: FILTER_KEYS,
       broken: {},
       openId: null
     };
   },
   computed: {
+    gridProjects() {
+      return localizedProjects().filter((p) => !featuredIds.has(p.id));
+    },
     items() {
-      if (this.activeFilter === 'all') return gridProjects;
-      return gridProjects.filter((p) => p.orgKey === this.activeFilter);
+      if (this.activeFilter === 'all') return this.gridProjects;
+      return this.gridProjects.filter((p) => p.orgKey === this.activeFilter);
     },
     openItem() {
-      return gridProjects.find((p) => p.id === this.openId) || null;
+      return this.gridProjects.find((p) => p.id === this.openId) || null;
     },
     openIndex() {
       return this.items.findIndex((p) => p.id === this.openId);
@@ -44,11 +47,9 @@ export default {
     document.body.style.overflow = '';
   },
   methods: {
+    statusOf,
     countFor(key) {
-      return key === 'all' ? gridProjects.length : gridProjects.filter((p) => p.orgKey === key).length;
-    },
-    statusOf(item) {
-      return STATUS[item.status] || STATUS.shipped;
+      return key === 'all' ? this.gridProjects.length : this.gridProjects.filter((p) => p.orgKey === key).length;
     },
     stackOf(item) {
       return item.tech.split(',').map((s) => s.trim()).filter(Boolean);
@@ -66,9 +67,11 @@ export default {
     },
     onKey(e) {
       if (!this.openId) return;
+      // Arrow keys follow reading direction: "next" is to the left under RTL.
+      const fwd = isRtl() ? -1 : 1;
       if (e.key === 'Escape') this.close();
-      else if (e.key === 'ArrowRight') this.step(1);
-      else if (e.key === 'ArrowLeft') this.step(-1);
+      else if (e.key === 'ArrowRight') this.step(fwd);
+      else if (e.key === 'ArrowLeft') this.step(-fwd);
     },
     // Cursor-following spotlight on each tile.
     spot(e) {
@@ -84,12 +87,12 @@ export default {
 </script>
 
 <template>
-  <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3">
+  <div class="px-5 py-5 md:px-12 md:py-10 text-start mx-3">
     <article>
       <header class="text-center mb-12 fadein-bot">
-        <h2 class="text-3xl font-bold" style="color: var(--text);">Projects</h2>
+        <h2 class="text-3xl font-bold" style="color: var(--text);">{{ $t('portfolio.title') }}</h2>
         <p class="text-base mt-1 text-transparent bg-clip-text" style="background-image: linear-gradient(to right, var(--gradient-from), var(--gradient-to));">
-          Production platforms, mobile apps and tools I have shipped
+          {{ $t('portfolio.subtitle') }}
         </p>
       </header>
 
@@ -98,18 +101,18 @@ export default {
 
       <section>
         <div class="text-xl font-bold mb-5 flex items-center" style="color: var(--text);">
-          <div class="h-[1px] w-10 md:w-20 mr-3" style="background-color: var(--accent);"></div>
-          More Projects
+          <div class="h-[1px] w-10 md:w-20 me-3" style="background-color: var(--accent);"></div>
+          {{ $t('portfolio.more') }}
         </div>
 
         <!-- Filter chips -->
-        <div class="flex flex-wrap gap-2 mb-6" role="group" aria-label="Filter projects by organisation">
-          <button v-for="f in filters" :key="f.key" type="button"
-            class="filter-chip" :class="{ active: activeFilter === f.key }"
-            :aria-pressed="activeFilter === f.key"
-            @click="activeFilter = f.key">
-            {{ f.label }}
-            <span class="filter-count">{{ countFor(f.key) }}</span>
+        <div class="flex flex-wrap gap-2 mb-6" role="group" :aria-label="$t('portfolio.filterLabel')">
+          <button v-for="key in filters" :key="key" type="button"
+            class="filter-chip" :class="{ active: activeFilter === key }"
+            :aria-pressed="activeFilter === key"
+            @click="activeFilter = key">
+            {{ $t('filters.' + key) }}
+            <span class="filter-count">{{ countFor(key) }}</span>
           </button>
         </div>
 
@@ -118,7 +121,7 @@ export default {
           <button v-for="(item, i) in items" :key="item.id" type="button"
             class="tile" :class="['tile-' + (item.size || 'md'), { 'is-featured': item.featured }]"
             :style="{ '--i': i, '--brand': item.color, '--sc': statusOf(item).color }"
-            :aria-label="'Open details for ' + item.name"
+            :aria-label="$t('portfolio.openDetails', { name: item.name })"
             @mousemove="spot" @click="open(item)">
             <img v-if="!broken[item.id]" class="tile-img" :src="item.image" :style="{ objectPosition: item.imagePosition }" alt="" loading="lazy" @error="onImgError(item.id)" />
             <span v-else class="tile-img tile-fallback">{{ item.name }}</span>
@@ -137,7 +140,7 @@ export default {
             <span class="tile-body">
               <span v-if="item.featured" class="tile-kicker">
                 <i class="tile-dot tile-dot-live" aria-hidden="true"></i>
-                Currently building
+                {{ $t('common.currentlyBuilding') }}
               </span>
               <span class="tile-name">{{ item.name }}</span>
               <span class="tile-tag">{{ item.tagline }}</span>
@@ -151,11 +154,11 @@ export default {
                 </span>
               </span>
 
-              <span v-if="item.featured && item.phases" class="tile-phases" :aria-label="'Progress: ' + item.phases[item.phase]">
+              <span v-if="item.featured && item.phases" class="tile-phases" :aria-label="$t('portfolio.progress', { phase: item.phases[item.phase] })">
                 <span class="tile-phase-bar">
                   <i v-for="(ph, pi) in item.phases" :key="ph" :class="{ done: pi < item.phase, now: pi === item.phase }" :title="ph"></i>
                 </span>
-                <span class="tile-phase-label">{{ item.phases[item.phase] }} · step {{ item.phase + 1 }} of {{ item.phases.length }}</span>
+                <span class="tile-phase-label">{{ $t('portfolio.stepOf', { phase: item.phases[item.phase], n: item.phase + 1, total: item.phases.length }) }}</span>
               </span>
             </span>
 
@@ -168,13 +171,13 @@ export default {
         <!-- Final Year Project -->
         <div class="mt-16 mb-32">
           <div class="text-xl font-bold mb-6 flex items-center" style="color: var(--text);">
-            <div class="h-[1px] w-10 md:w-20 mr-3" style="background-color: var(--accent);"></div>
-            Final Year Project
+            <div class="h-[1px] w-10 md:w-20 me-3" style="background-color: var(--accent);"></div>
+            {{ $t('portfolio.fyp') }}
           </div>
           <div class="fyp rounded-[22px] p-6 md:p-8" style="background-color: var(--bg-card); border: 1px solid var(--border);">
-            <h3 class="text-lg font-semibold mb-2" style="color: var(--text);">Brain Tumour Detection from MRI</h3>
+            <h3 class="text-lg font-semibold mb-2" style="color: var(--text);">{{ $t('portfolio.fypTitle') }}</h3>
             <p class="text-sm leading-relaxed mb-4" style="color: var(--text-muted);">
-              AI medical imaging system built in Python, TensorFlow/Keras and OpenCV to detect and classify brain tumours from MRI scans. Implemented CNN, VGG-16, ResNet-50 and Inception-V3 for multi-class tumour classification: the system identifies tumour presence, classifies it as benign or malignant, and further categorises it as Glioma, Meningioma, Pituitary Tumour or No Tumour. Delivered as a complete Flask web application.
+              {{ $t('portfolio.fypDesc') }}
             </p>
             <div class="flex items-center gap-2">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-5 h-5" />
@@ -192,7 +195,7 @@ export default {
     <Teleport to="body">
       <Transition name="sheet">
         <div v-if="openItem" class="sheet-backdrop" @click.self="close">
-          <div class="sheet" role="dialog" aria-modal="true" :aria-label="openItem.name + ' details'">
+          <div class="sheet" role="dialog" aria-modal="true" :aria-label="$t('portfolio.details', { name: openItem.name })">
             <div class="sheet-cover">
               <img v-if="!broken[openItem.id]" :src="openItem.image" :style="{ objectPosition: openItem.imagePosition }" alt="" />
               <span v-else class="sheet-cover-fallback" :style="{ background: openItem.color }">{{ openItem.name }}</span>
@@ -201,7 +204,7 @@ export default {
                 <i class="tile-dot" aria-hidden="true"></i>
                 {{ statusOf(openItem).label }}
               </span>
-              <button type="button" class="sheet-close" aria-label="Close" @click="close">
+              <button type="button" class="sheet-close" :aria-label="$t('common.close')" @click="close">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
               </button>
               <img v-if="openItem.icon" class="sheet-logo" :src="openItem.icon" alt="" aria-hidden="true" />
@@ -212,7 +215,7 @@ export default {
                 <div class="min-w-0">
                   <span v-if="openItem.featured" class="tile-kicker sheet-kicker">
                     <i class="tile-dot tile-dot-live" aria-hidden="true"></i>
-                    Currently building
+                    {{ $t('common.currentlyBuilding') }}
                   </span>
                   <h3 class="sheet-name">{{ openItem.name }}</h3>
                   <p class="sheet-tag">{{ openItem.tagline }}</p>
@@ -223,7 +226,7 @@ export default {
               <p class="sheet-desc">{{ openItem.description }}</p>
 
               <div v-if="openItem.phases" class="sheet-phases">
-                <ol class="sheet-steps" :aria-label="openItem.name + ' delivery progress'">
+                <ol class="sheet-steps" :aria-label="$t('portfolio.deliveryProgress', { name: openItem.name })">
                   <li v-for="(ph, pi) in openItem.phases" :key="ph" :class="{ done: pi < openItem.phase, now: pi === openItem.phase }" :aria-current="pi === openItem.phase ? 'step' : null">
                     <i aria-hidden="true"></i>
                     <span>{{ ph }}</span>
@@ -246,24 +249,24 @@ export default {
               <div class="sheet-links">
                 <a v-if="openItem.demo" :href="openItem.demo" target="_blank" rel="noopener" class="sheet-link sheet-link-primary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
-                  Live site
+                  {{ $t('portfolio.liveSite') }}
                 </a>
                 <a v-if="openItem.playstore" :href="openItem.playstore" target="_blank" rel="noopener" class="sheet-link">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302L15.396 12l2.302-2.492zM5.864 2.658L16.8 9.991l-2.302 2.302L5.864 3.658z" /></svg>
-                  Google Play
+                  {{ $t('portfolio.googlePlay') }}
                 </a>
                 <span v-if="openItem.note" class="sheet-linknote">{{ openItem.note }}</span>
               </div>
             </div>
 
             <div class="sheet-nav">
-              <button type="button" class="sheet-navbtn" aria-label="Previous project" @click="step(-1)">
+              <button type="button" class="sheet-navbtn" :aria-label="$t('portfolio.prevProject')" @click="step(-1)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
-                Prev
+                {{ $t('common.prev') }}
               </button>
-              <span class="sheet-count">{{ openIndex + 1 }} / {{ items.length }}</span>
-              <button type="button" class="sheet-navbtn" aria-label="Next project" @click="step(1)">
-                Next
+              <span class="sheet-count" dir="ltr">{{ openIndex + 1 }} / {{ items.length }}</span>
+              <button type="button" class="sheet-navbtn" :aria-label="$t('portfolio.nextProject')" @click="step(1)">
+                {{ $t('common.next') }}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
               </button>
             </div>
@@ -363,7 +366,7 @@ export default {
   overflow: hidden;
   isolation: isolate;
   border-radius: 22px;
-  text-align: left;
+  text-align: start;
   font: inherit;
   color: #fff;
   background: var(--brand, var(--bg-card));
@@ -542,7 +545,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 1rem 1.05rem 1.05rem;
-  padding-right: 3.2rem;
+  padding-inline-end: 3.2rem;
   pointer-events: none;
 }
 
@@ -672,7 +675,7 @@ export default {
 /* open affordance */
 .tile-open {
   position: absolute;
-  right: 0.95rem;
+  inset-inline-end: 0.95rem;
   bottom: 0.95rem;
   z-index: 3;
   display: inline-flex;
@@ -701,6 +704,16 @@ export default {
   transform: rotate(45deg);
 }
 
+/* The open arrow points into the reading direction, so it mirrors under RTL
+   along with its hover spin. */
+[dir="rtl"] .tile-open svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .tile:hover .tile-open {
+  transform: rotate(-45deg);
+}
+
 /* small tiles on phones: keep the chrome light */
 @media (max-width: 767px) {
   .tile-md .tile-pill-org,
@@ -716,21 +729,21 @@ export default {
   }
   .tile-body {
     padding: 0.85rem 0.9rem 0.9rem;
-    padding-right: 3rem;
+    padding-inline-end: 3rem;
   }
   .tile-md .tile-body {
-    padding-right: 2.5rem;
+    padding-inline-end: 2.5rem;
   }
   .tile-open {
     width: 30px;
     height: 30px;
-    right: 0.8rem;
+    inset-inline-end: 0.8rem;
     bottom: 0.8rem;
   }
   .tile-md .tile-open {
     width: 26px;
     height: 26px;
-    right: 0.7rem;
+    inset-inline-end: 0.7rem;
     bottom: 0.75rem;
   }
   .tile-md .tile-open svg {
@@ -762,7 +775,7 @@ html:not([data-theme="mono"]) .icon-dark,
   position: relative;
   width: 100%;
   max-width: 52rem;
-  text-align: left;
+  text-align: start;
   max-height: 92vh;
   max-height: 92dvh;
   display: flex;
@@ -841,13 +854,13 @@ html:not([data-theme="mono"]) .icon-dark,
 .sheet-status {
   position: absolute;
   top: 1rem;
-  left: 1rem;
+  inset-inline-start: 1rem;
 }
 
 .sheet-close {
   position: absolute;
   top: 0.9rem;
-  right: 0.9rem;
+  inset-inline-end: 0.9rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -874,7 +887,7 @@ html:not([data-theme="mono"]) .icon-dark,
 
 .sheet-logo {
   position: absolute;
-  left: 1.5rem;
+  inset-inline-start: 1.5rem;
   bottom: -24px;
   width: 60px;
   height: 60px;
@@ -968,7 +981,7 @@ html:not([data-theme="mono"]) .icon-dark,
   content: '';
   position: absolute;
   top: 5px;
-  left: 50%;
+  inset-inline-start: 50%;
   width: 100%;
   height: 2px;
   background: var(--border);
@@ -1153,6 +1166,10 @@ html:not([data-theme="mono"]) .icon-dark,
 .sheet-navbtn svg {
   width: 15px;
   height: 15px;
+}
+
+[dir="rtl"] .sheet-navbtn svg {
+  transform: scaleX(-1);
 }
 
 .sheet-navbtn:hover {

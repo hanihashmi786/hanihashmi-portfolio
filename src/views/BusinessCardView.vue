@@ -3,9 +3,9 @@
     <article>
       <header>
         <div class="text-2xl font-bold mb-3 fadein-bot title-section flex items-center justify-center flex-col">
-          <h4 style="color: var(--text)">Digital Business Card</h4>
+          <h4 style="color: var(--text)">{{ $t('card.title') }}</h4>
           <p class="text-base font-normal mt-2 text-center max-w-lg" style="color: var(--text-muted)">
-            Scan the code to drop me straight into your contacts. No typing, no app needed.
+            {{ $t('card.subtitle') }}
           </p>
         </div>
       </header>
@@ -30,7 +30,7 @@
 
               <div class="face-inner">
                 <div class="flex items-start justify-between">
-                  <span class="brand">haniHashmi();</span>
+                  <span class="brand" dir="ltr" lang="en">haniHashmi();</span>
                   <!-- Chip: the detail that sells the "real card" metaphor -->
                   <svg class="chip" viewBox="0 0 40 30" aria-hidden="true">
                     <defs>
@@ -48,32 +48,32 @@
                   </svg>
                 </div>
 
-                <div class="mt-auto flex items-center gap-3 text-left">
+                <div class="mt-auto flex items-center gap-3 text-start">
                   <img
                     class="card-photo"
                     :src="p.photo"
-                    :alt="p.fullName"
+                    :alt="$t('card.name')"
                     width="128"
                     height="128"
                     decoding="async"
                   />
                   <div class="min-w-0">
-                    <h2 class="card-name">{{ p.fullName }}</h2>
-                    <p class="card-role">{{ p.tagline }}</p>
+                    <h2 class="card-name">{{ $t('card.name') }}</h2>
+                    <p class="card-role">{{ $t('card.tagline') }}</p>
                   </div>
                 </div>
 
                 <div class="divider"></div>
 
                 <div class="flex items-end justify-between gap-3">
-                  <div class="text-left min-w-0">
+                  <div class="text-start min-w-0">
                     <p class="card-meta">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
                           d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      {{ p.location }}
+                      {{ $t('common.location') }}
                     </p>
                     <p class="card-stack">{{ p.stack.join(' · ') }}</p>
                   </div>
@@ -82,7 +82,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M4 4v5h5M20 20v-5h-5M20 9A8 8 0 006.3 5.7M4 15a8 8 0 0013.7 3.3" />
                     </svg>
-                    QR
+                    {{ $t('card.qr') }}
                   </span>
                 </div>
               </div>
@@ -97,7 +97,7 @@
                   type="button"
                   class="qr-panel"
                   @click.stop="zoomed = true"
-                  :aria-label="`Enlarge QR code: ${modeLabel}`"
+                  :aria-label="$t('card.enlarge', { label: modeLabel })"
                 >
                   <QrCode
                     ref="qr"
@@ -110,9 +110,9 @@
                   />
                 </button>
 
-                <div class="back-details text-left">
-                  <p class="back-name">{{ p.fullName }}</p>
-                  <p class="back-title">{{ p.title }}</p>
+                <div class="back-details text-start">
+                  <p class="back-name">{{ $t('card.name') }}</p>
+                  <p class="back-title">{{ $t('card.jobTitle') }}</p>
 
                   <ul class="back-list">
                     <li>
@@ -127,13 +127,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                           d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
-                      <span>{{ p.phoneDisplay }}</span>
+                      <span dir="ltr">{{ p.phoneDisplay }}</span>
                     </li>
                     <li>
                       <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                         <path :d="waPath" />
                       </svg>
-                      <span>Chat on WhatsApp</span>
+                      <span>{{ $t('card.chatWhatsapp') }}</span>
                     </li>
                     <li>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -142,12 +142,12 @@
                         <rect x="2" y="9" width="4" height="12" />
                         <circle cx="4" cy="4" r="2" />
                       </svg>
-                      <span>/in/hanihashmi</span>
+                      <span dir="ltr">/in/hanihashmi</span>
                     </li>
                   </ul>
 
                   <p class="scan-note">{{ modeHint }}</p>
-                  <p class="scan-sub">Tap the code to enlarge</p>
+                  <p class="scan-sub">{{ $t('card.tapToEnlarge') }}</p>
                 </div>
               </div>
             </div>
@@ -161,18 +161,18 @@
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M4 4v5h5M20 20v-5h-5M20 9A8 8 0 006.3 5.7M4 15a8 8 0 0013.7 3.3" />
             </svg>
-            {{ flipped ? 'Show card front' : 'Flip to QR code' }}
+            {{ flipped ? $t('card.showFront') : $t('card.flipToQr') }}
           </button>
 
           <!-- QR payload switch -->
-          <div class="mode-switch" role="group" aria-label="QR code content">
+          <div class="mode-switch" role="group" :aria-label="$t('card.modeGroup')">
             <button
               type="button"
               :class="['mode-btn', { active: mode === 'vcard' }]"
               :aria-pressed="mode === 'vcard'"
               @click="setMode('vcard')"
             >
-              Contact
+              {{ $t('card.modeContact') }}
             </button>
             <button
               type="button"
@@ -180,7 +180,7 @@
               :aria-pressed="mode === 'whatsapp'"
               @click="setMode('whatsapp')"
             >
-              WhatsApp
+              {{ $t('card.modeWhatsapp') }}
             </button>
             <button
               type="button"
@@ -188,7 +188,7 @@
               :aria-pressed="mode === 'url'"
               @click="setMode('url')"
             >
-              Portfolio
+              {{ $t('card.modePortfolio') }}
             </button>
           </div>
 
@@ -197,28 +197,28 @@
               <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                 <path :d="waPath" />
               </svg>
-              WhatsApp
+              {{ $t('card.actions.whatsapp') }}
             </a>
             <a :href="`mailto:${p.email}`" class="btn btn-ghost">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Email
+              {{ $t('card.actions.email') }}
             </a>
             <button type="button" class="btn btn-ghost" @click="saveVCard">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
               </svg>
-              Save contact
+              {{ $t('card.actions.save') }}
             </button>
             <button type="button" class="btn btn-ghost" @click="share">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v14" />
               </svg>
-              Share
+              {{ $t('card.actions.share') }}
             </button>
             <button type="button" class="btn btn-ghost" @click="copyLink">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -227,7 +227,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
               </svg>
-              Copy link
+              {{ $t('card.actions.copy') }}
             </button>
             <button type="button" class="btn btn-ghost" @click="downloadPdf" :disabled="pdfBusy">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -235,7 +235,7 @@
                   d="M9 13h6M9 17h3M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 3v5h5" />
               </svg>
-              {{ pdfBusy ? 'Preparing…' : 'Download PDF' }}
+              {{ pdfBusy ? $t('card.actions.preparing') : $t('card.actions.pdf') }}
             </button>
             <button type="button" class="btn btn-ghost" @click="downloadQr">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -244,7 +244,7 @@
                 <rect x="3" y="14" width="7" height="7" rx="1" />
                 <path stroke-linecap="round" d="M14 14h3v3h-3zM20 14h1M14 20h3M20 17v4" />
               </svg>
-              Download QR
+              {{ $t('card.actions.qr') }}
             </button>
           </div>
         </div>
@@ -255,7 +255,7 @@
 
     <!-- ================= FULLSCREEN QR ================= -->
     <div v-if="zoomed" class="qr-modal" @click="zoomed = false">
-      <div class="qr-modal-inner" role="dialog" aria-modal="true" aria-label="QR code" @click.stop>
+      <div class="qr-modal-inner" role="dialog" aria-modal="true" :aria-label="$t('card.qrDialog')" @click.stop>
         <div class="qr-modal-panel">
           <QrCode
             ec="H"
@@ -266,9 +266,9 @@
             :logo-scale="QR_LOGO_SCALE"
           />
         </div>
-        <p class="qr-modal-title">{{ p.fullName }}</p>
+        <p class="qr-modal-title">{{ $t('card.name') }}</p>
         <p class="qr-modal-sub">{{ modeHint }}</p>
-        <button type="button" class="btn btn-accent mt-5" @click="zoomed = false">Close</button>
+        <button type="button" class="btn btn-accent mt-5" @click="zoomed = false">{{ $t('card.close') }}</button>
       </div>
     </div>
 
@@ -321,14 +321,14 @@ export default {
       return buildVCard({ compact: true, url: this.url })
     },
     modeLabel() {
-      if (this.mode === 'url') return 'QR code linking to the portfolio'
-      if (this.mode === 'whatsapp') return 'QR code opening a WhatsApp chat'
-      return 'QR code with contact details for Hani Hashmi'
+      if (this.mode === 'url') return this.$t('card.labelUrl')
+      if (this.mode === 'whatsapp') return this.$t('card.labelWhatsapp')
+      return this.$t('card.labelVcard')
     },
     modeHint() {
-      if (this.mode === 'url') return 'Scan to open this portfolio.'
-      if (this.mode === 'whatsapp') return 'Scan to message me on WhatsApp.'
-      return 'Scan to save me to your contacts.'
+      if (this.mode === 'url') return this.$t('card.hintUrl')
+      if (this.mode === 'whatsapp') return this.$t('card.hintWhatsapp')
+      return this.$t('card.hintVcard')
     },
     qrSize() {
       return 210
@@ -394,7 +394,7 @@ export default {
       a.click()
       a.remove()
       URL.revokeObjectURL(href)
-      this.showToast('Contact card downloaded')
+      this.showToast(this.$t('card.toasts.saved'))
     },
     async downloadQr() {
       // Both faces stay mounted, so the ref resolves whichever side is showing.
@@ -406,7 +406,7 @@ export default {
       document.body.appendChild(a)
       a.click()
       a.remove()
-      this.showToast('QR code downloaded')
+      this.showToast(this.$t('card.toasts.qrSaved'))
     },
     async downloadPdf() {
       // jsPDF is only needed on this one click, so it stays out of the bundle
@@ -418,9 +418,9 @@ export default {
         // No QR passed: the PDF always prints the contact vCard, independent
         // of which mode the on-screen code is showing.
         await downloadCardPdf({ url: this.url })
-        this.showToast('Business card PDF downloaded')
+        this.showToast(this.$t('card.toasts.pdfSaved'))
       } catch {
-        this.showToast('Could not build the PDF, please try again')
+        this.showToast(this.$t('card.toasts.pdfFail'))
       } finally {
         this.pdfBusy = false
       }
@@ -445,7 +445,7 @@ export default {
     async copyLink() {
       try {
         await navigator.clipboard.writeText(this.url)
-        this.showToast('Link copied to clipboard')
+        this.showToast(this.$t('card.toasts.copied'))
       } catch {
         this.showToast(this.url)
       }

@@ -12,13 +12,13 @@
       <!-- Error Message -->
       <div class="mb-8 fadein-left fadeins-1">
         <h2 class="text-3xl font-bold mb-4" style="color: var(--text);">
-          Page Not Found
+          {{ $t('notFound.title') }}
         </h2>
         <p class="text-lg mb-6" style="color: var(--text-muted);">
-          Oops! The page you're looking for doesn't exist or has been moved.
+          {{ $t('notFound.desc') }}
         </p>
         <p class="text-sm mb-8" style="color: var(--text-muted);">
-          Don't worry, let's get you back on track!
+          {{ $t('notFound.hint') }}
         </p>
       </div>
 
@@ -29,48 +29,48 @@
           class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:opacity-80 hover:-translate-y-1"
           style="background-color: var(--accent); color: var(--bg);"
         >
-          Go to Home
+          {{ $t('notFound.home') }}
         </router-link>
         <button
           @click="goBack"
           class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:opacity-80 hover:-translate-y-1"
           style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text);"
         >
-          Go Back
+          {{ $t('notFound.back') }}
         </button>
       </div>
 
       <!-- Quick Links -->
       <div class="mt-12 fadein-left fadeins-3">
-        <p class="text-sm mb-4" style="color: var(--text-muted);">Quick Links:</p>
+        <p class="text-sm mb-4" style="color: var(--text-muted);">{{ $t('notFound.quickLinks') }}</p>
         <div class="flex flex-wrap justify-center gap-4">
           <router-link
             to="/about"
             class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
             style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
           >
-            About
+            {{ $t('nav.about') }}
           </router-link>
           <router-link
             to="/experience"
             class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
             style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
           >
-            Experience
+            {{ $t('nav.experience') }}
           </router-link>
           <router-link
             to="/portfolio"
             class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
             style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
           >
-            Portfolio
+            {{ $t('nav.portfolio') }}
           </router-link>
           <router-link
             to="/contact"
             class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
             style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
           >
-            Contact
+            {{ $t('nav.contact') }}
           </router-link>
         </div>
       </div>
@@ -89,9 +89,6 @@ export default {
         this.$router.push('/');
       }
     }
-  },
-  mounted() {
-    document.title = '404 - Page Not Found | Hani Hashmi';
   }
 }
 </script>

@@ -1,13 +1,17 @@
 <script>
-import { currentWork, STATUS } from '../data/projects.js'
+import { localizedCurrentWork, statusOf } from '../data/projects.js'
 
 export default {
   name: 'CurrentlyWorkingOn',
   data() {
     return {
-      work: currentWork,
       broken: {},
       visible: false
+    }
+  },
+  computed: {
+    work() {
+      return localizedCurrentWork()
     }
   },
   mounted() {
@@ -32,9 +36,7 @@ export default {
     if (this.observer) this.observer.disconnect()
   },
   methods: {
-    statusOf(p) {
-      return STATUS[p.status] || STATUS.live
-    },
+    statusOf,
     onImgError(id) {
       this.broken[id] = true
     }
@@ -48,26 +50,23 @@ export default {
       <div class="cwo-head-main">
         <span class="cwo-kicker">
           <span class="cwo-pulse" aria-hidden="true"></span>
-          Currently Working On
+          {{ $t('cwo.kicker') }}
         </span>
-        <h2 id="cwo-title" class="cwo-title">Two products in flight for the Saudi market</h2>
-        <p class="cwo-sub">
-          Product Developer at Otaishan Investments, Riyadh. Each platform is owned end-to-end:
-          mobile app, web, backend, admin platform and release.
-        </p>
+        <h2 id="cwo-title" class="cwo-title">{{ $t('cwo.title') }}</h2>
+        <p class="cwo-sub">{{ $t('cwo.sub') }}</p>
       </div>
-      <ul class="cwo-meta" aria-label="Role details">
+      <ul class="cwo-meta" :aria-label="$t('cwo.roleDetails')">
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-          Otaishan Investments
+          {{ $t('orgs.otaishan') }}
         </li>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          Riyadh, Saudi Arabia
+          {{ $t('common.location') }}
         </li>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-          Since Oct 2025
+          {{ $t('cwo.since') }}
         </li>
       </ul>
     </header>
@@ -76,7 +75,7 @@ export default {
       <div v-for="(p, i) in work" :key="p.id" class="rise" :style="{ animationDelay: (0.15 + i * 0.15) + 's' }">
         <article class="cwo-card" :style="{ '--brand': p.color, '--status-color': statusOf(p).color }">
           <div class="cwo-cover">
-            <img v-if="!broken[p.id]" class="cwo-cover-img" :src="p.image" :alt="p.name + ' preview'" loading="lazy" @error="onImgError(p.id)" />
+            <img v-if="!broken[p.id]" class="cwo-cover-img" :src="p.image" :alt="$t('cwo.preview', { name: p.name })" loading="lazy" @error="onImgError(p.id)" />
             <div v-else class="cwo-cover-fallback">{{ p.name }}</div>
             <div class="cwo-cover-shade" aria-hidden="true"></div>
             <span class="cwo-status">
@@ -92,7 +91,7 @@ export default {
                 <h3 class="cwo-name">{{ p.name }}</h3>
                 <p class="cwo-tagline">{{ p.tagline }}</p>
               </div>
-              <a :href="p.website" target="_blank" rel="noopener" class="cwo-iconlink" :aria-label="'Open ' + p.websiteLabel" :title="p.websiteLabel">
+              <a :href="p.website" target="_blank" rel="noopener" class="cwo-iconlink" :aria-label="$t('cwo.open', { site: p.websiteLabel })" :title="p.websiteLabel">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                   <polyline points="15 3 21 3 21 9"></polyline>
@@ -103,7 +102,7 @@ export default {
 
             <p class="cwo-desc">{{ p.description }}</p>
 
-            <ol class="cwo-phases" :aria-label="p.name + ' delivery progress'">
+            <ol class="cwo-phases" :aria-label="$t('portfolio.deliveryProgress', { name: p.name })">
               <li v-for="(ph, pi) in p.phases" :key="ph" :class="{ done: pi < p.phase, now: pi === p.phase }" :aria-current="pi === p.phase ? 'step' : null">
                 <span class="ph-dot" aria-hidden="true"></span>
                 <span class="ph-label">{{ ph }}</span>
@@ -174,7 +173,7 @@ export default {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    text-align: left;
+    text-align: start;
     gap: 2rem;
   }
 }
@@ -286,7 +285,7 @@ export default {
   height: 100%;
   border-radius: 20px;
   overflow: hidden;
-  text-align: left;
+  text-align: start;
   background: var(--bg-card);
   border: 1px solid var(--border);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -345,7 +344,7 @@ export default {
 .cwo-status {
   position: absolute;
   top: 0.9rem;
-  right: 0.9rem;
+  inset-inline-end: 0.9rem;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -387,7 +386,7 @@ export default {
 
 .cwo-logo {
   position: absolute;
-  left: 1.25rem;
+  inset-inline-start: 1.25rem;
   bottom: -22px;
   width: 56px;
   height: 56px;
@@ -477,7 +476,7 @@ export default {
   content: '';
   position: absolute;
   top: 5px;
-  left: 50%;
+  inset-inline-start: 50%;
   width: 100%;
   height: 2px;
   background: var(--border);
@@ -635,6 +634,10 @@ export default {
 
 .cwo-visit:hover {
   gap: 0.6rem;
+}
+
+[dir="rtl"] .cwo-visit svg {
+  transform: scaleX(-1);
 }
 
 @media (prefers-reduced-motion: reduce) {

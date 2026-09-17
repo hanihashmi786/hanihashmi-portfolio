@@ -1,6 +1,12 @@
 // Single source of truth for project data.
 // `currentWork` feeds the "Currently building" strip on the home page,
 // `projects` feeds the portfolio mosaic. Keep both in sync with the CV.
+//
+// The copy here is English. Arabic and Urdu live in src/i18n/locales and are
+// overlaid by id through `localizedCurrentWork()` / `localizedProjects()`,
+// which is what the views should read.
+
+import { t, overlay } from '../i18n/index.js'
 
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/'
 
@@ -36,28 +42,24 @@ export const ICONS = {
   aws: icon('AWS', 'amazonwebservices/amazonwebservices-original-wordmark.svg')
 }
 
+// Labels come from the locale files (`status.*`), see `statusOf()`.
 export const STATUS = {
-  live: { label: 'Live', color: '#22c55e' },
-  testing: { label: 'Internal testing', color: '#f59e0b' },
-  prelaunch: { label: 'Pre-launch', color: '#38bdf8' },
-  soon: { label: 'Launching soon', color: '#a78bfa' },
-  shipped: { label: 'Shipped', color: '#9ca3af' }
+  live: { color: '#22c55e' },
+  testing: { color: '#f59e0b' },
+  prelaunch: { color: '#38bdf8' },
+  soon: { color: '#a78bfa' },
+  shipped: { color: '#9ca3af' }
 }
 
-export const ORGS = {
-  otaishan: 'Otaishan Investments',
-  freelance: 'Freelance',
-  marsbpo: 'Mars BPO',
-  personal: 'Personal project'
+// Status colour plus its label in the current language.
+export function statusOf(item) {
+  const key = STATUS[item.status] ? item.status : 'shipped'
+  return { key, color: STATUS[key].color, label: t('status.' + key) }
 }
 
-export const ORG_FILTERS = [
-  { key: 'all', label: 'All' },
-  { key: 'otaishan', label: 'Otaishan Investments' },
-  { key: 'freelance', label: 'Freelance' },
-  { key: 'marsbpo', label: 'Mars BPO' },
-  { key: 'personal', label: 'Personal' }
-]
+// Organisation keys; labels are `orgs.*` / `filters.*` in the locale files.
+export const ORG_KEYS = ['otaishan', 'freelance', 'marsbpo', 'personal']
+export const FILTER_KEYS = ['all', ...ORG_KEYS]
 
 // The two platforms currently in flight at Otaishan Investments.
 // `phase` is the index into `phases` of the stage in progress right now.
@@ -67,7 +69,7 @@ export const currentWork = [
     name: 'Mrafqk',
     tagline: 'Medical Companion Booking Platform',
     short: 'Medical companion booking',
-    org: ORGS.otaishan,
+    orgKey: 'otaishan',
     image: '/images/projects/mrafqk.jpg',
     icon: '/images/projects/mrafqk-icon.svg',
     color: '#0d5856',
@@ -91,7 +93,7 @@ export const currentWork = [
     name: 'BAHHR',
     tagline: 'Vehicle & Adventure Rental Marketplace',
     short: 'Adventure rental marketplace',
-    org: ORGS.otaishan,
+    orgKey: 'otaishan',
     image: '/images/projects/bahhr-cover.svg',
     icon: '/images/projects/bahhr-icon.svg',
     color: '#023047',
@@ -132,7 +134,6 @@ export const projects = [
     name: 'Mrafqk',
     tagline: 'Medical companion booking platform',
     orgKey: 'otaishan',
-    org: ORGS.otaishan,
     status: 'testing',
     size: 'xl',
     image: '/images/projects/mrafqk.jpg',
@@ -153,7 +154,6 @@ export const projects = [
     name: 'BAHHR',
     tagline: 'Vehicle & adventure rental marketplace',
     orgKey: 'otaishan',
-    org: ORGS.otaishan,
     status: 'prelaunch',
     size: 'xl',
     image: '/images/projects/bahhr-cover.svg',
@@ -172,7 +172,6 @@ export const projects = [
     name: 'Motorekcs',
     tagline: 'On-demand automotive service platform',
     orgKey: 'otaishan',
-    org: ORGS.otaishan,
     status: 'live',
     size: 'lg',
     image: '/images/projects/motorek.jpg',
@@ -195,7 +194,6 @@ export const projects = [
     name: 'The Perfect House',
     tagline: 'Architecture & construction platform',
     orgKey: 'otaishan',
-    org: ORGS.otaishan,
     status: 'live',
     size: 'lg',
     image: '/images/projects/the-perfect-house.webp',
@@ -218,7 +216,6 @@ export const projects = [
     name: 'Gogo Sports',
     tagline: 'Premium football gear store, KSA',
     orgKey: 'freelance',
-    org: ORGS.freelance,
     status: 'live',
     size: 'md',
     image: '/images/projects/gogo-sports.jpg',
@@ -240,7 +237,6 @@ export const projects = [
     name: "Mutma'innah",
     tagline: 'Offline-first Islamic companion app',
     orgKey: 'personal',
-    org: ORGS.personal,
     status: 'soon',
     size: 'md',
     image: '/images/projects/mutmainnah.png',
@@ -263,7 +259,6 @@ export const projects = [
     name: 'Call Loom',
     tagline: 'AI call-tracking & IVR platform',
     orgKey: 'marsbpo',
-    org: ORGS.marsbpo,
     status: 'live',
     size: 'lg',
     image: '/images/projects/call-loom.jpg',
@@ -285,7 +280,6 @@ export const projects = [
     name: 'Break Portal',
     tagline: 'Workforce break management',
     orgKey: 'marsbpo',
-    org: ORGS.marsbpo,
     status: 'shipped',
     size: 'md',
     image: '/images/projects/break-portal.jpg',
@@ -303,7 +297,6 @@ export const projects = [
     name: 'Data Scrubber',
     tagline: 'Number cleaning & compliance tool',
     orgKey: 'marsbpo',
-    org: ORGS.marsbpo,
     status: 'shipped',
     size: 'md',
     image: '/images/projects/data-scrubber.jpg',
@@ -321,7 +314,6 @@ export const projects = [
     name: 'Dial Loom',
     tagline: 'Dialer performance monitoring',
     orgKey: 'marsbpo',
-    org: ORGS.marsbpo,
     status: 'shipped',
     size: 'md',
     image: '/images/projects/dial-loom.jpg',
@@ -339,7 +331,6 @@ export const projects = [
     name: 'Taskio',
     tagline: 'Task & team productivity',
     orgKey: 'marsbpo',
-    org: ORGS.marsbpo,
     status: 'shipped',
     size: 'md',
     image: '/images/projects/taskio.jpg',
@@ -353,3 +344,28 @@ export const projects = [
     color: '#3b82f6'
   }
 ]
+
+// ---------- localized views of the data ----------
+// Each returns fresh records with the translated copy for the current
+// language spread over the English fields, plus a resolved `org` label. In
+// English the overlay is null and the records come back as they are above.
+
+const withOrg = (p) => ({ ...p, org: t('orgs.' + p.orgKey) })
+
+// Only the keys the overlay actually defines, so a missing translation never
+// blanks out an English field.
+const pick = (obj, keys) =>
+  Object.fromEntries(keys.filter((k) => obj && obj[k] !== undefined).map((k) => [k, obj[k]]))
+
+export function localizedCurrentWork() {
+  return currentWork.map((p) => withOrg({ ...p, ...overlay('currentWork.' + p.id) }))
+}
+
+export function localizedProjects() {
+  return projects.map((p) => {
+    // The featured tiles borrow their progress copy from the currentWork
+    // entry, exactly as `featured()` does for the English fields.
+    const shared = p.featured ? pick(overlay('currentWork.' + p.id), ['statusNote', 'phases', 'highlights']) : null
+    return withOrg({ ...p, ...shared, ...overlay('projects.' + p.id) })
+  })
+}

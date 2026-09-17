@@ -22,6 +22,53 @@
   --img-glow: rgba(255,219,112,0.44);
 }
 
+/* ---------- language & script ----------
+   The html `lang` drives the typeface: Poppins for Latin, IBM Plex Sans
+   Arabic for Arabic and Noto Nastaliq Urdu for Urdu. `:lang()` also catches
+   the language menu's native labels inside an English page. */
+:lang(ar) {
+  font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+}
+
+/* Poppins first: it has no Arabic-script glyphs, so Urdu falls through to
+   Nastaliq while product and technology names keep the site's Latin face
+   instead of Noto Nastaliq's serif Latin. */
+:lang(ur) {
+  font-family: 'Poppins', 'Noto Nastaliq Urdu', 'IBM Plex Sans Arabic', sans-serif;
+}
+
+/* Tracking breaks the joined letterforms of Arabic script, so every
+   letter-spaced label (pills, kickers, section labels) drops it under RTL. */
+html[dir="rtl"] *,
+html[dir="rtl"] *::before,
+html[dir="rtl"] *::after {
+  letter-spacing: 0 !important;
+}
+
+/* Nastaliq hangs well below the baseline and its x-height reads small, so
+   Urdu gets taller lines and a touch more size across the board. */
+html[lang="ur"] {
+  font-size: 106%;
+}
+
+html[lang="ur"] :is(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.75 !important;
+}
+
+html[lang="ur"] :is(p, li, dd, blockquote, label, figcaption) {
+  line-height: 2 !important;
+}
+
+/* Word-spaced justification pulls Nastaliq apart; ragged edges read better. */
+html[lang="ur"] .text-justify {
+  text-align: start;
+}
+
+/* Elements that keep Latin content regardless of page language. */
+[lang="en"] {
+  font-family: 'Poppins', sans-serif;
+}
+
 [data-theme="mono"] {
   --bg: #f0f0f0;
   --bg-card: #ffffff;

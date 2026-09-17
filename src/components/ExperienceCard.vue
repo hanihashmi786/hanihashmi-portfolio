@@ -13,7 +13,7 @@ export default {
 
 <template>
   <div
-    class="exp-card rounded-xl text-left transition-all duration-300 cursor-pointer"
+    class="exp-card rounded-xl text-start transition-all duration-300 cursor-pointer"
     :class="[compact ? 'p-4' : 'p-5', expanded ? 'is-open' : '']"
     style="background-color: var(--bg-card); border: 1px solid var(--border);"
     role="button"
@@ -33,7 +33,7 @@ export default {
           <p class="text-xs font-medium" style="color: var(--accent);">{{ exp.period }}</p>
           <span v-if="exp.current" class="now-pill">
             <span class="now-dot" aria-hidden="true"></span>
-            Present
+            {{ $t('common.present') }}
           </span>
         </div>
         <h3 :class="compact ? 'text-sm' : 'text-base'" class="font-bold mt-0.5" style="color: var(--text);">{{ exp.role }}</h3>
@@ -53,7 +53,7 @@ export default {
       <p v-if="exp.summary" class="leading-relaxed mb-4" :class="compact ? 'text-xs' : 'text-sm'" style="color: var(--text-secondary);">{{ exp.summary }}</p>
 
       <template v-if="exp.products && exp.products.length">
-        <h4 class="section-label">Products Delivered</h4>
+        <h4 class="section-label">{{ $t('experience.products') }}</h4>
         <ul class="flex flex-col gap-2 mb-4">
           <li v-for="p in exp.products" :key="p.name" class="product-row">
             <div class="flex items-center justify-between gap-2 flex-wrap">
@@ -65,12 +65,12 @@ export default {
               </div>
               <span class="status-pill" :style="{ color: p.statusColor, backgroundColor: p.statusColor + '22', borderColor: p.statusColor + '55' }">{{ p.status }}</span>
             </div>
-            <p class="text-[11px] mt-1 pl-4 leading-relaxed" style="color: var(--text-muted); opacity: 0.85;">{{ p.stack }}</p>
+            <p class="text-[11px] mt-1 ps-4 leading-relaxed" style="color: var(--text-muted); opacity: 0.85;">{{ p.stack }}</p>
           </li>
         </ul>
       </template>
 
-      <h4 class="section-label">Key Responsibilities</h4>
+      <h4 class="section-label">{{ $t('experience.responsibilities') }}</h4>
       <ul class="flex flex-col gap-1.5 mb-4">
         <li v-for="(r, ri) in exp.responsibilities" :key="ri" class="leading-relaxed flex items-start gap-2" :class="compact ? 'text-xs' : 'text-sm'" style="color: var(--text-muted);">
           <span class="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style="background-color: var(--accent);"></span>
@@ -78,7 +78,7 @@ export default {
         </li>
       </ul>
 
-      <h4 class="section-label">Impact</h4>
+      <h4 class="section-label">{{ $t('experience.impact') }}</h4>
       <ul class="flex flex-col gap-1.5">
         <li v-for="(i, ii) in exp.impact" :key="ii" class="leading-relaxed flex items-start gap-2" :class="compact ? 'text-xs' : 'text-sm'" style="color: var(--text-muted);">
           <span class="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style="background-color: var(--accent);"></span>

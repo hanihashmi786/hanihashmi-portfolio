@@ -8,7 +8,26 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Set the language and direction before first paint so an Arabic or
+         Urdu visitor never sees the page flip after the app mounts. Mirrors
+         detect() in src/i18n/index.js. -->
+    <script>
+      (function () {
+        var codes = ['en', 'ar', 'ur'];
+        var lang = null;
+        try { lang = localStorage.getItem('lang'); } catch (e) {}
+        if (codes.indexOf(lang) < 0) {
+          var nav = (navigator.language || '').slice(0, 2).toLowerCase();
+          lang = codes.indexOf(nav) < 0 ? 'en' : nav;
+        }
+        var root = document.documentElement;
+        root.lang = lang;
+        root.dir = lang === 'en' ? 'ltr' : 'rtl';
+      })();
+    </script>
+    <!-- Browsers only fetch a font once text needs it, so the Arabic and Urdu
+         faces cost English visitors nothing beyond this stylesheet. -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   </head>
   <body>

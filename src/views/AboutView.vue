@@ -3,46 +3,48 @@ export default {
   data() {
     return {
       activeTab: 1,
+      // `level`, `type` and `category` are keys into about.* in the locale files.
       tech: [
-        { id: 1, name: 'Python', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', status: 'Advanced' },
-        { id: 2, name: 'JavaScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', status: 'Advanced' },
-        { id: 3, name: 'TypeScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', status: 'Advanced' },
-        { id: 4, name: 'React', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', status: 'Advanced' },
-        { id: 5, name: 'React Native', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', status: 'Advanced' },
-        { id: 6, name: 'Next.js', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', status: 'Advanced' },
-        { id: 7, name: 'HTML', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', status: 'Advanced' },
-        { id: 8, name: 'CSS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', status: 'Advanced' },
-        { id: 9, name: 'Tailwind CSS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg', status: 'Advanced' },
-        { id: 10, name: 'Angular', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', status: 'Intermediate' },
-        { id: 11, name: 'Flask', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', status: 'Advanced' },
-        { id: 12, name: 'Django', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg', status: 'Advanced' },
-        { id: 13, name: 'Node.js', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', status: 'Advanced' },
-        { id: 14, name: 'Express', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', status: 'Advanced' },
-        { id: 15, name: 'PostgreSQL', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', status: 'Advanced' },
-        { id: 16, name: 'MySQL', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', status: 'Intermediate' },
-        { id: 17, name: 'MongoDB', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', status: 'Advanced' },
-        { id: 18, name: 'Firebase', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg', status: 'Intermediate' },
+        { id: 1, name: 'Python', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', level: 'advanced' },
+        { id: 2, name: 'JavaScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', level: 'advanced' },
+        { id: 3, name: 'TypeScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', level: 'advanced' },
+        { id: 4, name: 'React', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', level: 'advanced' },
+        { id: 5, name: 'React Native', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', level: 'advanced' },
+        { id: 6, name: 'Next.js', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', level: 'advanced' },
+        { id: 7, name: 'HTML', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', level: 'advanced' },
+        { id: 8, name: 'CSS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', level: 'advanced' },
+        { id: 9, name: 'Tailwind CSS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg', level: 'advanced' },
+        { id: 10, name: 'Angular', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', level: 'intermediate' },
+        { id: 11, name: 'Flask', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', level: 'advanced' },
+        { id: 12, name: 'Django', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg', level: 'advanced' },
+        { id: 13, name: 'Node.js', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', level: 'advanced' },
+        { id: 14, name: 'Express', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', level: 'advanced' },
+        { id: 15, name: 'PostgreSQL', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', level: 'advanced' },
+        { id: 16, name: 'MySQL', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', level: 'intermediate' },
+        { id: 17, name: 'MongoDB', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', level: 'advanced' },
+        { id: 18, name: 'Firebase', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg', level: 'intermediate' },
       ],
       tools: [
-        { id: 1, name: 'Git', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', status: 'Version Control' },
-        { id: 2, name: 'GitHub', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', status: 'Git Hosting' },
-        { id: 3, name: 'AWS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', status: 'Cloud' },
-        { id: 4, name: 'Docker', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', status: 'Containers' },
-        { id: 5, name: 'VS Code', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', status: 'IDE' },
-        { id: 6, name: 'NPM', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg', status: 'Package Manager' },
-        { id: 7, name: 'Selenium', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg', status: 'Automation' },
-        { id: 8, name: 'TensorFlow', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', status: 'AI/ML' },
+        { id: 1, name: 'Git', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', type: 'versionControl' },
+        { id: 2, name: 'GitHub', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', type: 'gitHosting' },
+        { id: 3, name: 'AWS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', type: 'cloud' },
+        { id: 4, name: 'Docker', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', type: 'containers' },
+        { id: 5, name: 'VS Code', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', type: 'ide' },
+        { id: 6, name: 'NPM', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg', type: 'packageManager' },
+        { id: 7, name: 'Selenium', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg', type: 'automation' },
+        { id: 8, name: 'TensorFlow', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', type: 'aiMl' },
       ],
 
+      // Certificate titles and issuers are proper names and stay as issued.
       certifications: [
-        { name: 'Google IT Support', issuer: 'Google', category: 'IT Support', url: 'https://www.coursera.org/professional-certificates/google-it-support' },
-        { name: 'Crash Course on Python', issuer: 'Google', category: 'Programming', url: 'https://www.coursera.org/learn/python-crash-course' },
-        { name: 'Introduction to DevOps', issuer: 'Coursera', category: 'DevOps', url: 'https://www.coursera.org/learn/intro-to-devops' },
-        { name: 'Data Science', issuer: 'Coursera', category: 'Data Science', url: 'https://www.coursera.org/browse/data-science' },
-        { name: 'JavaScript (Basics)', issuer: 'Coursera', category: 'Programming', url: 'https://www.coursera.org/learn/javascript-basics' },
-        { name: 'JavaScript', issuer: 'Coursera', category: 'Programming', url: 'https://www.coursera.org/learn/javascript' },
-        { name: 'Advanced Appium: Scalable Mobile Automation', issuer: 'Coursera', category: 'Test Automation', url: 'https://www.coursera.org/account/accomplishments/verify/W9XMI8AGU48H' },
-        { name: 'Lean Six Sigma White Belt', issuer: 'Smart Irtekaz', category: 'Process Improvement', url: null },
+        { name: 'Google IT Support', issuer: 'Google', category: 'itSupport', url: 'https://www.coursera.org/professional-certificates/google-it-support' },
+        { name: 'Crash Course on Python', issuer: 'Google', category: 'programming', url: 'https://www.coursera.org/learn/python-crash-course' },
+        { name: 'Introduction to DevOps', issuer: 'Coursera', category: 'devops', url: 'https://www.coursera.org/learn/intro-to-devops' },
+        { name: 'Data Science', issuer: 'Coursera', category: 'dataScience', url: 'https://www.coursera.org/browse/data-science' },
+        { name: 'JavaScript (Basics)', issuer: 'Coursera', category: 'programming', url: 'https://www.coursera.org/learn/javascript-basics' },
+        { name: 'JavaScript', issuer: 'Coursera', category: 'programming', url: 'https://www.coursera.org/learn/javascript' },
+        { name: 'Advanced Appium: Scalable Mobile Automation', issuer: 'Coursera', category: 'testAutomation', url: 'https://www.coursera.org/account/accomplishments/verify/W9XMI8AGU48H' },
+        { name: 'Lean Six Sigma White Belt', issuer: 'Smart Irtekaz', category: 'processImprovement', url: null },
       ]
     };
   }
@@ -50,26 +52,26 @@ export default {
 </script>
 <template>
   <!-- About Me Section -->
-  <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3 mb-5 rounded-3xl" style="background-color: var(--bg-card); border: 1px solid var(--border);">
+  <div class="px-5 py-5 md:px-12 md:py-10 text-start mx-3 mb-5 rounded-3xl" style="background-color: var(--bg-card); border: 1px solid var(--border);">
     <article>
       <header>
         <div class="text-2xl font-bold mb-5 fadein-bot title-section flex items-center" style="color: var(--text);">
-          About Me &nbsp;
+          {{ $t('about.title') }} &nbsp;
           <div class="h-[1px] w-32 md:w-96" style="background-color: var(--accent);"></div>
         </div>
       </header>
       <section class="text-sm md:text-base text-justify flex flex-col md:flex-row gap-6">
         <div class="flex-shrink-0 flex justify-center md:justify-start">
           <div class="w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border-2" style="border-color: var(--accent);">
-            <img src="/images/profile-about.jpeg" alt="Hani Hashmi" class="w-full h-full object-cover" />
+            <img src="/images/profile-about.jpeg" :alt="$t('home.name')" class="w-full h-full object-cover" />
           </div>
         </div>
         <div class="flex flex-col gap-4">
           <p class="leading-relaxed fadein-left fadeins-1" style="color: var(--text-muted);">
-            I am a Product Engineer with 3 years of experience building and shipping full-stack products across mobile, web and backend. Strong in TypeScript, React Native, Next.js, Node.js and Django, with bilingual Arabic/English (RTL) product experience and a solid foundation in AI and Machine Learning.
+            {{ $t('about.p1') }}
           </p>
           <p class="leading-relaxed fadein-left fadeins-2" style="color: var(--text-muted);">
-            At Otaishan Investments in Riyadh I own end-to-end delivery of four production platforms for the Saudi market: Mrafqk, BAHHR, Motorekcs and The Perfect House, spanning marketplace, booking, real-time and on-demand service domains. Before that I shipped Call Loom, Break Portal, Data Scrubber, Dial Loom and Taskio at Mars BPO, and built Gogo Sports and the Mutma'innah app independently.
+            {{ $t('about.p2') }}
           </p>
         </div>
       </section>
@@ -79,24 +81,24 @@ export default {
 
 
   <!-- Skills Section -->
-  <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3 mb-5">
+  <div class="px-5 py-5 md:px-12 md:py-10 text-start mx-3 mb-5">
     <article>
       <header>
         <div class="text-2xl font-bold mb-5 fadein-bot title-section flex items-center" style="color: var(--text);">
           <div class="h-[1px] w-10 md:w-20" style="background-color: var(--accent);"></div>
-          &nbsp; Skills & Technologies
+          &nbsp; {{ $t('about.skills') }}
         </div>
       </header>
       <section>
         <div>
           <ul class="flex flex-wrap text-sm font-medium text-center mb-5" style="color: var(--text-muted);">
-            <li class="mr-2">
+            <li class="me-2">
               <button class="inline-block px-4 py-3 rounded-lg transition-colors"
-                :style="activeTab === 1 ? { color: 'var(--accent)', backgroundColor: 'rgba(var(--accent-rgb), 0.1)' } : {}" @click="activeTab = 1">Tech Stack</button>
+                :style="activeTab === 1 ? { color: 'var(--accent)', backgroundColor: 'rgba(var(--accent-rgb), 0.1)' } : {}" @click="activeTab = 1">{{ $t('about.techStack') }}</button>
             </li>
-            <li class="mr-2">
+            <li class="me-2">
               <button class="inline-block px-4 py-3 rounded-lg transition-colors"
-                :style="activeTab === 2 ? { color: 'var(--accent)', backgroundColor: 'rgba(var(--accent-rgb), 0.1)' } : {}" @click="activeTab = 2">Tools</button>
+                :style="activeTab === 2 ? { color: 'var(--accent)', backgroundColor: 'rgba(var(--accent-rgb), 0.1)' } : {}" @click="activeTab = 2">{{ $t('about.tools') }}</button>
             </li>
           </ul>
         </div>
@@ -112,7 +114,7 @@ export default {
                 </div>
                 <div class="flex items-center text-sm md:text-base lg:text-lg">
                   <div class="tech font-medium transition-all duration-300 translate-y-0" style="color: var(--text-secondary);">{{ item.name }}</div>
-                  <div class="status-tech opacity-0 absolute mt-5 text-[10px] transition-all duration-300 md:text-xs lg:text-sm" style="color: var(--accent);">{{ item.status }}</div>
+                  <div class="status-tech opacity-0 absolute mt-5 text-[10px] transition-all duration-300 md:text-xs lg:text-sm" style="color: var(--accent);">{{ $t('about.level.' + item.level) }}</div>
                 </div>
               </div>
             </div>
@@ -130,7 +132,7 @@ export default {
                 </div>
                 <div class="flex items-center text-sm md:text-base lg:text-lg">
                   <div class="tech font-medium transition-all duration-300 translate-y-0" style="color: var(--text-secondary);">{{ item.name }}</div>
-                  <div class="status-tech opacity-0 absolute mt-5 text-[10px] transition-all duration-300 md:text-xs lg:text-sm" style="color: var(--accent);">{{ item.status }}</div>
+                  <div class="status-tech opacity-0 absolute mt-5 text-[10px] transition-all duration-300 md:text-xs lg:text-sm" style="color: var(--accent);">{{ $t('about.toolType.' + item.type) }}</div>
                 </div>
               </div>
             </div>
@@ -141,11 +143,11 @@ export default {
   </div>
 
   <!-- Certifications Section -->
-  <div class="px-5 py-5 md:px-12 md:py-10 text-left mx-3 mb-32">
+  <div class="px-5 py-5 md:px-12 md:py-10 text-start mx-3 mb-32">
     <article>
       <header>
         <div class="text-2xl font-bold mb-8 fadein-bot title-section flex items-center" style="color: var(--text);">
-          Certifications &nbsp;
+          {{ $t('about.certifications') }} &nbsp;
           <div class="h-[1px] w-32 md:w-96" style="background-color: var(--accent);"></div>
         </div>
       </header>
@@ -164,7 +166,7 @@ export default {
                 <h3 class="text-sm font-semibold" style="color: var(--text);">{{ cert.name }}</h3>
                 <p class="text-xs mt-1" style="color: var(--accent);">{{ cert.issuer }}</p>
                 <div class="flex items-center justify-between mt-2">
-                  <span class="inline-block px-2 py-0.5 text-[10px] rounded-full" style="background-color: rgba(var(--accent-rgb), 0.1); color: var(--accent); opacity: 0.8;">{{ cert.category }}</span>
+                  <span class="inline-block px-2 py-0.5 text-[10px] rounded-full" style="background-color: rgba(var(--accent-rgb), 0.1); color: var(--accent); opacity: 0.8;">{{ $t('about.certCategory.' + cert.category) }}</span>
                   <a v-if="cert.url" :href="cert.url" target="_blank" rel="noopener"
                     class="transition-opacity hover:opacity-100 flex items-center justify-center w-7 h-7 rounded-md" style="color: var(--accent); opacity: 0.6; background-color: rgba(var(--accent-rgb), 0.1);">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -196,6 +198,22 @@ export default {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Under RTL the copy slides in from the reading edge, like it does in LTR. */
+@keyframes fadeInLeftAboutRtl {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+[dir="rtl"] .fadein-left {
+  animation-name: fadeInLeftAboutRtl;
 }
 
 .fadeins-1 {
