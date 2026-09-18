@@ -467,39 +467,3 @@ html[lang="ur"] .text-justify {
 [lang="en"] {
   font-family: 'Poppins', sans-serif;
 }
-
-/* =====================================================================
-   Print
-   Chrome-only site chrome comes off; pages that print (the CV, the
-   business card) style their own sheet.
-   ===================================================================== */
-
-@media print {
-  @page {
-    size: A4;
-    margin: 11mm 13mm;
-  }
-
-  html,
-  body {
-    height: auto !important;
-    overflow: visible !important;
-    background: #ffffff !important;
-    background-image: none !important;
-  }
-
-  .site-nav,
-  .site-footer,
-  .custom-cursor {
-    display: none !important;
-  }
-
-  .page-host {
-    margin-top: 0 !important;
-  }
-
-  * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-}

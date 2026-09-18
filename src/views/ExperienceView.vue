@@ -34,12 +34,6 @@ export default {
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold mb-2" style="color: var(--text);">{{ $t('experience.title') }}</h2>
       <p class="text-sm" style="color: var(--text-muted);">{{ $t('experience.subtitle') }}</p>
-      <router-link to="/cv" class="cv-link ui-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5zM14 3v5h5M9 13h6M9 17h4" />
-        </svg>
-        {{ $t('cv.view') }}
-      </router-link>
     </div>
 
     <!-- Work Experience Section -->
@@ -154,27 +148,3 @@ export default {
 
 <!-- Entrance animations (.fadein-left, .fadein-bot, .fadeins-*) live in
      src/assets/motion.css and play when the element scrolls into view. -->
-
-<style scoped>
-.cv-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-top: 1.1rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent);
-  border: var(--btn-bw) solid var(--accent);
-}
-
-.cv-link svg {
-  width: 15px;
-  height: 15px;
-}
-
-.cv-link:hover {
-  background: rgba(var(--accent-rgb), 0.08);
-  transform: translateY(-2px);
-}
-</style>

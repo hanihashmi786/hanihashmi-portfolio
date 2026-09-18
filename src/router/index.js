@@ -44,12 +44,6 @@ const routes = [
     meta: { title: 'card' }
   },
   {
-    path: '/cv',
-    name: 'cv',
-    component: () => import('../views/CvView.vue'),
-    meta: { title: 'cv' }
-  },
-  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('../views/NotFoundView.vue'),

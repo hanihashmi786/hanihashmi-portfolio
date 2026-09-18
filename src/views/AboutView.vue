@@ -1,14 +1,51 @@
 <script>
-import { tech, tools, certifications } from '../data/skills.js'
-
 export default {
   data() {
     return {
       activeTab: 1,
-      // Shared with the CV page; see src/data/skills.js.
-      tech,
-      tools,
-      certifications
+      // `level`, `type` and `category` are keys into about.* in the locale files.
+      tech: [
+        { id: 1, name: 'Python', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', level: 'advanced' },
+        { id: 2, name: 'JavaScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', level: 'advanced' },
+        { id: 3, name: 'TypeScript', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', level: 'advanced' },
+        { id: 4, name: 'React', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', level: 'advanced' },
+        { id: 5, name: 'React Native', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', level: 'advanced' },
+        { id: 6, name: 'Next.js', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', level: 'advanced' },
+        { id: 7, name: 'HTML', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', level: 'advanced' },
+        { id: 8, name: 'CSS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', level: 'advanced' },
+        { id: 9, name: 'Tailwind CSS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg', level: 'advanced' },
+        { id: 10, name: 'Angular', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg', level: 'intermediate' },
+        { id: 11, name: 'Flask', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', level: 'advanced' },
+        { id: 12, name: 'Django', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg', level: 'advanced' },
+        { id: 13, name: 'Node.js', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', level: 'advanced' },
+        { id: 14, name: 'Express', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', level: 'advanced' },
+        { id: 15, name: 'PostgreSQL', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', level: 'advanced' },
+        { id: 16, name: 'MySQL', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', level: 'intermediate' },
+        { id: 17, name: 'MongoDB', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', level: 'advanced' },
+        { id: 18, name: 'Firebase', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg', level: 'intermediate' },
+      ],
+      tools: [
+        { id: 1, name: 'Git', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', type: 'versionControl' },
+        { id: 2, name: 'GitHub', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', type: 'gitHosting' },
+        { id: 3, name: 'AWS', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', type: 'cloud' },
+        { id: 4, name: 'Docker', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', type: 'containers' },
+        { id: 5, name: 'VS Code', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', type: 'ide' },
+        { id: 6, name: 'NPM', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg', type: 'packageManager' },
+        { id: 7, name: 'Selenium', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg', type: 'automation' },
+        { id: 8, name: 'TensorFlow', imageUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', type: 'aiMl' },
+      ],
+
+      // Certificate titles and issuers are proper names and stay as issued.
+      certifications: [
+        { name: 'Google IT Support', issuer: 'Google', category: 'itSupport', url: 'https://www.coursera.org/professional-certificates/google-it-support' },
+        { name: 'Crash Course on Python', issuer: 'Google', category: 'programming', url: 'https://www.coursera.org/learn/python-crash-course' },
+        { name: 'Introduction to DevOps', issuer: 'Coursera', category: 'devops', url: 'https://www.coursera.org/learn/intro-to-devops' },
+        { name: 'Data Science', issuer: 'Coursera', category: 'dataScience', url: 'https://www.coursera.org/browse/data-science' },
+        { name: 'JavaScript (Basics)', issuer: 'Coursera', category: 'programming', url: 'https://www.coursera.org/learn/javascript-basics' },
+        { name: 'JavaScript', issuer: 'Coursera', category: 'programming', url: 'https://www.coursera.org/learn/javascript' },
+        { name: 'Advanced Appium: Scalable Mobile Automation', issuer: 'Coursera', category: 'testAutomation', url: 'https://www.coursera.org/account/accomplishments/verify/W9XMI8AGU48H' },
+        { name: 'Lean Six Sigma White Belt', issuer: 'Smart Irtekaz', category: 'processImprovement', url: null },
+      ]
     };
   }
 }

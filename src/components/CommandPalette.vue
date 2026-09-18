@@ -74,7 +74,6 @@ export default {
         run: () => this.$router.push(p.path)
       }))
       pages.push({ id: 'page:card', icon: 'card', label: t('titles.card'), run: () => this.$router.push('/card') })
-      pages.push({ id: 'page:cv', icon: 'doc', label: t('cv.view'), keys: 'cv resume pdf', run: () => this.$router.push('/cv') })
 
       const projects = localizedProjects().map((p) => ({
         id: 'project:' + p.id,

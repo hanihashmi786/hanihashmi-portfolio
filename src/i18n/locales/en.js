@@ -13,7 +13,6 @@ export default {
     portfolio: 'Portfolio',
     contact: 'Contact',
     card: 'Business Card',
-    cv: 'CV',
     notFound: '404 - Page Not Found'
   },
 
@@ -23,32 +22,7 @@ export default {
     experience: 'Experience',
     portfolio: 'Portfolio',
     contact: 'Contact',
-    cv: 'CV',
     language: 'Language'
-  },
-
-  // Printable CV page
-  cv: {
-    view: 'View CV',
-    headline: 'Product Engineer · Full-Stack (mobile, web, backend)',
-    download: 'Download PDF',
-    hint: 'Opens the print dialog: choose “Save as PDF”. A4, in the current language.',
-    summary: 'Summary',
-    experience: 'Experience',
-    skills: 'Skills',
-    projects: 'Selected projects',
-    education: 'Education',
-    certifications: 'Certifications',
-    products: 'Products',
-    impact: 'Impact',
-    skillGroups: {
-      languages: 'Languages',
-      frontend: 'Frontend & mobile',
-      backend: 'Backend',
-      data: 'Data',
-      platform: 'Platform & tooling',
-      other: 'AI, testing & other'
-    }
   },
 
   theme: {
