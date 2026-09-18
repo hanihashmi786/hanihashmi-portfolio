@@ -22,9 +22,13 @@ export default {
     experience: 'تجربہ',
     portfolio: 'پورٹ فولیو',
     contact: 'رابطہ',
-    themeDark: 'ڈارک تھیم پر جائیں',
-    themeMono: 'لائٹ تھیم پر جائیں',
     language: 'زبان'
+  },
+
+  theme: {
+    open: 'ظاہری شکل',
+    scheme: 'رنگ',
+    style: 'اسٹائل'
   },
 
   common: {

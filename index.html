@@ -8,21 +8,34 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <!-- Set the language and direction before first paint so an Arabic or
-         Urdu visitor never sees the page flip after the app mounts. Mirrors
-         detect() in src/i18n/index.js. -->
+    <!-- Set language, direction, colour scheme and container style before
+         first paint so nothing flips after the app mounts. Mirrors the
+         detection in src/i18n/index.js and src/theme/index.js; keep the
+         lists in step with SCHEMES / STYLES there. -->
     <script>
       (function () {
+        var root = document.documentElement;
+        var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
         var codes = ['en', 'ar', 'ur'];
-        var lang = null;
-        try { lang = localStorage.getItem('lang'); } catch (e) {}
+        var lang = get('lang');
         if (codes.indexOf(lang) < 0) {
           var nav = (navigator.language || '').slice(0, 2).toLowerCase();
           lang = codes.indexOf(nav) < 0 ? 'en' : nav;
         }
-        var root = document.documentElement;
         root.lang = lang;
         root.dir = lang === 'en' ? 'ltr' : 'rtl';
+
+        var schemes = ['gold', 'mono', 'dark-mono', 'andromeda', 'gruvbox-dark', 'gruvbox-light', 'monokai', 'solarized-dark', 'solarized-light', 'vscode-dark'];
+        var light = ['mono', 'gruvbox-light', 'solarized-light'];
+        var scheme = get('scheme');
+        if (schemes.indexOf(scheme) < 0) scheme = get('theme') === 'mono' ? 'mono' : 'gold';
+        root.setAttribute('data-scheme', scheme);
+        root.setAttribute('data-mode', light.indexOf(scheme) < 0 ? 'dark' : 'light');
+
+        var styles = ['minimal', 'material', 'brutal', 'glass', 'soft'];
+        var style = get('style');
+        root.setAttribute('data-style', styles.indexOf(style) < 0 ? 'minimal' : style);
       })();
     </script>
     <!-- Browsers only fetch a font once text needs it, so the Arabic and Urdu

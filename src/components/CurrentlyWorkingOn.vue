@@ -73,7 +73,7 @@ export default {
 
     <div class="cwo-grid">
       <div v-for="(p, i) in work" :key="p.id" class="rise" :style="{ animationDelay: (0.15 + i * 0.15) + 's' }">
-        <article class="cwo-card" :style="{ '--brand': p.color, '--status-color': statusOf(p).color }">
+        <article class="cwo-card surface surface-hover" :style="{ '--brand': p.color, '--status-color': statusOf(p).color }">
           <div class="cwo-cover">
             <img v-if="!broken[p.id]" class="cwo-cover-img" :src="p.image" :alt="$t('cwo.preview', { name: p.name })" loading="lazy" @error="onImgError(p.id)" />
             <div v-else class="cwo-cover-fallback">{{ p.name }}</div>
@@ -283,18 +283,9 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-radius: 20px;
+  border-radius: var(--r-card-lg);
   overflow: hidden;
   text-align: start;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cwo-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(var(--accent-rgb), 0.45);
-  box-shadow: 0 28px 48px -28px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(var(--accent-rgb), 0.08);
 }
 
 /* cover */

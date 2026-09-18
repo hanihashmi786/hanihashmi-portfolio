@@ -93,7 +93,7 @@ export default {
         <div class="h-[1px] w-32 md:w-96" style="background-color: var(--accent);"></div>
       </div>
 
-      <div class="rounded-xl p-6 md:p-8 fadein-left fadeins-1" style="background-color: var(--bg-card); border: 1px solid var(--border);">
+      <div class="surface rounded-card p-6 md:p-8 fadein-left fadeins-1">
         <div class="flex flex-col md:flex-row md:items-start gap-5">
           <!-- Education icon -->
           <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background-color: rgba(var(--accent-rgb), 0.1);">
@@ -126,7 +126,7 @@ export default {
               <!-- Highlight cards grid -->
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div v-for="(h, hi) in education.highlights" :key="hi"
-                  :class="['rounded-xl p-5 text-center transition-all duration-300 hover:-translate-y-1 fadein-left', hi === 0 ? 'fadeins-3' : hi === 1 ? 'fadeins-4' : 'fadeins-5']"
+                  :class="['rounded-card p-5 text-center transition-all duration-300 hover:-translate-y-1 fadein-left', hi === 0 ? 'fadeins-3' : hi === 1 ? 'fadeins-4' : 'fadeins-5']"
                   style="background-color: var(--bg); border: 1px solid rgba(var(--accent-rgb), 0.2);">
                   <!-- Medal/ribbon icon -->
                   <div class="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3" style="background-color: rgba(var(--accent-rgb), 0.1);">
@@ -183,6 +183,8 @@ export default {
   animation: fadeInBot 0.5s forwards;
 }
 
+/* Same keyframes as HomeView; ends on `transform: none` so the nav's
+   popovers can still blur the page (see the note there). */
 @keyframes fadeInBot {
   from {
     opacity: 0;
@@ -190,7 +192,7 @@ export default {
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: none;
   }
 }
 

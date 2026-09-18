@@ -274,24 +274,4 @@ export default {
               border-width 0.1s ease;
 }
 
-/* Ensure cursor is visible on both themes */
-[data-theme="mono"] .cursor-dot {
-  background-color: var(--accent);
-  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.7), 0 0 25px rgba(var(--accent-rgb), 0.4);
-}
-
-[data-theme="mono"] .cursor-ring {
-  border-color: var(--accent);
-  box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.5), 
-              inset 0 0 12px rgba(var(--accent-rgb), 0.15);
-}
-
-[data-theme="mono"] .cursor-dot.cursor-hover {
-  box-shadow: 0 0 25px rgba(var(--accent-rgb), 1), 0 0 35px rgba(var(--accent-rgb), 0.6);
-}
-
-[data-theme="mono"] .cursor-ring.cursor-hover {
-  box-shadow: 0 0 35px rgba(var(--accent-rgb), 0.7), 
-              inset 0 0 18px rgba(var(--accent-rgb), 0.2);
-}
 </style>

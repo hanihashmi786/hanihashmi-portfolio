@@ -2,13 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* =====================================================================
+   Colour schemes
+   Picked with `data-scheme` on <html> (see src/theme). Each block is the
+   full palette plus `--on-accent`, the ink used on top of the accent. The
+   blocks are written as plain attribute selectors, not `html[...]`, so the
+   theme panel can drop `data-scheme` on a swatch to preview a palette.
+   ===================================================================== */
+
+:root,
+[data-scheme="gold"] {
+  color-scheme: dark;
   --bg: #121212;
   --bg-card: #1e1e1f;
   --bg-card-hover: #282828;
   --border: #383838;
   --accent: #ffdb70;
   --accent-rgb: 255, 219, 112;
+  --on-accent: #111111;
   --text: #ffffff;
   --text-secondary: #e0e0e0;
   --text-muted: #9ca3af;
@@ -19,11 +30,399 @@
   --scrollbar-thumb: #ffdb70;
   --gradient-from: #f1f5f9;
   --gradient-to: #eab308;
-  --img-glow: rgba(255,219,112,0.44);
+  --img-glow: rgba(255, 219, 112, 0.44);
 }
 
-/* ---------- language & script ----------
-   The html `lang` drives the typeface: Poppins for Latin, IBM Plex Sans
+[data-scheme="mono"] {
+  color-scheme: light;
+  --bg: #f0f0f0;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f5f5;
+  --border: #d1d5db;
+  --accent: #374151;
+  --accent-rgb: 55, 65, 81;
+  --on-accent: #ffffff;
+  --text: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --nav-bg: #f0f0f0;
+  --nav-link: #6b7280;
+  --nav-link-active: #111827;
+  --scrollbar-track: #e5e7eb;
+  --scrollbar-thumb: #374151;
+  --gradient-from: #374151;
+  --gradient-to: #111827;
+  --img-glow: rgba(55, 65, 81, 0.3);
+}
+
+[data-scheme="dark-mono"] {
+  color-scheme: dark;
+  --bg: #0f0f10;
+  --bg-card: #1a1a1c;
+  --bg-card-hover: #232326;
+  --border: #2e2e33;
+  --accent: #f4f4f5;
+  --accent-rgb: 244, 244, 245;
+  --on-accent: #111111;
+  --text: #ffffff;
+  --text-secondary: #d4d4d8;
+  --text-muted: #9a9aa3;
+  --nav-bg: #0f0f10;
+  --nav-link: #52525b;
+  --nav-link-active: #ffffff;
+  --scrollbar-track: #1a1a1c;
+  --scrollbar-thumb: #d4d4d8;
+  --gradient-from: #ffffff;
+  --gradient-to: #a1a1aa;
+  --img-glow: rgba(244, 244, 245, 0.22);
+}
+
+[data-scheme="andromeda"] {
+  color-scheme: dark;
+  --bg: #23262e;
+  --bg-card: #2b2f39;
+  --bg-card-hover: #333845;
+  --border: #3d4350;
+  --accent: #00e8c6;
+  --accent-rgb: 0, 232, 198;
+  --on-accent: #10141a;
+  --text: #f5f7fa;
+  --text-secondary: #d5d8de;
+  --text-muted: #9aa0ad;
+  --nav-bg: #23262e;
+  --nav-link: #5c6370;
+  --nav-link-active: #ffffff;
+  --scrollbar-track: #2b2f39;
+  --scrollbar-thumb: #00e8c6;
+  --gradient-from: #00e8c6;
+  --gradient-to: #f92aad;
+  --img-glow: rgba(0, 232, 198, 0.35);
+}
+
+[data-scheme="gruvbox-dark"] {
+  color-scheme: dark;
+  --bg: #282828;
+  --bg-card: #32302f;
+  --bg-card-hover: #3c3836;
+  --border: #504945;
+  --accent: #fabd2f;
+  --accent-rgb: 250, 189, 47;
+  --on-accent: #282828;
+  --text: #fbf1c7;
+  --text-secondary: #ebdbb2;
+  --text-muted: #a89984;
+  --nav-bg: #282828;
+  --nav-link: #665c54;
+  --nav-link-active: #fbf1c7;
+  --scrollbar-track: #32302f;
+  --scrollbar-thumb: #fabd2f;
+  --gradient-from: #fabd2f;
+  --gradient-to: #fe8019;
+  --img-glow: rgba(250, 189, 47, 0.35);
+}
+
+[data-scheme="gruvbox-light"] {
+  color-scheme: light;
+  --bg: #fbf1c7;
+  --bg-card: #f9f5d7;
+  --bg-card-hover: #f2e5bc;
+  --border: #d5c4a1;
+  --accent: #b57614;
+  --accent-rgb: 181, 118, 20;
+  --on-accent: #fbf1c7;
+  --text: #282828;
+  --text-secondary: #3c3836;
+  --text-muted: #7c6f64;
+  --nav-bg: #fbf1c7;
+  --nav-link: #a89984;
+  --nav-link-active: #282828;
+  --scrollbar-track: #ebdbb2;
+  --scrollbar-thumb: #b57614;
+  --gradient-from: #b57614;
+  --gradient-to: #af3a03;
+  --img-glow: rgba(181, 118, 20, 0.3);
+}
+
+[data-scheme="monokai"] {
+  color-scheme: dark;
+  --bg: #272822;
+  --bg-card: #2f302a;
+  --bg-card-hover: #3e3d32;
+  --border: #49483e;
+  --accent: #a6e22e;
+  --accent-rgb: 166, 226, 46;
+  --on-accent: #272822;
+  --text: #f8f8f2;
+  --text-secondary: #e6e6e0;
+  --text-muted: #90908a;
+  --nav-bg: #272822;
+  --nav-link: #75715e;
+  --nav-link-active: #f8f8f2;
+  --scrollbar-track: #2f302a;
+  --scrollbar-thumb: #a6e22e;
+  --gradient-from: #a6e22e;
+  --gradient-to: #f92672;
+  --img-glow: rgba(166, 226, 46, 0.35);
+}
+
+[data-scheme="solarized-dark"] {
+  color-scheme: dark;
+  --bg: #002b36;
+  --bg-card: #073642;
+  --bg-card-hover: #0b4552;
+  --border: #164b5a;
+  --accent: #2aa198;
+  --accent-rgb: 42, 161, 152;
+  --on-accent: #002b36;
+  --text: #fdf6e3;
+  --text-secondary: #eee8d5;
+  --text-muted: #93a1a1;
+  --nav-bg: #002b36;
+  --nav-link: #586e75;
+  --nav-link-active: #fdf6e3;
+  --scrollbar-track: #073642;
+  --scrollbar-thumb: #2aa198;
+  --gradient-from: #2aa198;
+  --gradient-to: #b58900;
+  --img-glow: rgba(42, 161, 152, 0.35);
+}
+
+[data-scheme="solarized-light"] {
+  color-scheme: light;
+  --bg: #fdf6e3;
+  --bg-card: #f4ecd6;
+  --bg-card-hover: #eee8d5;
+  --border: #d9d2bd;
+  --accent: #268bd2;
+  --accent-rgb: 38, 139, 210;
+  --on-accent: #fdf6e3;
+  --text: #002b36;
+  --text-secondary: #073642;
+  --text-muted: #657b83;
+  --nav-bg: #fdf6e3;
+  --nav-link: #93a1a1;
+  --nav-link-active: #002b36;
+  --scrollbar-track: #eee8d5;
+  --scrollbar-thumb: #268bd2;
+  --gradient-from: #268bd2;
+  --gradient-to: #2aa198;
+  --img-glow: rgba(38, 139, 210, 0.3);
+}
+
+[data-scheme="vscode-dark"] {
+  color-scheme: dark;
+  --bg: #1e1e1e;
+  --bg-card: #252526;
+  --bg-card-hover: #2d2d30;
+  --border: #3c3c3c;
+  --accent: #569cd6;
+  --accent-rgb: 86, 156, 214;
+  --on-accent: #1e1e1e;
+  --text: #e8e8e8;
+  --text-secondary: #d4d4d4;
+  --text-muted: #9d9d9d;
+  --nav-bg: #1e1e1e;
+  --nav-link: #6a6a6a;
+  --nav-link-active: #ffffff;
+  --scrollbar-track: #252526;
+  --scrollbar-thumb: #569cd6;
+  --gradient-from: #569cd6;
+  --gradient-to: #4ec9b0;
+  --img-glow: rgba(86, 156, 214, 0.35);
+}
+
+/* Black-on-transparent logos vanish on dark surfaces. */
+[data-mode="dark"] .icon-dark {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* =====================================================================
+   Container styles
+   Picked with `data-style` on <html>. Every card, sheet and button reads
+   these tokens (through .surface / .ui-btn or directly), so a style is
+   just a different set of values. Written without `html` so the theme
+   panel can preview a style on a nested element too.
+   ===================================================================== */
+
+:root,
+[data-style="minimal"] {
+  --r-card-lg: 24px;
+  --r-card: 18px;
+  --r-btn: 12px;
+  --surface-bg: var(--bg-card);
+  --surface-bw: 1px;
+  --surface-bc: var(--border);
+  --surface-shadow: none;
+  --surface-hover-shadow: none;
+  --surface-hover-bc: rgba(var(--accent-rgb), 0.45);
+  --surface-hover-y: -4px;
+  --surface-blur: none;
+  --tile-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.8);
+  --tile-hover-shadow: 0 30px 50px -28px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(var(--accent-rgb), 0.12);
+  --btn-bw: 1px;
+  --btn-shadow: none;
+  --btn-hover-shadow: none;
+  --chip-bw: 1px;
+  --nav-surface: var(--nav-bg);
+}
+
+/* Material: no hairlines, tonal surfaces lifted by layered shadows. */
+[data-style="material"] {
+  --r-card-lg: 20px;
+  --r-card: 14px;
+  --r-btn: 10px;
+  --surface-bg: color-mix(in srgb, var(--bg-card) 93%, var(--accent));
+  --surface-bw: 0px;
+  --surface-bc: transparent;
+  --surface-shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 2px 6px 1px rgba(0, 0, 0, 0.16);
+  --surface-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.28), 0 10px 24px 4px rgba(0, 0, 0, 0.2);
+  --surface-hover-bc: transparent;
+  --surface-hover-y: -3px;
+  --tile-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.3);
+  --tile-hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 14px 32px 6px rgba(0, 0, 0, 0.24);
+  --btn-bw: 1px;
+  --btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 2px 5px rgba(0, 0, 0, 0.12);
+  --btn-hover-shadow: 0 3px 6px rgba(0, 0, 0, 0.28), 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* Neo-brutalism: thick ink borders, hard offset shadows, tight corners. */
+[data-style="brutal"] {
+  --r-card-lg: 10px;
+  --r-card: 8px;
+  --r-btn: 6px;
+  --surface-bg: var(--bg-card);
+  --surface-bw: 2.5px;
+  --surface-bc: var(--text);
+  --surface-shadow: 5px 5px 0 var(--text);
+  --surface-hover-shadow: 7px 7px 0 var(--accent);
+  --surface-hover-bc: var(--text);
+  --surface-hover-y: -2px;
+  --tile-shadow: 5px 5px 0 var(--text);
+  --tile-hover-shadow: 7px 7px 0 var(--accent);
+  --btn-bw: 2px;
+  --btn-shadow: 3px 3px 0 var(--text);
+  --btn-hover-shadow: 4px 4px 0 var(--accent);
+  --chip-bw: 1.5px;
+}
+
+/* Glass: frosted, translucent panes over an aurora wash of the accent. */
+[data-style="glass"] {
+  --r-card-lg: 26px;
+  --r-card: 20px;
+  --r-btn: 14px;
+  --surface-bg: color-mix(in srgb, var(--bg-card) 58%, transparent);
+  --surface-bw: 1px;
+  --surface-bc: color-mix(in srgb, var(--text) 14%, transparent);
+  --surface-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.5), inset 0 1px 0 color-mix(in srgb, var(--text) 9%, transparent);
+  --surface-hover-shadow: 0 22px 50px -18px rgba(0, 0, 0, 0.6), inset 0 1px 0 color-mix(in srgb, var(--text) 12%, transparent);
+  --surface-hover-bc: color-mix(in srgb, var(--accent) 55%, transparent);
+  --surface-hover-y: -4px;
+  --surface-blur: blur(18px) saturate(1.4);
+  --tile-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.8);
+  --tile-hover-shadow: 0 30px 50px -28px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(var(--accent-rgb), 0.25);
+  --btn-bw: 1px;
+  --btn-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 10%, transparent);
+  --btn-hover-shadow: 0 8px 24px -10px rgba(var(--accent-rgb), 0.5);
+  --nav-surface: color-mix(in srgb, var(--nav-bg) 55%, transparent);
+}
+
+/* Soft: neumorphic, surfaces cut from the page colour by paired shadows. */
+[data-style="soft"] {
+  --r-card-lg: 28px;
+  --r-card: 22px;
+  --r-btn: 14px;
+  --surface-bg: var(--bg);
+  --surface-bw: 0px;
+  --surface-bc: transparent;
+  --surface-shadow: 9px 9px 22px color-mix(in srgb, var(--bg) 76%, #000), -9px -9px 22px color-mix(in srgb, var(--bg) 86%, #fff);
+  --surface-hover-shadow: 13px 13px 28px color-mix(in srgb, var(--bg) 72%, #000), -13px -13px 28px color-mix(in srgb, var(--bg) 84%, #fff);
+  --surface-hover-bc: transparent;
+  --surface-hover-y: -3px;
+  --tile-shadow: 9px 9px 22px color-mix(in srgb, var(--bg) 76%, #000), -9px -9px 22px color-mix(in srgb, var(--bg) 86%, #fff);
+  --tile-hover-shadow: 13px 13px 28px color-mix(in srgb, var(--bg) 72%, #000), -13px -13px 28px color-mix(in srgb, var(--bg) 84%, #fff);
+  --btn-bw: 0px;
+  --btn-shadow: 5px 5px 12px color-mix(in srgb, var(--bg) 78%, #000), -5px -5px 12px color-mix(in srgb, var(--bg) 88%, #fff);
+  --btn-hover-shadow: 7px 7px 16px color-mix(in srgb, var(--bg) 74%, #000), -7px -7px 16px color-mix(in srgb, var(--bg) 86%, #fff);
+}
+
+/* ---------- shared surface primitives ---------- */
+
+.surface {
+  background-color: var(--surface-bg);
+  border: var(--surface-bw) solid var(--surface-bc);
+  box-shadow: var(--surface-shadow);
+  backdrop-filter: var(--surface-blur);
+  -webkit-backdrop-filter: var(--surface-blur);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.surface-hover:hover {
+  transform: translateY(var(--surface-hover-y));
+  box-shadow: var(--surface-hover-shadow);
+  border-color: var(--surface-hover-bc);
+}
+
+.ui-btn {
+  border-width: var(--btn-bw);
+  border-radius: var(--r-btn);
+  box-shadow: var(--btn-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.ui-btn:hover {
+  box-shadow: var(--btn-hover-shadow);
+}
+
+/* The aurora the glass panes blur against. */
+html[data-style="glass"] body {
+  background-image:
+    radial-gradient(60% 50% at 12% 8%, rgba(var(--accent-rgb), 0.2), transparent 62%),
+    radial-gradient(50% 45% at 88% 22%, color-mix(in srgb, var(--gradient-to) 24%, transparent), transparent 62%),
+    radial-gradient(55% 50% at 50% 96%, rgba(var(--accent-rgb), 0.12), transparent 62%);
+  background-attachment: fixed;
+}
+
+/* On desktop the fixed nav is narrower than the viewport, so a translucent
+   fill would read as a stray band; glass turns it into a floating frosted bar. */
+@media (min-width: 768px) {
+  html[data-style="glass"] .site-nav {
+    border: 1px solid var(--surface-bc);
+    border-top: 0;
+    border-radius: 0 0 var(--r-card-lg) var(--r-card-lg);
+    box-shadow: 0 16px 40px -24px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* Neo-brutal chips and pills take the same ink border as the cards. */
+html[data-style="brutal"] :is(.stack-chip, .cwo-chip, .sheet-chip, .filter-chip, .status-pill, .now-pill, .cwo-meta li, .cwo-kicker, .product-row, .flip-badge, .mode-switch, .lang-btn) {
+  border-width: var(--chip-bw);
+  border-color: var(--text);
+}
+
+html[data-style="brutal"] :is(.filter-chip.active, .now-pill) {
+  border-color: var(--accent);
+}
+
+/* The project sheet and the business card carry their own big shadows;
+   the two styles with a signature shadow replace them outright. */
+html[data-style="brutal"] :is(.sheet, .face) {
+  box-shadow: 8px 8px 0 var(--text);
+}
+
+html[data-style="soft"] :is(.sheet, .face) {
+  box-shadow: var(--surface-shadow);
+}
+
+/* Soft has no hairlines, so nested rows lean on tint alone. */
+html[data-style="soft"] :is(.product-row, .cwo-meta li, .filter-chip, .lang-btn) {
+  border-color: transparent;
+}
+
+/* =====================================================================
+   Language & script
+   ===================================================================== */
+
+/* The html `lang` drives the typeface: Poppins for Latin, IBM Plex Sans
    Arabic for Arabic and Noto Nastaliq Urdu for Urdu. `:lang()` also catches
    the language menu's native labels inside an English page. */
 :lang(ar) {
@@ -67,24 +466,4 @@ html[lang="ur"] .text-justify {
 /* Elements that keep Latin content regardless of page language. */
 [lang="en"] {
   font-family: 'Poppins', sans-serif;
-}
-
-[data-theme="mono"] {
-  --bg: #f0f0f0;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f5f5f5;
-  --border: #d1d5db;
-  --accent: #374151;
-  --accent-rgb: 55, 65, 81;
-  --text: #111827;
-  --text-secondary: #374151;
-  --text-muted: #6b7280;
-  --nav-bg: #f0f0f0;
-  --nav-link: #6b7280;
-  --nav-link-active: #111827;
-  --scrollbar-track: #e5e7eb;
-  --scrollbar-thumb: #374151;
-  --gradient-from: #374151;
-  --gradient-to: #111827;
-  --img-glow: rgba(55,65,81,0.3);
 }

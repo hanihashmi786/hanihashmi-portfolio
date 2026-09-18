@@ -52,7 +52,7 @@ export default {
 </script>
 <template>
   <!-- About Me Section -->
-  <div class="px-5 py-5 md:px-12 md:py-10 text-start mx-3 mb-5 rounded-3xl" style="background-color: var(--bg-card); border: 1px solid var(--border);">
+  <div class="surface px-5 py-5 md:px-12 md:py-10 text-start mx-3 mb-5 rounded-card-lg">
     <article>
       <header>
         <div class="text-2xl font-bold mb-5 fadein-bot title-section flex items-center" style="color: var(--text);">
@@ -105,8 +105,8 @@ export default {
         <div v-show="activeTab === 1">
           <div class="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8 xl:grid-cols-4 xl:gap-10 2xl:gap-12">
             <div v-for="item in tech" :key="item.id">
-              <div class="item-tech flex cursor-pointer items-center gap-2 rounded px-2 py-2 md:gap-3 lg:px-3 transition-colors"
-                style="border: 1px solid var(--accent);">
+              <div class="item-tech surface flex cursor-pointer items-center gap-2 rounded-btn px-2 py-2 md:gap-3 lg:px-3"
+                style="border-color: var(--accent);">
                 <div class="flex h-12 w-12 items-center justify-center p-0 lg:h-16 lg:w-16 lg:p-2 zoom-in">
                   <img :alt="item.name" loading="lazy" width="32" height="32" decoding="async"
                     class="img-tech drop-shadow-xl transition-all duration-300 h-[65%] w-[65%] lg:h-[85%] lg:w-[85%]"
@@ -123,8 +123,8 @@ export default {
         <div v-show="activeTab === 2">
           <div class="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8 xl:grid-cols-4 xl:gap-10 2xl:gap-12">
             <div v-for="item in tools" :key="item.id">
-              <div class="item-tech flex cursor-pointer items-center gap-2 rounded px-2 py-2 md:gap-3 lg:px-3 transition-colors"
-                style="border: 1px solid var(--accent);">
+              <div class="item-tech surface flex cursor-pointer items-center gap-2 rounded-btn px-2 py-2 md:gap-3 lg:px-3"
+                style="border-color: var(--accent);">
                 <div class="flex h-12 w-12 items-center justify-center p-0 lg:h-16 lg:w-16 lg:p-2 zoom-in">
                   <img :alt="item.name" loading="lazy" width="32" height="32" decoding="async"
                     class="img-tech drop-shadow-xl transition-all duration-300 h-[65%] w-[65%] lg:h-[85%] lg:w-[85%]"
@@ -154,8 +154,7 @@ export default {
       <section>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           <div v-for="(cert, index) in certifications" :key="index"
-            class="cert-card rounded-xl p-5 transition-all duration-300"
-            style="background-color: var(--bg-card); border: 1px solid var(--border);">
+            class="cert-card surface surface-hover rounded-card p-5">
             <div class="flex items-start gap-3">
               <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background-color: rgba(var(--accent-rgb), 0.1);">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" style="color: var(--accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -239,9 +238,5 @@ export default {
 
 .item-tech:hover .status-tech {
   opacity: 1;
-}
-
-.cert-card:hover {
-  transform: translateY(-4px);
 }
 </style>

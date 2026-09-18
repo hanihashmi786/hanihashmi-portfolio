@@ -3,27 +3,20 @@
   <CustomCursor />
   <div class="max-w-7xl mx-auto flex flex-col relative">
 
-    <nav class="max-w-7xl px-5 md:fixed top-0 z-[98] w-screen backdrop-blur-md bg-opacity-80" style="background-color: var(--nav-bg);">
+    <nav class="site-nav relative isolate max-w-7xl px-5 md:fixed top-0 z-[98] w-screen" style="background-color: var(--nav-surface);">
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <button @click="redirectToHome" class="flex">
           <!-- Kept LTR so the wordmark always reads `name();` like code, whatever the page direction. -->
           <span class="self-center text-lg font-semibold whitespace-nowrap fadein-bot hover:opacity-80 transition-opacity" style="color: var(--accent);" dir="ltr">{{ $t('brand') }}</span>
         </button>
-        <div class="flex md:order-2 fadein-bot items-center gap-3">
+        <!-- The entrance animation comes off once it has played: an element with
+             a (finished, filled) animation is a backdrop root in Chrome, and the
+             language/theme popovers inside need to blur the page, not this div. -->
+        <div class="flex md:order-2 items-center gap-3" :class="{ 'fadein-bot': !navReady }" @animationend.self="navReady = true">
           <LanguageSwitcher />
-          <!-- Theme Toggle -->
-          <button @click="toggleTheme" class="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:opacity-80" style="color: var(--accent);" :title="isDark ? $t('nav.themeMono') : $t('nav.themeDark')" :aria-label="isDark ? $t('nav.themeMono') : $t('nav.themeDark')">
-            <!-- Sun icon (shown in dark mode) -->
-            <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-            <!-- Moon icon (shown in mono/light mode) -->
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-          </button>
+          <ThemePanel />
           <a href="https://github.com/hanihashmi786" target="_blank" rel="noopener">
-            <img class="w-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" :style="{ filter: isDark ? 'invert(1)' : 'none' }">
+            <img class="w-8 rounded-full gh-icon" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
           </a>
           <a href="https://linkedin.com/in/hanihashmi" target="_blank" rel="noopener">
             <img class="w-8 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn">
@@ -61,7 +54,7 @@
       <router-view />
     </div>
   </div>
-  <footer class="block md:hidden fixed bottom-0 left-0 right-0 rounded-t-3xl border bg-opacity-80 backdrop-blur-md backdrop-opacity-90 z-[99]" style="border-color: var(--border); background-color: var(--nav-bg);">
+  <footer class="block md:hidden fixed bottom-0 left-0 right-0 rounded-t-3xl border bg-opacity-80 backdrop-blur-md backdrop-opacity-90 z-[99]" style="border-color: var(--surface-bc); background-color: var(--nav-surface);">
     <nav class="flex justify-around py-4 text-xs">
       <router-link to="/" class="nav-link-mobile">{{ $t('nav.home') }}</router-link>
       <router-link to="/about" class="nav-link-mobile">{{ $t('nav.about') }}</router-link>
@@ -76,38 +69,23 @@
 import { Analytics } from '@vercel/analytics/vue'
 import CustomCursor from './components/CustomCursor.vue'
 import LanguageSwitcher from './components/LanguageSwitcher.vue'
+import ThemePanel from './components/ThemePanel.vue'
 
 export default {
   components: {
     Analytics,
     CustomCursor,
-    LanguageSwitcher
+    LanguageSwitcher,
+    ThemePanel
   },
   data() {
     return {
-      isDark: true
-    }
-  },
-  mounted() {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'mono') {
-      this.isDark = false;
-      document.documentElement.setAttribute('data-theme', 'mono');
+      navReady: false
     }
   },
   methods: {
     redirectToHome() {
       this.$router.push('/')
-    },
-    toggleTheme() {
-      this.isDark = !this.isDark;
-      if (this.isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'mono');
-        localStorage.setItem('theme', 'mono');
-      }
     }
   },
 }
@@ -161,6 +139,20 @@ nav {
   padding: 30px;
 }
 
+/* The frosted blur lives on a pseudo-element rather than the nav itself: an
+   element with backdrop-filter becomes the backdrop root for everything
+   inside it, which would leave the language and theme popovers unable to
+   blur the page behind them. */
+.site-nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 .nav-link {
   font-weight: bold;
   color: var(--nav-link);
@@ -178,6 +170,11 @@ nav {
 
 .nav-link-mobile:hover {
   color: var(--text);
+}
+
+/* The GitHub mark is black on transparent; flip it on dark schemes. */
+[data-mode="dark"] .gh-icon {
+  filter: invert(1);
 }
 
 nav a.router-link-exact-active {

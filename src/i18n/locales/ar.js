@@ -22,9 +22,13 @@ export default {
     experience: 'الخبرات',
     portfolio: 'الأعمال',
     contact: 'تواصل معي',
-    themeDark: 'التبديل إلى الوضع الداكن',
-    themeMono: 'التبديل إلى الوضع الفاتح',
     language: 'اللغة'
+  },
+
+  theme: {
+    open: 'المظهر',
+    scheme: 'الألوان',
+    style: 'النمط'
   },
 
   common: {

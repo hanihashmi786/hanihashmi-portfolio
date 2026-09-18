@@ -26,15 +26,15 @@
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fadein-left fadeins-2">
         <router-link
           to="/"
-          class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:opacity-80 hover:-translate-y-1"
-          style="background-color: var(--accent); color: var(--bg);"
+          class="ui-btn px-6 py-3 rounded-btn font-semibold border hover:opacity-80 hover:-translate-y-1"
+          style="background-color: var(--accent); border-color: var(--accent); color: var(--on-accent);"
         >
           {{ $t('notFound.home') }}
         </router-link>
         <button
           @click="goBack"
-          class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:opacity-80 hover:-translate-y-1"
-          style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text);"
+          class="surface px-6 py-3 rounded-btn font-semibold hover:opacity-80 hover:-translate-y-1"
+          style="color: var(--text);"
         >
           {{ $t('notFound.back') }}
         </button>
@@ -46,29 +46,29 @@
         <div class="flex flex-wrap justify-center gap-4">
           <router-link
             to="/about"
-            class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
-            style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
+            class="surface text-sm px-4 py-2 rounded-btn hover:opacity-80"
+            style="color: var(--text-muted);"
           >
             {{ $t('nav.about') }}
           </router-link>
           <router-link
             to="/experience"
-            class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
-            style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
+            class="surface text-sm px-4 py-2 rounded-btn hover:opacity-80"
+            style="color: var(--text-muted);"
           >
             {{ $t('nav.experience') }}
           </router-link>
           <router-link
             to="/portfolio"
-            class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
-            style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
+            class="surface text-sm px-4 py-2 rounded-btn hover:opacity-80"
+            style="color: var(--text-muted);"
           >
             {{ $t('nav.portfolio') }}
           </router-link>
           <router-link
             to="/contact"
-            class="text-sm px-4 py-2 rounded-lg transition-all duration-300 hover:opacity-80"
-            style="background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);"
+            class="surface text-sm px-4 py-2 rounded-btn hover:opacity-80"
+            style="color: var(--text-muted);"
           >
             {{ $t('nav.contact') }}
           </router-link>

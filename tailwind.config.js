@@ -14,6 +14,12 @@ export default {
         'th-text-secondary': 'var(--text-secondary)',
         'th-text-muted': 'var(--text-muted)',
         'th-nav-bg': 'var(--nav-bg)',
+      },
+      // Radii follow the active container style (see src/assets/tailwind.css).
+      borderRadius: {
+        card: 'var(--r-card)',
+        'card-lg': 'var(--r-card-lg)',
+        btn: 'var(--r-btn)',
       }
     },
   },

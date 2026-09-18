@@ -22,14 +22,14 @@
       <br>
       <div class="fadein-bot fade-500 flex items-center gap-3 justify-center md:justify-start">
         <router-link to="/contact"
-          class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
+          class="ui-btn flex items-center py-2 px-4 text-sm font-medium rounded-btn border md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
           style="color: var(--accent); border-color: var(--accent);">
           <svg xmlns="http://www.w3.org/2000/svg" class="me-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
           {{ $t('home.getInTouch') }}
         </router-link>
         <router-link to="/portfolio"
-          class="flex items-center py-2 px-4 text-sm font-medium rounded-lg border transition duration-300 md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
-          style="color: var(--text); border-color: var(--border);">
+          class="ui-btn flex items-center py-2 px-4 text-sm font-medium rounded-btn border md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
+          style="color: var(--text); border-color: var(--surface-bc);">
           {{ $t('home.viewWork') }}
         </router-link>
       </div>
@@ -43,7 +43,7 @@
         </p>
         <div class="nb-row">
           <a v-for="p in nowBuilding" :key="p.id" :href="p.website" target="_blank" rel="noopener"
-            class="nb-card" :style="{ '--sc': statusOf(p).color }" :title="p.tagline + ' · ' + p.websiteLabel">
+            class="nb-card surface surface-hover" :style="{ '--sc': statusOf(p).color }" :title="p.tagline + ' · ' + p.websiteLabel">
             <img class="nb-icon" :src="p.icon" alt="" aria-hidden="true" />
             <span class="nb-text">
               <span class="nb-name">{{ p.name }}</span>
@@ -219,17 +219,8 @@ body {
   gap: 0.65rem;
   padding: 0.5rem;
   padding-inline: 0.55rem 0.75rem;
-  border-radius: 14px;
+  border-radius: var(--r-card);
   text-align: start;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-}
-
-.nb-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(var(--accent-rgb), 0.5);
-  background-color: var(--bg-card-hover);
 }
 
 .nb-icon {
@@ -386,6 +377,9 @@ body {
   animation: fadeInBot 0.5s forwards;
 }
 
+/* Ends on `transform: none`, not an identity translate3d: a retained
+   transform makes the element a backdrop root in Chrome, which would stop
+   the nav popovers (glass style) from blurring the page behind them. */
 @keyframes fadeInBot {
   from {
     opacity: 0;
@@ -393,7 +387,7 @@ body {
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: none;
   }
 }
 

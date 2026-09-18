@@ -478,12 +478,12 @@ export default {
 .face {
   position: absolute;
   inset: 0;
-  border-radius: 20px;
+  border-radius: var(--r-card);
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: var(--surface-bw) solid var(--surface-bc);
   box-shadow: 0 18px 45px -12px rgba(0, 0, 0, 0.55),
     0 0 0 1px rgba(var(--accent-rgb), 0.08);
   /* backface-visibility alone is not reliable here: a face that clips its own
@@ -739,15 +739,18 @@ export default {
   justify-content: center;
   gap: 7px;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: var(--r-btn);
   font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
-  border: 1px solid var(--border);
+  border: var(--btn-bw) solid var(--surface-bc);
+  box-shadow: var(--btn-shadow);
   color: var(--text-muted);
-  background: var(--bg-card);
+  background: var(--surface-bg);
+  backdrop-filter: var(--surface-blur);
+  -webkit-backdrop-filter: var(--surface-blur);
   transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn svg {
@@ -758,7 +761,7 @@ export default {
 
 .btn:hover {
   transform: translateY(-2px);
-  background: var(--bg-card-hover);
+  box-shadow: var(--btn-hover-shadow);
   color: var(--text);
 }
 
@@ -769,7 +772,7 @@ export default {
 
 .btn[disabled]:hover {
   transform: none;
-  background: var(--bg-card);
+  box-shadow: var(--btn-shadow);
   color: var(--text-muted);
 }
 
@@ -884,7 +887,7 @@ export default {
   font-weight: 600;
   color: var(--text);
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: var(--surface-bw) solid var(--surface-bc);
   box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6);
 }
 

@@ -90,7 +90,7 @@ export default {
     </button>
 
     <Transition name="lang-pop">
-      <ul v-if="open" class="lang-menu" role="menu" :aria-label="$t('nav.language')">
+      <ul v-if="open" class="lang-menu surface" role="menu" :aria-label="$t('nav.language')">
         <li v-for="l in locales" :key="l.code" role="none">
           <button
             type="button"
@@ -183,10 +183,7 @@ export default {
   margin: 0;
   padding: 6px;
   list-style: none;
-  border-radius: 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  box-shadow: 0 22px 44px -18px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(var(--accent-rgb), 0.06);
+  border-radius: var(--r-card);
   transform-origin: top;
 }
 

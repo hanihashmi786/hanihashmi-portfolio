@@ -13,9 +13,8 @@ export default {
 
 <template>
   <div
-    class="exp-card rounded-xl text-start transition-all duration-300 cursor-pointer"
+    class="exp-card surface surface-hover rounded-card text-start cursor-pointer"
     :class="[compact ? 'p-4' : 'p-5', expanded ? 'is-open' : '']"
-    style="background-color: var(--bg-card); border: 1px solid var(--border);"
     role="button"
     tabindex="0"
     :aria-expanded="expanded"
@@ -94,12 +93,8 @@ export default {
 </template>
 
 <style scoped>
-.exp-card:hover {
-  border-color: rgba(var(--accent-rgb), 0.4) !important;
-}
-
 .exp-card.is-open {
-  border-color: rgba(var(--accent-rgb), 0.5) !important;
+  border-color: var(--surface-hover-bc);
 }
 
 .exp-card:focus-visible {
@@ -147,7 +142,7 @@ export default {
 
 .product-row {
   padding: 0.55rem 0.7rem;
-  border-radius: 0.6rem;
+  border-radius: calc(var(--r-btn) - 2px);
   background: rgba(var(--accent-rgb), 0.05);
   border: 1px solid rgba(var(--accent-rgb), 0.12);
 }

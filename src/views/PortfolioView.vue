@@ -174,7 +174,7 @@ export default {
             <div class="h-[1px] w-10 md:w-20 me-3" style="background-color: var(--accent);"></div>
             {{ $t('portfolio.fyp') }}
           </div>
-          <div class="fyp rounded-[22px] p-6 md:p-8" style="background-color: var(--bg-card); border: 1px solid var(--border);">
+          <div class="fyp surface rounded-card-lg p-6 md:p-8">
             <h3 class="text-lg font-semibold mb-2" style="color: var(--text);">{{ $t('portfolio.fypTitle') }}</h3>
             <p class="text-sm leading-relaxed mb-4" style="color: var(--text-muted);">
               {{ $t('portfolio.fypDesc') }}
@@ -365,13 +365,13 @@ export default {
   padding: 0;
   overflow: hidden;
   isolation: isolate;
-  border-radius: 22px;
+  border-radius: var(--r-card-lg);
   text-align: start;
   font: inherit;
   color: #fff;
   background: var(--brand, var(--bg-card));
-  border: 1px solid var(--border);
-  box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.8);
+  border: var(--surface-bw) solid var(--surface-bc);
+  box-shadow: var(--tile-shadow);
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   animation: tileIn 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
   animation-delay: calc(var(--i, 0) * 55ms);
@@ -381,8 +381,8 @@ export default {
 .tile:hover,
 .tile:focus-visible {
   transform: translateY(-5px);
-  border-color: rgba(var(--accent-rgb), 0.55);
-  box-shadow: 0 30px 50px -28px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(var(--accent-rgb), 0.12);
+  border-color: var(--surface-hover-bc);
+  box-shadow: var(--tile-hover-shadow);
 }
 
 .tile:focus-visible {
@@ -752,8 +752,8 @@ export default {
   }
 }
 
-/* Black-on-transparent logos are invisible on dark surfaces. */
-html:not([data-theme="mono"]) .icon-dark,
+/* Tiles sit on a dark photo in every scheme, so their dark logos always flip
+   (the page-level rule for dark schemes lives in tailwind.css). */
 .tile-icons .icon-dark {
   filter: invert(1) hue-rotate(180deg);
 }
@@ -781,10 +781,12 @@ html:not([data-theme="mono"]) .icon-dark,
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 24px 24px 0 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  border-radius: var(--r-card-lg) var(--r-card-lg) 0 0;
+  background: var(--surface-bg);
+  border: var(--surface-bw) solid var(--surface-bc);
   box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
+  backdrop-filter: var(--surface-blur);
+  -webkit-backdrop-filter: var(--surface-blur);
   transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
@@ -795,7 +797,7 @@ html:not([data-theme="mono"]) .icon-dark,
   }
   .sheet {
     max-height: 88vh;
-    border-radius: 24px;
+    border-radius: var(--r-card-lg);
   }
 }
 
@@ -1100,13 +1102,14 @@ html:not([data-theme="mono"]) .icon-dark,
   align-items: center;
   gap: 0.45rem;
   padding: 0.55rem 1rem;
-  border-radius: 12px;
+  border-radius: var(--r-btn);
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text);
   background: var(--bg);
-  border: 1px solid var(--border);
-  transition: border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+  border: var(--btn-bw) solid var(--border);
+  box-shadow: var(--btn-shadow);
+  transition: border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .sheet-link svg {
@@ -1120,13 +1123,9 @@ html:not([data-theme="mono"]) .icon-dark,
 }
 
 .sheet-link-primary {
-  color: #111;
+  color: var(--on-accent);
   background: var(--accent);
   border-color: var(--accent);
-}
-
-[data-theme="mono"] .sheet-link-primary {
-  color: #fff;
 }
 
 .sheet-link-primary:hover {

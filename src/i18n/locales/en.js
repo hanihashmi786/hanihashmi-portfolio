@@ -22,9 +22,13 @@ export default {
     experience: 'Experience',
     portfolio: 'Portfolio',
     contact: 'Contact',
-    themeDark: 'Switch to Dark theme',
-    themeMono: 'Switch to Mono theme',
     language: 'Language'
+  },
+
+  theme: {
+    open: 'Appearance',
+    scheme: 'Theme',
+    style: 'Style'
   },
 
   common: {
