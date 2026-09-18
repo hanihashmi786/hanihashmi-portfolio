@@ -22,13 +22,13 @@
       <br>
       <div class="fadein-bot fade-500 flex items-center gap-3 justify-center md:justify-start">
         <router-link to="/contact"
-          class="ui-btn flex items-center py-2 px-4 text-sm font-medium rounded-btn border md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
+          class="ui-btn flex items-center py-2 px-4 text-sm font-medium rounded-btn border md:py-2.5 md:px-5 w-fit hover:opacity-80"
           style="color: var(--accent); border-color: var(--accent);">
           <svg xmlns="http://www.w3.org/2000/svg" class="me-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
           {{ $t('home.getInTouch') }}
         </router-link>
         <router-link to="/portfolio"
-          class="ui-btn flex items-center py-2 px-4 text-sm font-medium rounded-btn border md:py-2.5 md:px-5 focus:outline-none w-fit hover:opacity-80"
+          class="ui-btn flex items-center py-2 px-4 text-sm font-medium rounded-btn border md:py-2.5 md:px-5 w-fit hover:opacity-80"
           style="color: var(--text); border-color: var(--surface-bc);">
           {{ $t('home.viewWork') }}
         </router-link>
@@ -166,6 +166,16 @@ body {
   box-shadow: 0px 0px 73px -9px var(--img-glow);
   -webkit-box-shadow: 0px 0px 73px -9px var(--img-glow);
   -moz-box-shadow: 0px 0px 73px -9px var(--img-glow);
+}
+
+/* The welcome clip is H.264 on black, so the disc is black on every scheme.
+   On light schemes a glow reads as a smudge; a gap and an accent hairline
+   frame it as a deliberate dark badge instead. */
+[data-mode="light"] .pict {
+  box-shadow:
+    0 0 0 5px var(--bg),
+    0 0 0 7px rgba(var(--accent-rgb), 0.55),
+    0 28px 50px -24px rgba(0, 0, 0, 0.45);
 }
 
 /* ---------- Currently building strip ---------- */

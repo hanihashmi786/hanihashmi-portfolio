@@ -469,6 +469,18 @@ html[lang="ur"] .text-justify {
 }
 
 /* =====================================================================
+   Keyboard focus
+   One accent ring for anything focusable, shown only for keyboard
+   focus. Zero specificity, so components that draw their own focus
+   state (tiles, palette rows) keep it.
+   ===================================================================== */
+
+:where(a, button, [role="button"], [tabindex]:not([tabindex="-1"]), input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* =====================================================================
    Print
    Chrome-only site chrome comes off; pages that print (the CV, the
    business card) style their own sheet.
