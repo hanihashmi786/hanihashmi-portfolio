@@ -237,7 +237,7 @@ export const projects = [
     name: "Mutma'innah",
     tagline: 'Offline-first Islamic companion app',
     orgKey: 'personal',
-    status: 'soon',
+    status: 'live',
     size: 'md',
     image: '/images/projects/mutmainnah.png',
     description:
@@ -250,8 +250,8 @@ export const projects = [
     tech: 'React Native, React, JavaScript, Hermes, React Navigation, AsyncStorage',
     icons: [ICONS.reactNative, ICONS.react, ICONS.javascript],
     demo: null,
-    playstore: null,
-    note: 'Google Play listing goes live shortly',
+    playstore: 'https://play.google.com/store/apps/details?id=com.mutmainnah',
+    note: null,
     color: '#10b981'
   },
   {
