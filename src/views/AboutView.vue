@@ -51,6 +51,8 @@ export default {
 }
 </script>
 <template>
+  <!-- One root element: the page transition in App.vue needs it. -->
+  <div>
   <!-- About Me Section -->
   <div class="surface px-5 py-5 md:px-12 md:py-10 text-start mx-3 mb-5 rounded-card-lg">
     <article>
@@ -180,48 +182,12 @@ export default {
       </section>
     </article>
   </div>
+  </div>
 </template>
 
 <style>
-.fadein-left {
-  opacity: 0;
-  animation: fadeInLeftAbout 0.5s ease-out forwards;
-}
-
-@keyframes fadeInLeftAbout {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Under RTL the copy slides in from the reading edge, like it does in LTR. */
-@keyframes fadeInLeftAboutRtl {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-[dir="rtl"] .fadein-left {
-  animation-name: fadeInLeftAboutRtl;
-}
-
-.fadeins-1 {
-  animation-delay: 500ms;
-}
-
-.fadeins-2 {
-  animation-delay: 800ms;
-}
+/* Entrance animations (.fadein-left, .fadein-bot, .fadeins-*) live in
+   src/assets/motion.css and play when the element scrolls into view. */
 
 .img-tech,
 .tech {

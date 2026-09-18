@@ -93,48 +93,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.fadein-left {
-  opacity: 0;
-  animation: fadeInLeftAbout 0.5s ease-out forwards;
-}
-
-@keyframes fadeInLeftAbout {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.fadein-bot {
-  opacity: 0;
-  animation: fadeInBot 0.5s forwards;
-}
-
-@keyframes fadeInBot {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.fadeins-1 {
-  animation-delay: 200ms;
-}
-
-.fadeins-2 {
-  animation-delay: 400ms;
-}
-
-.fadeins-3 {
-  animation-delay: 600ms;
-}
-</style>
+<!-- Entrance animations (.fadein-bot, .fadein-left, .fadeins-*) live in
+     src/assets/motion.css. -->

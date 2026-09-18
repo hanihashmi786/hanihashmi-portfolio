@@ -1,0 +1,165 @@
+/* =====================================================================
+   Motion
+   Scroll reveals, page transitions and the theme-change reveal.
+
+   The reveal classes are the ones the views carry (.fadein-bot, .fadein-up,
+   .fadein-left, .fadein-right, .fade-in-from-left, plus the portfolio
+   .tile). src/motion/reveal.js sets data-reveal="in" when an element
+   scrolls into view and data-reveal="done" once its animation has ended,
+   so nothing animates off-screen and no element is left holding a
+   finished animation.
+   ===================================================================== */
+
+:root {
+  --m-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --m-dur: 0.6s;
+}
+
+/* Hidden until revealed. Zero specificity so the finished state and any
+   hover opacity utility on the same element still win. */
+:where(.fadein-bot, .fadein-up, .fadein-left, .fadein-right, .fade-in-from-left) {
+  opacity: 0;
+}
+
+[data-reveal="in"]:is(.fadein-bot, .fadein-up, .fadein-left, .fadein-right, .fade-in-from-left) {
+  animation: mFadeUp var(--m-dur) var(--m-ease) both;
+  animation-delay: var(--m-delay, 0ms);
+}
+
+.fadein-bot[data-reveal="in"] {
+  animation-name: mFadeDown;
+}
+
+.fadein-up[data-reveal="in"] {
+  animation-name: mFadeUp;
+}
+
+/* Side entrances are logical: `fadein-left` and `fadein-right` both come in
+   from the inline end, `fade-in-from-left` from the inline start, so they
+   mirror under RTL. */
+.fadein-left[data-reveal="in"],
+.fadein-right[data-reveal="in"] {
+  animation-name: mFromRight;
+}
+
+.fade-in-from-left[data-reveal="in"] {
+  animation-name: mFromLeft;
+}
+
+[dir="rtl"] .fadein-left[data-reveal="in"],
+[dir="rtl"] .fadein-right[data-reveal="in"] {
+  animation-name: mFromLeft;
+}
+
+[dir="rtl"] .fade-in-from-left[data-reveal="in"] {
+  animation-name: mFromRight;
+}
+
+/* Finished: static, and no longer a compositing layer. */
+[data-reveal="done"] {
+  opacity: 1;
+  animation: none !important;
+}
+
+/* ---------- choreography for the first screen ----------
+   Delays only apply to what is in view on load; reveal.js overrides them
+   with a short stagger for anything that arrives by scrolling. */
+.fadein-up,
+.fade-in-from-left,
+.fadein-right {
+  --m-delay: 250ms;
+}
+
+.fadein-1 { --m-delay: 100ms; }
+.fadein-2 { --m-delay: 200ms; }
+.fadein-3 { --m-delay: 300ms; }
+.fade-500 { --m-delay: 350ms; }
+.fade-700 { --m-delay: 500ms; }
+.fadeins-1 { --m-delay: 120ms; }
+.fadeins-2 { --m-delay: 240ms; }
+.fadeins-3 { --m-delay: 360ms; }
+.fadeins-4 { --m-delay: 480ms; }
+.fadeins-5 { --m-delay: 600ms; }
+
+@keyframes mFadeDown {
+  from { opacity: 0; transform: translate3d(0, -28px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mFadeUp {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mFromRight {
+  from { opacity: 0; transform: translate3d(56px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mFromLeft {
+  from { opacity: 0; transform: translate3d(-56px, 0, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- route change ---------- */
+.page-enter-active {
+  transition: opacity 0.28s ease-out, transform 0.28s var(--m-ease);
+}
+
+.page-leave-active {
+  transition: opacity 0.16s ease-in, transform 0.16s ease-in;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -6px, 0);
+}
+
+/* ---------- theme change (View Transitions API) ----------
+   Plain cross-fade by default; with .vt-circle on <html> the new page grows
+   as a circle from --vt-x/--vt-y (set by src/motion/transition.js). */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  mix-blend-mode: normal;
+}
+
+:root.vt-circle::view-transition-old(root) {
+  animation: none;
+}
+
+:root.vt-circle::view-transition-new(root) {
+  animation: vtCircle 0.6s var(--m-ease);
+}
+
+@keyframes vtCircle {
+  from { clip-path: circle(0 at var(--vt-x) var(--vt-y)); }
+  to { clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y)); }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :where(.fadein-bot, .fadein-up, .fadein-left, .fadein-right, .fade-in-from-left, .tile) {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

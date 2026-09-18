@@ -4,6 +4,7 @@
 // module owns it from then on.
 
 import { reactive } from 'vue'
+import { viewTransition } from '../motion/transition.js'
 
 export const SCHEMES = [
   { id: 'gold', name: 'Gold', mode: 'dark' },
@@ -72,18 +73,28 @@ export function applyDocument() {
   root.setAttribute('data-style', theme.style)
 }
 
-export function setScheme(id) {
+/**
+ * Switch colour scheme. With `from` (a viewport point, normally the centre
+ * of the swatch that was clicked) the new palette sweeps out from there as a
+ * circle; without it, or where the View Transitions API is missing, the
+ * change is immediate.
+ */
+export function setScheme(id, from = null) {
   if (!has(SCHEMES, id) || id === theme.scheme) return
-  theme.scheme = id
   write(SCHEME_KEY, id)
-  applyDocument()
+  viewTransition(() => {
+    theme.scheme = id
+    applyDocument()
+  }, { from })
 }
 
 export function setStyle(id) {
   if (!has(STYLES, id) || id === theme.style) return
-  theme.style = id
   write(STYLE_KEY, id)
-  applyDocument()
+  viewTransition(() => {
+    theme.style = id
+    applyDocument()
+  })
 }
 
 export default {

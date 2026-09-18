@@ -3,6 +3,7 @@
 // src/data. Installed as a plugin so templates can call `$t('nav.home')`.
 
 import { reactive } from 'vue'
+import { viewTransition } from '../motion/transition.js'
 import en from './locales/en.js'
 import ar from './locales/ar.js'
 import ur from './locales/ur.js'
@@ -69,13 +70,16 @@ export function applyDocument() {
 
 export function setLocale(code) {
   if (!messages[code] || code === i18n.locale) return
-  i18n.locale = code
   try {
     localStorage.setItem(STORAGE_KEY, code)
   } catch {
     /* storage blocked */
   }
-  applyDocument()
+  // Cross-fade: the whole page re-renders, and possibly flips direction.
+  viewTransition(() => {
+    i18n.locale = code
+    applyDocument()
+  })
 }
 
 export default {

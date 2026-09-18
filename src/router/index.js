@@ -51,9 +51,20 @@ const routes = [
   }
 ]
 
+// The page transition in App.vue fades the old view out over 160ms; the
+// scroll waits for that so the outgoing page does not jump to the top while
+// it is still visible.
+const LEAVE_MS = 180
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to, from, saved) {
+    if (to.path === from.path) return false
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(saved || { top: 0 }), LEAVE_MS)
+    })
+  }
 })
 
 function applyTitle(route) {

@@ -373,9 +373,20 @@ export default {
   border: var(--surface-bw) solid var(--surface-bc);
   box-shadow: var(--tile-shadow);
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-  animation: tileIn 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-  animation-delay: calc(var(--i, 0) * 55ms);
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Tiles are revealed by src/motion/reveal.js as they scroll into view
+   (data-reveal="in"), staggered by grid order on the first screen or by
+   batch after that. Zero specificity on the hidden state so the finished
+   state in motion.css can lift it. */
+:where(.tile) {
+  opacity: 0;
+}
+
+.tile[data-reveal="in"] {
+  animation: tileIn 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: var(--m-delay, calc(var(--i, 0) * 55ms));
 }
 
 .tile:hover,
@@ -1185,9 +1196,13 @@ export default {
 
 @media (prefers-reduced-motion: reduce) {
   .tile,
+  .tile[data-reveal="in"],
   .tile.is-featured::after,
   .tile-dot-live {
     animation: none;
+  }
+  .tile {
+    opacity: 1;
   }
   .tile,
   .tile-img,

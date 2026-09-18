@@ -32,8 +32,13 @@ export default {
     }
   },
   mounted() {
-    // Detect mobile/touch devices
-    this.isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Touch devices get no custom cursor, nor do visitors who asked for
+    // reduced motion (the trailing ring is exactly the kind of movement
+    // that setting is meant to switch off).
+    this.isMobile =
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     if (!this.isMobile) {
       // Initialize cursor to center of viewport

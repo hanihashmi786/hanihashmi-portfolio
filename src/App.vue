@@ -9,10 +9,7 @@
           <!-- Kept LTR so the wordmark always reads `name();` like code, whatever the page direction. -->
           <span class="self-center text-lg font-semibold whitespace-nowrap fadein-bot hover:opacity-80 transition-opacity" style="color: var(--accent);" dir="ltr">{{ $t('brand') }}</span>
         </button>
-        <!-- The entrance animation comes off once it has played: an element with
-             a (finished, filled) animation is a backdrop root in Chrome, and the
-             language/theme popovers inside need to blur the page, not this div. -->
-        <div class="flex md:order-2 items-center gap-3" :class="{ 'fadein-bot': !navReady }" @animationend.self="navReady = true">
+        <div class="flex md:order-2 items-center gap-3 fadein-bot">
           <LanguageSwitcher />
           <ThemePanel />
           <a href="https://github.com/hanihashmi786" target="_blank" rel="noopener">
@@ -51,7 +48,13 @@
     </nav>
 
     <div class="md:mt-[100px]">
-      <router-view />
+      <!-- Pages cross-fade with a slight rise (see motion.css); the scroll
+           to the top waits for the old page to leave (router scrollBehavior). -->
+      <router-view v-slot="{ Component }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" :key="$route.path" />
+        </Transition>
+      </router-view>
     </div>
   </div>
   <footer class="block md:hidden fixed bottom-0 left-0 right-0 rounded-t-3xl border bg-opacity-80 backdrop-blur-md backdrop-opacity-90 z-[99]" style="border-color: var(--surface-bc); background-color: var(--nav-surface);">
@@ -77,11 +80,6 @@ export default {
     CustomCursor,
     LanguageSwitcher,
     ThemePanel
-  },
-  data() {
-    return {
-      navReady: false
-    }
   },
   methods: {
     redirectToHome() {
@@ -128,8 +126,9 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hide default cursor on desktop when custom cursor is active */
-@media (hover: hover) and (pointer: fine) {
+/* Hide the default cursor on desktop while the custom one is active. Visitors
+   who ask for reduced motion keep the native cursor (see CustomCursor.vue). */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   body * {
     cursor: none !important;
   }
@@ -196,16 +195,5 @@ nav a.router-link-exact-active::after {
 
 nav a.router-link-exact-active:hover {
   color: var(--nav-link-active);
-}
-
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 </style>

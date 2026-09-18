@@ -1,5 +1,6 @@
 <script>
 import { SCHEMES, STYLES, setScheme, setStyle } from '../theme/index.js'
+import { pointOf } from '../motion/transition.js'
 
 export default {
   name: 'ThemePanel',
@@ -27,7 +28,10 @@ export default {
       this.open = false
       if (refocus) this.$refs.trigger.focus()
     },
-    pickScheme: setScheme,
+    // The new palette sweeps out from the row that was picked.
+    pickScheme(id, e) {
+      setScheme(id, pointOf(e))
+    },
     pickStyle: setStyle,
     onOutside(e) {
       if (!this.$el.contains(e.target)) this.close()
@@ -65,7 +69,7 @@ export default {
         <p class="tp-label">{{ $t('theme.scheme') }}</p>
         <ul class="tp-list" role="listbox" :aria-label="$t('theme.scheme')">
           <li v-for="s in schemes" :key="s.id" role="option" :aria-selected="s.id === $theme.scheme">
-            <button type="button" class="tp-item" :class="{ active: s.id === $theme.scheme }" @click="pickScheme(s.id)">
+            <button type="button" class="tp-item" :class="{ active: s.id === $theme.scheme }" @click="pickScheme(s.id, $event)">
               <span class="tp-name">{{ s.name }}</span>
               <!-- data-scheme on the swatch group resolves that palette's tokens for the dots. -->
               <span class="tp-dots" :data-scheme="s.id" aria-hidden="true">
