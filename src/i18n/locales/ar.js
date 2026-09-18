@@ -13,6 +13,7 @@ export default {
     portfolio: 'الأعمال',
     contact: 'تواصل معي',
     card: 'بطاقة العمل الرقمية',
+    cv: 'السيرة الذاتية',
     notFound: '404 - الصفحة غير موجودة'
   },
 
@@ -22,7 +23,31 @@ export default {
     experience: 'الخبرات',
     portfolio: 'الأعمال',
     contact: 'تواصل معي',
+    cv: 'السيرة الذاتية',
     language: 'اللغة'
+  },
+
+  cv: {
+    view: 'عرض السيرة الذاتية',
+    headline: 'مهندس منتجات · Full-Stack (جوال، ويب، خلفية)',
+    download: 'تنزيل PDF',
+    hint: 'تُفتح نافذة الطباعة: اختر «حفظ بصيغة PDF». مقاس A4 وباللغة الحالية.',
+    summary: 'نبذة',
+    experience: 'الخبرات',
+    skills: 'المهارات',
+    projects: 'مشاريع مختارة',
+    education: 'التعليم',
+    certifications: 'الشهادات',
+    products: 'المنتجات',
+    impact: 'الأثر',
+    skillGroups: {
+      languages: 'اللغات',
+      frontend: 'الواجهات والجوال',
+      backend: 'الخلفية',
+      data: 'البيانات',
+      platform: 'المنصات والأدوات',
+      other: 'الذكاء الاصطناعي والاختبار وغيرها'
+    }
   },
 
   theme: {

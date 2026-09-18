@@ -13,6 +13,7 @@ export default {
     portfolio: 'پورٹ فولیو',
     contact: 'رابطہ',
     card: 'ڈیجیٹل بزنس کارڈ',
+    cv: 'سی وی',
     notFound: '404 - صفحہ نہیں ملا'
   },
 
@@ -22,7 +23,31 @@ export default {
     experience: 'تجربہ',
     portfolio: 'پورٹ فولیو',
     contact: 'رابطہ',
+    cv: 'سی وی',
     language: 'زبان'
+  },
+
+  cv: {
+    view: 'سی وی دیکھیں',
+    headline: 'پروڈکٹ انجینئر · فل اسٹیک (موبائل، ویب، بیک اینڈ)',
+    download: 'PDF ڈاؤن لوڈ کریں',
+    hint: 'پرنٹ ڈائیلاگ کھلے گا: "Save as PDF" منتخب کریں۔ A4 سائز، موجودہ زبان میں۔',
+    summary: 'خلاصہ',
+    experience: 'تجربہ',
+    skills: 'مہارتیں',
+    projects: 'منتخب پروجیکٹس',
+    education: 'تعلیم',
+    certifications: 'سرٹیفیکیشنز',
+    products: 'پروڈکٹس',
+    impact: 'اثر',
+    skillGroups: {
+      languages: 'زبانیں',
+      frontend: 'فرنٹ اینڈ اور موبائل',
+      backend: 'بیک اینڈ',
+      data: 'ڈیٹا',
+      platform: 'پلیٹ فارم اور ٹولز',
+      other: 'AI، ٹیسٹنگ اور دیگر'
+    }
   },
 
   theme: {

@@ -43,12 +43,16 @@
               <router-link to="/contact"
                 class="fadein-bot nav-link block ps-3 pe-4 py-2 md:p-0 transition-colors duration-300">{{ $t('nav.contact') }}</router-link>
             </li>
+            <li>
+              <router-link to="/cv"
+                class="fadein-bot fadein-1 nav-link block ps-3 pe-4 py-2 md:p-0 transition-colors duration-300">{{ $t('nav.cv') }}</router-link>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="md:mt-[100px]">
+    <div class="page-host md:mt-[100px]">
       <!-- Pages cross-fade with a slight rise (see motion.css); the scroll
            to the top waits for the old page to leave (router scrollBehavior). -->
       <router-view v-slot="{ Component }">
@@ -58,7 +62,7 @@
       </router-view>
     </div>
   </div>
-  <footer class="block md:hidden fixed bottom-0 left-0 right-0 rounded-t-3xl border bg-opacity-80 backdrop-blur-md backdrop-opacity-90 z-[99]" style="border-color: var(--surface-bc); background-color: var(--nav-surface);">
+  <footer class="site-footer block md:hidden fixed bottom-0 left-0 right-0 rounded-t-3xl border bg-opacity-80 backdrop-blur-md backdrop-opacity-90 z-[99]" style="border-color: var(--surface-bc); background-color: var(--nav-surface);">
     <nav class="flex justify-around py-4 text-xs">
       <router-link to="/" class="nav-link-mobile">{{ $t('nav.home') }}</router-link>
       <router-link to="/about" class="nav-link-mobile">{{ $t('nav.about') }}</router-link>
