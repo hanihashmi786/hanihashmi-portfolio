@@ -37,10 +37,19 @@ export default {
     openId(id) {
       // Lock page scroll while the sheet is up.
       document.body.style.overflow = id ? 'hidden' : '';
+      // Mirror the open project into the URL (?p=id) so a sheet can be
+      // linked to, and reached from the command palette.
+      if ((id || undefined) !== this.$route.query.p) {
+        this.$router.replace({ query: id ? { p: id } : {} });
+      }
+    },
+    '$route.query.p'(p) {
+      this.openFromQuery(p);
     }
   },
   mounted() {
     window.addEventListener('keydown', this.onKey);
+    this.openFromQuery(this.$route.query.p);
   },
   beforeUnmount() {
     window.removeEventListener('keydown', this.onKey);
@@ -59,6 +68,18 @@ export default {
     },
     close() {
       this.openId = null;
+    },
+    openFromQuery(p) {
+      if (!p) {
+        this.openId = null;
+        return;
+      }
+      const item = this.gridProjects.find((x) => x.id === p);
+      if (!item) return;
+      // A filter that hides the project would leave the sheet's prev/next
+      // with nothing to step through.
+      if (this.activeFilter !== 'all' && item.orgKey !== this.activeFilter) this.activeFilter = 'all';
+      this.openId = p;
     },
     step(dir) {
       if (!this.items.length) return;

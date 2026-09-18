@@ -31,6 +31,29 @@ export default {
     style: 'اسٹائل'
   },
 
+  cmd: {
+    open: 'تلاش اور کمانڈز',
+    placeholder: 'صفحات، پروجیکٹس، تھیمز تلاش کریں…',
+    pages: 'صفحات',
+    projects: 'پروجیکٹس',
+    links: 'لنکس اور رابطہ',
+    appearance: 'ظاہری شکل',
+    language: 'زبان',
+    theme: 'رنگ',
+    style: 'اسٹائل',
+    copyEmail: 'ای میل ایڈریس کاپی کریں',
+    emailCopied: 'ای میل ایڈریس کاپی ہو گیا',
+    whatsapp: 'واٹس ایپ پر پیغام بھیجیں',
+    call: 'کال کریں',
+    saveContact: 'کانٹیکٹ محفوظ کریں (.vcf)',
+    github: 'GitHub پروفائل',
+    linkedin: 'LinkedIn پروفائل',
+    empty: '"{q}" سے کوئی نتیجہ نہیں ملا',
+    navigate: 'نیویگیٹ',
+    select: 'منتخب کریں',
+    close: 'بند کریں'
+  },
+
   common: {
     location: 'ریاض، سعودی عرب',
     currentlyBuilding: 'ابھی زیرِ تعمیر',

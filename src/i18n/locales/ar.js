@@ -31,6 +31,29 @@ export default {
     style: 'النمط'
   },
 
+  cmd: {
+    open: 'البحث والأوامر',
+    placeholder: 'ابحث في الصفحات والمشاريع والمظاهر…',
+    pages: 'الصفحات',
+    projects: 'المشاريع',
+    links: 'روابط وتواصل',
+    appearance: 'المظهر',
+    language: 'اللغة',
+    theme: 'الألوان',
+    style: 'النمط',
+    copyEmail: 'نسخ البريد الإلكتروني',
+    emailCopied: 'تم نسخ البريد الإلكتروني',
+    whatsapp: 'مراسلة على واتساب',
+    call: 'اتصال',
+    saveContact: 'حفظ جهة الاتصال (.vcf)',
+    github: 'حساب GitHub',
+    linkedin: 'حساب LinkedIn',
+    empty: 'لا نتائج لـ "{q}"',
+    navigate: 'للتنقل',
+    select: 'للاختيار',
+    close: 'للإغلاق'
+  },
+
   common: {
     location: 'الرياض، المملكة العربية السعودية',
     currentlyBuilding: 'قيد التطوير حاليًا',

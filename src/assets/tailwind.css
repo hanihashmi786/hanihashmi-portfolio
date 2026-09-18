@@ -394,7 +394,7 @@ html[data-style="glass"] body {
 }
 
 /* Neo-brutal chips and pills take the same ink border as the cards. */
-html[data-style="brutal"] :is(.stack-chip, .cwo-chip, .sheet-chip, .filter-chip, .status-pill, .now-pill, .cwo-meta li, .cwo-kicker, .product-row, .flip-badge, .mode-switch, .lang-btn) {
+html[data-style="brutal"] :is(.stack-chip, .cwo-chip, .sheet-chip, .filter-chip, .status-pill, .now-pill, .cwo-meta li, .cwo-kicker, .product-row, .flip-badge, .mode-switch, .lang-btn, .cmd-btn, .cmd-kbd) {
   border-width: var(--chip-bw);
   border-color: var(--text);
 }
@@ -414,7 +414,7 @@ html[data-style="soft"] :is(.sheet, .face) {
 }
 
 /* Soft has no hairlines, so nested rows lean on tint alone. */
-html[data-style="soft"] :is(.product-row, .cwo-meta li, .filter-chip, .lang-btn) {
+html[data-style="soft"] :is(.product-row, .cwo-meta li, .filter-chip, .lang-btn, .cmd-btn) {
   border-color: transparent;
 }
 

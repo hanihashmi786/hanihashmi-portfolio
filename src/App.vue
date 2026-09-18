@@ -10,6 +10,7 @@
           <span class="self-center text-lg font-semibold whitespace-nowrap fadein-bot hover:opacity-80 transition-opacity" style="color: var(--accent);" dir="ltr">{{ $t('brand') }}</span>
         </button>
         <div class="flex md:order-2 items-center gap-3 fadein-bot">
+          <CommandPalette />
           <LanguageSwitcher />
           <ThemePanel />
           <a href="https://github.com/hanihashmi786" target="_blank" rel="noopener">
@@ -71,6 +72,7 @@
 <script>
 import { Analytics } from '@vercel/analytics/vue'
 import CustomCursor from './components/CustomCursor.vue'
+import CommandPalette from './components/CommandPalette.vue'
 import LanguageSwitcher from './components/LanguageSwitcher.vue'
 import ThemePanel from './components/ThemePanel.vue'
 
@@ -78,6 +80,7 @@ export default {
   components: {
     Analytics,
     CustomCursor,
+    CommandPalette,
     LanguageSwitcher,
     ThemePanel
   },

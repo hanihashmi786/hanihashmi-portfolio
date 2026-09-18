@@ -31,6 +31,30 @@ export default {
     style: 'Style'
   },
 
+  // Command palette (Ctrl/⌘ K)
+  cmd: {
+    open: 'Search & commands',
+    placeholder: 'Search pages, projects, themes…',
+    pages: 'Pages',
+    projects: 'Projects',
+    links: 'Links & contact',
+    appearance: 'Appearance',
+    language: 'Language',
+    theme: 'Theme',
+    style: 'Style',
+    copyEmail: 'Copy email address',
+    emailCopied: 'Email address copied',
+    whatsapp: 'Message on WhatsApp',
+    call: 'Call',
+    saveContact: 'Save contact (.vcf)',
+    github: 'GitHub profile',
+    linkedin: 'LinkedIn profile',
+    empty: 'Nothing matches “{q}”',
+    navigate: 'navigate',
+    select: 'select',
+    close: 'close'
+  },
+
   common: {
     location: 'Riyadh, Saudi Arabia',
     currentlyBuilding: 'Currently building',
