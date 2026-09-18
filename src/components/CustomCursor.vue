@@ -207,8 +207,13 @@ export default {
   opacity: 1;
 }
 
+/* Pinned to the origin explicitly: with `left` left auto, an absolutely
+   positioned box sits at its static position, which under RTL is the right
+   edge, and the mouse translate then pushes the cursor off-screen. */
 .cursor-dot {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -222,6 +227,8 @@ export default {
 
 .cursor-ring {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 40px;
   height: 40px;
   border: 2px solid var(--accent);
