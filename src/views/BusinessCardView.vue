@@ -30,7 +30,7 @@
 
               <div class="face-inner">
                 <div class="flex items-start justify-between">
-                  <span class="brand" dir="ltr" lang="en">haniHashmi();</span>
+                  <span class="brand" dir="ltr">{{ $t('brand') }}</span>
                   <!-- Chip: the detail that sells the "real card" metaphor -->
                   <svg class="chip" viewBox="0 0 40 30" aria-hidden="true">
                     <defs>

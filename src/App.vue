@@ -6,7 +6,8 @@
     <nav class="max-w-7xl px-5 md:fixed top-0 z-[98] w-screen backdrop-blur-md bg-opacity-80" style="background-color: var(--nav-bg);">
       <div class="container mx-auto flex flex-wrap items-center justify-between">
         <button @click="redirectToHome" class="flex">
-          <span class="self-center text-lg font-semibold whitespace-nowrap fadein-bot hover:opacity-80 transition-opacity" style="color: var(--accent);" dir="ltr" lang="en">haniHashmi();</span>
+          <!-- Kept LTR so the wordmark always reads `name();` like code, whatever the page direction. -->
+          <span class="self-center text-lg font-semibold whitespace-nowrap fadein-bot hover:opacity-80 transition-opacity" style="color: var(--accent);" dir="ltr">{{ $t('brand') }}</span>
         </button>
         <div class="flex md:order-2 fadein-bot items-center gap-3">
           <LanguageSwitcher />

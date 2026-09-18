@@ -4,6 +4,7 @@
 
 export default {
   siteName: 'هاني هاشمي',
+  brand: 'هاني هاشمي();',
 
   titles: {
     home: 'الرئيسية',

@@ -3,7 +3,8 @@
 // technology names stay in Latin script.
 
 export default {
-  siteName: 'ہانی ہاشمی',
+  siteName: 'هاني هاشمي',
+  brand: 'هاني هاشمي();',
 
   titles: {
     home: 'ہوم',
@@ -60,7 +61,7 @@ export default {
 
   home: {
     greeting: 'ہیلو ورلڈ، میرا نام ہے',
-    name: 'ہانی ہاشمی',
+    name: 'هاني هاشمي',
     roles: ['پروڈکٹ انجینئر', 'فل اسٹیک ڈویلپر', 'React Native ڈویلپر', 'Next.js اور Node.js ڈویلپر'],
     bio: 'پروڈکٹ انجینئر، موبائل، ویب اور بیک اینڈ پر فل اسٹیک پروڈکٹس بنانے اور لانچ کرنے کا 3 سال کا تجربہ۔ TypeScript، React Native، Next.js، Node.js اور Django میں مہارت، اور دو لسانی عربی/انگریزی (RTL) پروڈکٹس کا تجربہ۔',
     getInTouch: 'رابطہ کریں',
@@ -156,7 +157,7 @@ export default {
   card: {
     title: 'ڈیجیٹل بزنس کارڈ',
     subtitle: 'کوڈ اسکین کریں اور مجھے سیدھا اپنے کانٹیکٹس میں شامل کریں۔ نہ ٹائپنگ، نہ کسی ایپ کی ضرورت۔',
-    name: 'ہانی ہاشمی',
+    name: 'هاني هاشمي',
     tagline: 'فل اسٹیک ڈویلپر',
     jobTitle: 'سافٹ ویئر انجینئر',
     qr: 'QR',
@@ -171,7 +172,7 @@ export default {
     enlarge: 'QR کوڈ بڑا کریں: {label}',
     labelUrl: 'پورٹ فولیو کا لنک والا QR کوڈ',
     labelWhatsapp: 'واٹس ایپ چیٹ کھولنے والا QR کوڈ',
-    labelVcard: 'ہانی ہاشمی کی رابطہ تفصیلات والا QR کوڈ',
+    labelVcard: 'هاني هاشمي کی رابطہ تفصیلات والا QR کوڈ',
     hintUrl: 'یہ پورٹ فولیو کھولنے کے لیے اسکین کریں۔',
     hintWhatsapp: 'واٹس ایپ پر پیغام بھیجنے کے لیے اسکین کریں۔',
     hintVcard: 'مجھے اپنے کانٹیکٹس میں محفوظ کرنے کے لیے اسکین کریں۔',

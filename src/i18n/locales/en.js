@@ -3,6 +3,8 @@
 
 export default {
   siteName: 'Hani Hashmi',
+  // The nav wordmark; a code-style `name();` in every language.
+  brand: 'haniHashmi();',
 
   titles: {
     home: 'Home',
